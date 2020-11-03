@@ -23,9 +23,20 @@
                         <div class="best-search-content">
                             <div class="content" @click="toSingerDetail(bestSearch.singer)">
                                 <div class="img-box">
-                                    <img ondragstart="return false" :src="bestSearch.singer.singerPic" alt="">
+                                    <img ondragstart="return false"
+                                         v-lazy="handleLazyImage(bestSearch.singer.singerPic)"
+                                         :key="bestSearch.singer.singerPic"
+                                         :alt="bestSearch.singer.singerName"
+                                    >
                                 </div>
-                                <div class="name">歌手：{{bestSearch.singer.singerName}}</div>
+                                <div class="info-content">
+                                    <div class="info name">
+                                        <span>歌手：{{bestSearch.singer.singerName}}</span>
+                                    </div>
+                                    <div class="info song-num">
+                                        <span>歌曲：{{bestSearch.songNum}}首</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -69,6 +80,7 @@
   import MSlider from '../../../components/m-slider/m-slider'
   import { timeOut } from '../../../common/js/config'
   import MErrorPage from '../../../components/m-error-page/m-error-page'
+  import SingerDefLazyImg from '../../../resources/images/singer_300.png'
 
   export default {
     name: 'm-search',
@@ -92,6 +104,16 @@
       ]),
       _listHasSong () {
         return listHasSong(this.searchRes.songList, this.currentPlaySong)
+      },
+      // 图片懒加载 v-lazy配置对象
+      handleLazyImage () {
+        return (ImgSrc) => {
+          return {
+            src: ImgSrc,
+            error: SingerDefLazyImg,
+            loading: SingerDefLazyImg
+          }
+        }
       }
     },
     data () {
@@ -298,6 +320,9 @@
                 }
 
                 .best-search-content {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
                     height: 80px;
                     padding: 10px 30px;
                     border-bottom: 1px solid #333333;
@@ -320,13 +345,27 @@
                             }
                         }
 
-                        .name {
-                            width: 100px;
+                        .info-content {
+                            display: flex;
+                            justify-content: space-around;
+                            align-items: start;
+                            flex-flow: column;
                             height: 50px;
-                            font-size: 12px;
+                            font-size: 14px;
                             color: #dcdde4;
-                            margin-left: 10px;
-                            float: left;
+                            padding-left: 10px;
+
+                            .info {
+                                width: 100%;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                            }
+
+                            .song-num {
+                                color: #918e8e;
+                                font-size: 12px;
+                            }
                         }
                     }
 
