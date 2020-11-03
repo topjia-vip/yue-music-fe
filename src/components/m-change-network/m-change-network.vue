@@ -137,7 +137,7 @@
                     align-items: center;
                     height: 16px;
                     width: 16px;
-                    border: 1px solid #8b8b8b;
+                    background-color: #0000007a;
                     border-radius: 50%;
 
                     .inner {
@@ -153,8 +153,13 @@
                 }
             }
 
+            .connection:hover {
+                cursor: pointer;
+                color: #cccccc;
+            }
+
             .selected {
-                color: #FFFFFF;
+                color: #FFFFFF !important;
             }
         }
 
