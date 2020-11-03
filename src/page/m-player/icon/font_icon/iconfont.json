@@ -1,0 +1,51 @@
+{
+  "id": "1233271",
+  "name": "test",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "11010648",
+      "name": "play-list-line",
+      "font_class": "play-list",
+      "unicode": "ec8b",
+      "unicode_decimal": 60555
+    },
+    {
+      "icon_id": "12905230",
+      "name": "词",
+      "font_class": "lyric",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "7007612",
+      "name": "random",
+      "font_class": "random-play",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "881793",
+      "name": "circulation",
+      "font_class": "loop-play",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "8194826",
+      "name": "list-loop",
+      "font_class": "list-loop-play",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "10893117",
+      "name": "icon_singletunecirculation@2x",
+      "font_class": "single_play",
+      "unicode": "e748",
+      "unicode_decimal": 59208
+    }
+  ]
+}
