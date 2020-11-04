@@ -1,25 +1,14 @@
-import { BASE_URL, MUSIC_REQUEST, MUSIC_MUSIC } from './config'
+import { BASE_URL, MUSIC_MUSIC, MUSIC_REQUEST } from './config'
 import axios from 'axios'
-import Qs from 'qs'
 import { aesMinEncrypt } from '../common/js/aes'
 import state from '../store/state'
-
-export function getLyric (mid) {
-  const url = `${BASE_URL}/${MUSIC_REQUEST}/song/getLyric`
-  const data = {
-    songmid: mid
-  }
-  return axios.post(url, Qs.stringify(data)).then(res => {
-    return Promise.resolve(res.data)
-  })
-}
 
 export function getSongUrlByQQYY (reqData) {
   const url = `${BASE_URL}/${MUSIC_REQUEST}/song/getsongurlqqyy`
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -29,7 +18,7 @@ export function getSongUrl (reqData) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -39,7 +28,7 @@ export function songLyric (reqData) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -59,7 +48,7 @@ export function saveSong (song) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(song))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -69,7 +58,7 @@ export function deleteSong (songId) {
   const data = {
     reqData: aesMinEncrypt(songId)
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
