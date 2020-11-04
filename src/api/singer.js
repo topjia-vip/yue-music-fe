@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Qs from 'qs'
 import { aesMinEncrypt } from '../common/js/aes'
 import { BASE_URL, MUSIC_REQUEST } from './config'
 
@@ -8,7 +7,7 @@ export function getSingerList (reqData) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -18,7 +17,7 @@ export function getSingerSongList (reqData) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -28,7 +27,7 @@ export function getSingerAlbums (reqData) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -39,7 +38,7 @@ export function getSingerConcern (reqData, singerMid) {
     reqData: aesMinEncrypt(JSON.stringify(reqData)),
     singerMid
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -49,7 +48,7 @@ export function getSingerInfo (reqData) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }

@@ -1,23 +1,7 @@
 import { BASE_URL, MUSIC_USER } from './config'
 import { aesMinEncrypt } from '../common/js/aes'
 import axios from 'axios'
-import Qs from 'qs'
 import state from '../store/state'
-
-/**
- * 用户注册api
- * @param reqData 请求加密参数
- * @returns {Promise<T>}
- */
-export function register (reqData) {
-  const url = `${BASE_URL}/${MUSIC_USER}/user/register`
-  const data = {
-    reqData: aesMinEncrypt(JSON.stringify(reqData))
-  }
-  return axios.post(url, Qs.stringify(data)).then(res => {
-    return Promise.resolve(res.data)
-  })
-}
 
 /**
  * 用户登录api
@@ -29,7 +13,7 @@ export function login (reqData) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -58,7 +42,7 @@ export function updateUser (reqData) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -73,7 +57,7 @@ export function checkNickName (reqData) {
   const data = {
     reqData: aesMinEncrypt(reqData)
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }

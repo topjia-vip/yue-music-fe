@@ -1,7 +1,6 @@
 import axios from 'axios'
-import Qs from 'qs'
 import { aesMinEncrypt } from '../common/js/aes'
-import { BASE_URL, MUSIC_REQUEST, MUSIC_MUSIC } from './config'
+import { BASE_URL, MUSIC_MUSIC, MUSIC_REQUEST } from './config'
 import state from '../store/state'
 
 export function disstCategoryGroup (reqData) {
@@ -9,7 +8,7 @@ export function disstCategoryGroup (reqData) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -19,7 +18,7 @@ export function dissList (reqData) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -29,7 +28,7 @@ export function disstDetailSongList (reqData) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -39,7 +38,7 @@ export function disstDetail (reqData) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -49,7 +48,7 @@ export function saveDisst (reqData) {
   const data = {
     reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
@@ -59,7 +58,7 @@ export function deleteDisst (disstId) {
   const data = {
     reqData: aesMinEncrypt(disstId)
   }
-  return axios.post(url, Qs.stringify(data)).then(res => {
+  return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
   })
 }
