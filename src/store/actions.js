@@ -196,6 +196,11 @@ export const deleteSearchHistoryByKey = function ({ commit }, key) {
   commit(types.SET_SEARCH_HISTORY, getSearchHistory())
 }
 
+export const deleteSearchHistory = function ({ commit }) {
+  yueMusicLocalStorage.remove(SEARCH_HISTORY)
+  commit(types.SET_SEARCH_HISTORY, getSearchHistory())
+}
+
 export const getSearchHistory = function () {
   return yueMusicLocalStorage.get(SEARCH_HISTORY)
 }

@@ -4,7 +4,13 @@
             <div class="hot-search-title" ref="hotSearch" v-if="smartSearch === null">
                 <!--历史搜索记录-->
                 <div class="search-history" v-if="searchHistory.length > 0">
-                    <div class="search-history-title">搜索历史</div>
+                    <div class="search-history-title">
+                        <div class="text">搜索历史</div>
+                        <div class="delete-all-icon" title="清空搜索记录" @click="deleteSearch()">
+                            <Icon type="md-trash" size="16"/>
+                            清空
+                        </div>
+                    </div>
                     <div class="history-search-box">
                         <div class="history-search-key"
                              v-for="(key,index) in searchHistory" :key="index"
@@ -111,6 +117,9 @@
       this.readSearchHistory()
     },
     methods: {
+      deleteSearch () {
+        this.deleteSearchHistory()
+      },
       deleteSearchItem (key) {
         this.deleteSearchHistoryByKey(key)
       },
@@ -175,7 +184,8 @@
       }),
       ...mapActions([
         'readSearchHistory',
-        'deleteSearchHistoryByKey'
+        'deleteSearchHistoryByKey',
+        'deleteSearchHistory'
       ])
     },
     watch: {
@@ -245,7 +255,22 @@
                     color: #828385;
                     height: 60px;
                     line-height: 60px;
-                    padding-left: 20px;
+                    padding: 0 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .delete-all-icon {
+                        font-size: 14px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    .delete-all-icon:hover {
+                        cursor: pointer;
+                        color: #FFFFFF;
+                    }
                 }
 
                 .history-search-box {
