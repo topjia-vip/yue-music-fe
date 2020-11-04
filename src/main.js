@@ -10,6 +10,7 @@ import Router from 'vue-router'
 import routerStack from './RouterStack'
 
 Vue.prototype.routerStack = routerStack.routerStack
+
 // 解决连续点击相同路由报错
 const originalPush = Router.prototype.push
 Router.prototype.push = function push (location) {

@@ -586,9 +586,14 @@
           this.$refs.audio.volume = this.volumePercent
         }
       },
+      // 添加历史播放记录
+      addPlayHistory (song) {
+        this.addPlayHistorySong(song)
+      },
       ...mapActions([
         'deleteSong',
-        'deleteSongList'
+        'deleteSongList',
+        'addPlayHistorySong'
       ]),
       ...mapMutations({
         setFullScreen: 'SET_FULL_SCREEN',
@@ -648,87 +653,47 @@
           } else {
             this.currentLyric = newSong.lyric
           }
-          if (!newSong.playUrl) {
-            //  获取新的播放链接（防止老链接死亡无法播放）
-            getSongUrl(newSong.mid).then(async res => {
-              if (res.code === ERR_OK) {
-                // 重新设置该歌曲的播放链接
+          //  获取新的播放链接（防止老链接死亡无法播放）
+          getSongUrl(newSong.mid).then(async res => {
+            if (res.code === ERR_OK) {
+              // 重新设置该歌曲的播放链接
+              this.setCurrentPlaySong(res.songPlayUrl)
+              this.$refs.audio.src = this.currentPlaySong.playUrl
+              this.$refs.audio.volume = this.volumePercent
+              this.changeTitle()
+              this.addPlayHistory(this.currentPlaySong)
+            } else {
+              // 其他途径获取失败尝试从官方获取播放链接
+              let data = getSongPlayUrlData(newSong.mid)
+              let sign = getSign(data)
+              let reqData = createReqData(sign, data)
+              let res = await getSongUrlByQQYY(reqData)
+              for (let i = 0; i < 3; i++) {
+                // 重试三次
+                if (res.code !== ERR_OK) {
+                  res = await getSongUrlByQQYY(reqData)
+                } else {
+                  break
+                }
+              }
+              if (res.code === ERR_OK && res.songPlayUrl !== null) {
+                //  重新设置该歌曲的播放链接
                 this.setCurrentPlaySong(res.songPlayUrl)
                 this.$refs.audio.src = this.currentPlaySong.playUrl
                 this.$refs.audio.volume = this.volumePercent
                 this.changeTitle()
+                this.addPlayHistory(this.currentPlaySong)
               } else {
-                // 其他途径获取失败尝试从官方获取播放链接
-                let data = getSongPlayUrlData(newSong.mid)
-                let sign = getSign(data)
-                let reqData = createReqData(sign, data)
-                let res = await getSongUrlByQQYY(reqData)
-                for (let i = 0; i < 3; i++) {
-                  // 重试三次
-                  if (res.code !== ERR_OK) {
-                    res = await getSongUrlByQQYY(reqData)
-                  } else {
-                    break
-                  }
-                }
-                if (res.code === ERR_OK && res.songPlayUrl !== null) {
-                  //  重新设置该歌曲的播放链接
-                  this.setCurrentPlaySong(res.songPlayUrl)
-                  this.$refs.audio.src = this.currentPlaySong.playUrl
-                  this.$refs.audio.volume = this.volumePercent
-                  this.changeTitle()
-                } else {
-                  // 提示用户无法播放并跳过播放下一首
-                  this.openTips(`≥﹏≤${newSong.name}无法播放`)
-                  // 下一首
-                  setTimeout(() => {
-                    this.closeTips()
-                    this.next(true)
-                  }, 500)
-                }
+                // 提示用户无法播放并跳过播放下一首
+                this.openTips(`≥﹏≤${newSong.name}无法播放`)
+                // 下一首
+                setTimeout(() => {
+                  this.closeTips()
+                  this.next(true)
+                }, 500)
               }
-            })
-          } else {
-            if (newSong.songPlayUrl !== null) {
-              // 获取歌曲歌词
-              if (newSong.lyric === undefined) {
-                let reaData = createSongLyricData(newSong.mid)
-                let res = await songLyric(reaData)
-                for (let i = 0; i < 3; i++) {
-                  if (res.code !== ERR_OK) {
-                    res = await songLyric(reaData)
-                  } else {
-                    break
-                  }
-                }
-                // 三次重试无效
-                if (res.code !== ERR_OK) {
-                  this.openTips('≥﹏≤歌词获取失败啦')
-                  // 下一首
-                  setTimeout(() => {
-                    this.closeTips()
-                    this.next(true)
-                  }, 500)
-                  return
-                }
-                let lyric = Base64.decode(res.songLyric)
-                this.currentLyric = lyric
-              } else {
-                this.currentLyric = newSong.lyric
-              }
-              this.$refs.audio.src = this.currentPlaySong.playUrl
-              this.$refs.audio.volume = this.volumePercent
-              this.changeTitle()
-            } else {
-              // 提示用户无法播放并跳过播放下一首
-              this.openTips(`≥﹏≤${newSong.name}无法播放`)
-              // 下一首
-              setTimeout(() => {
-                this.closeTips()
-                this.next(true)
-              }, 500)
             }
-          }
+          })
         }, 500)
       },
       currentPlaySongIndex (newValue) {

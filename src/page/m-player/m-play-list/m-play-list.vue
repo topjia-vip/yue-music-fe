@@ -2,10 +2,10 @@
     <div ref="playListBox" class="m-play-list">
         <div class="heard">
             <div class="btn-box">
-                <div class="btn now-play-list btn-active">
+                <div class="btn now-play-list" :class="listMode === 0?'btn-active':''" @click="listMode = 0">
                     <span>播放列表</span>
                 </div>
-                <div class="btn history-play-list">
+                <div class="btn history-play-list" :class="listMode === 1?'btn-active':''" @click="listMode = 1">
                     <span>历史记录</span>
                 </div>
                 <div class="close" @click="closeList">
@@ -16,19 +16,23 @@
         <!--工具栏-->
         <div class="play-list-tool">
             <div class="song-sum">
-                <span>总<span class="num">{{sequenceList.length}}</span>首</span>
+                <span>总<span class="num">{{listMode === 0 ? sequenceList.length : playHistory.length}}</span>首</span>
             </div>
-            <div class="clear-all" @click="clearAll">
+            <div class="clear-all" @click="clearAll" v-if="listMode === 0">
                 <Icon class="clear-icon" type="ios-trash-outline" size="18"/>
-                <span class="name">清空</span>
+                <span class="name">清空播放列表</span>
+            </div>
+            <div class="clear-all" @click="clearAllPlayHistory" v-else>
+                <Icon class="clear-icon" type="ios-trash-outline" size="18"/>
+                <span class="name">清空历史记录</span>
             </div>
         </div>
-        <div class="play-list-info">
+        <div class="play-list-info" v-if="listMode === 0">
             <!--列表展示-->
             <div class="song-list">
                 <ul>
                     <li class="song-item" v-for="(song,index) in sequenceList" :key="index"
-                        :class="[index%2===0?'':'odd',index === curSelectSong?'song-select':'',song === currentPlaySong?'song-playing':'']"
+                        :class="[index%2===0?'':'odd',index === curSelectSong?'song-select':'',song.id + '' === currentPlaySong.id + ''?'song-playing':'']"
                         @click="selectSong(index)"
                         @dblclick="selectItem(song,index)"
                     >
@@ -59,12 +63,48 @@
                 </div>
             </div>
         </div>
+        <div class="play-list-info history" v-else>
+            <!--列表展示-->
+            <div class="song-list">
+                <ul>
+                    <li class="song-item" v-for="(song,index) in playHistory" :key="index"
+                        :class="[index%2===0?'':'odd',index === curSelectHistorySong?'song-select':'',song.id + '' === currentPlaySong.id + ''?'song-playing':'']"
+                        @click="selectSong(index)"
+                        @dblclick="selectItem(song,index)"
+                    >
+                        <div class="play-status-icon" v-if="song.mid === currentPlaySong.mid">
+                            <Icon type="ios-play" size="17" v-if="playStatus"/>
+                            <Icon type="ios-pause" size="17" v-else/>
+                        </div>
+                        <div class="song-name">
+                            <span class="title" v-html="song.title"></span>
+                            <span class="subTitle" v-if="song.subTitle" v-html="'('+song.subTitle+')'"></span>
+                        </div>
+                        <div class="singer">
+                             <span v-for="(singer) in song.singers" :key="singer.singerMid"
+                                   v-html="singer.singerName" :title="singer.singerName"
+                                   @click="toSingerDetail(singer)" @dblclick.stop=""></span>
+                        </div>
+                        <div class="song-time">
+                            {{_handleTime(song.duration)}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!--没有列表时显示-->
+            <div class="no-song-list" v-if="playHistory.length === 0">
+                <div class="tips">
+                    <p>您还没有播放任何歌曲!</p>
+                    <p>前往首页<span class="toFindMusic" @click="toFindMusicPage">发现音乐</span></p>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
   import { Icon } from 'view-design'
-  import { mapGetters, mapMutations } from 'vuex'
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
   import { handleTime, scrollToTop } from '../../../common/js/util'
   import { playMode } from '../../../common/js/config'
 
@@ -75,7 +115,9 @@
     },
     data () {
       return {
-        curSelectSong: -1
+        curSelectSong: -1,
+        curSelectHistorySong: -1,
+        listMode: 0
       }
     },
     computed: {
@@ -86,7 +128,8 @@
         'currentPlaySong',
         'currentPlaySongIndex',
         'playStatus',
-        'mode'
+        'mode',
+        'playHistory'
       ])
     },
     mounted () {
@@ -94,6 +137,7 @@
         this.$refs.playListBox.style.height = `${window.innerHeight * 0.7}px`
       })
       this.$refs.playListBox.style.height = `${window.innerHeight * 0.7}px`
+      this.readPlayHistory()
     },
     methods: {
       closeList () {
@@ -126,24 +170,46 @@
         return handleTime(duration)
       },
       selectSong (songIndex) {
-        this.curSelectSong = songIndex
+        switch (this.listMode) {
+          case 0: {
+            this.curSelectSong = songIndex
+            break
+          }
+          case 1: {
+            this.curSelectHistorySong = songIndex
+            break
+          }
+        }
       },
       clearAll () {
         this.$emit('clearAll')
       },
+      clearAllPlayHistory () {
+        this.cleanAllPlayHistorySong()
+      },
       // 从播放列表中切换歌曲
       selectItem (item, index) {
-        if (this.mode === playMode.random) {
-          index = this.playList.findIndex((song) => {
-            return song.id === item.id
-          })
+        if (this.listMode === 1) {
+          // 从历史记录里选取歌曲播放
+          this.insertSong(item)
+        } else {
+          if (this.mode === playMode.random) {
+            index = this.playList.findIndex((song) => {
+              return song.id + '' === item.id + ''
+            })
+          }
+          this.setCurrentPlaySongIndex(index)
         }
-        this.setCurrentPlaySongIndex(index)
       },
       ...mapMutations({
         setCurrentPlaySongIndex: 'SET_CURRENT_PLAY_SONG_INDEX',
         setRouterStackPointer: 'SET_ROUTER_STACK_POINTER'
-      })
+      }),
+      ...mapActions([
+        'readPlayHistory',
+        'insertSong',
+        'cleanAllPlayHistorySong'
+      ])
     }
   }
 </script>

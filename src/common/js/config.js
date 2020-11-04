@@ -11,3 +11,5 @@ export const operationType = {
 }
 
 export const timeOut = 200
+
+export const PLAY_HISTORY = 'playHistory'

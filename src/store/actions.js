@@ -1,6 +1,7 @@
 import * as types from './mutation-types'
-import { playMode } from '../common/js/config'
+import { PLAY_HISTORY, playMode } from '../common/js/config'
 import { shuffle } from '../common/js/util'
+import yueMusicLocalStorage from '../common/js/localStorage'
 
 function findIndex (list, song) {
   return list.findIndex((item) => item.id === song.id)
@@ -133,4 +134,33 @@ export const deleteSongList = function ({ commit }) {
   commit(types.SET_PLAY_LIST, [])
   commit(types.SET_SEQUENCE_LIST, [])
   commit(types.SET_PLAYING_STATUS, false)
+}
+
+export const addPlayHistorySong = function ({ commit }, song) {
+  let playHistoryArr = getPlayHistorySong()
+  let index = playHistoryArr.findIndex((item) => item.id + '' === song.id + '')
+
+  if (playHistoryArr.length !== 0 && index !== -1) {
+    // 原来数组已经存在该歌曲
+    // 1. 删除该歌曲原来的位置
+    playHistoryArr.splice(index, 1)
+  }
+  // 2. 将该歌曲添加到第一个位置
+  playHistoryArr.unshift(song)
+  // 重新保存LocalStorage
+  yueMusicLocalStorage.save(PLAY_HISTORY, playHistoryArr)
+  commit(types.SET_PLAY_HISTORY, getPlayHistorySong())
+}
+
+export const cleanAllPlayHistorySong = function ({ commit }) {
+  yueMusicLocalStorage.remove(PLAY_HISTORY)
+  commit(types.SET_PLAY_HISTORY, getPlayHistorySong())
+}
+
+export const getPlayHistorySong = function () {
+  return yueMusicLocalStorage.get(PLAY_HISTORY)
+}
+
+export const readPlayHistory = function ({ commit }) {
+  commit(types.SET_PLAY_HISTORY, getPlayHistorySong())
 }
