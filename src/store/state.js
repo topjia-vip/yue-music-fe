@@ -37,7 +37,9 @@ const state = {
   // 是否需要登录
   needLogin: false,
   // 播放历史
-  playHistory: []
+  playHistory: [],
+  // 搜索历史记录
+  searchHistory: []
 }
 
 export default state

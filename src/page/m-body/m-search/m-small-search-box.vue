@@ -3,9 +3,22 @@
         <div class="m-small-search-box" ref="smallSearchBox">
             <div class="hot-search-title" ref="hotSearch" v-if="smartSearch === null">
                 <!--历史搜索记录-->
+                <div class="search-history" v-if="searchHistory.length > 0">
+                    <div class="search-history-title">搜索历史</div>
+                    <div class="history-search-box">
+                        <div class="history-search-key"
+                             v-for="(key,index) in searchHistory" :key="index"
+                        >
+                            <div class="key-text" @click="quickSearch(key)">{{key}}</div>
+                            <div class="delete-icon" title="删除搜索记录" @click="deleteSearchItem(key)">
+                                <Icon type="md-trash" size="16"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!--热搜榜-->
                 <div class="hot-title-box">
-                    <div class="hot-title">热搜榜</div>
+                    <div class="hot-title">热搜</div>
                     <clip-loader style="display: inline-block;" v-if="hotKey === null"
                                  :color="'rgba(255, 255, 255, 0.5)'"
                                  :size="'10px'"></clip-loader>
@@ -55,7 +68,7 @@
   import { createHotKeyData } from '../../../common/js/createReqData'
   import { ERR_OK } from '../../../api/config'
   import { Icon } from 'view-design'
-  import { mapMutations } from 'vuex'
+  import { mapMutations, mapGetters, mapActions } from 'vuex'
   import ClipLoader from 'vue-spinner/src/ClipLoader'
   import MTips from '../../../components/m-tips/m-tips'
 
@@ -80,6 +93,11 @@
       Icon,
       ClipLoader
     },
+    computed: {
+      ...mapGetters([
+        'searchHistory'
+      ])
+    },
     created () {
       document.addEventListener('mousedown', e => {
         const x = document.getElementsByClassName('m-small-search-box')[0]
@@ -90,8 +108,12 @@
           }
         }
       })
+      this.readSearchHistory()
     },
     methods: {
+      deleteSearchItem (key) {
+        this.deleteSearchHistoryByKey(key)
+      },
       quickSearch (key) {
         this.$emit('quickSearch', key)
       },
@@ -150,7 +172,11 @@
       },
       ...mapMutations({
         setRouterStackPointer: 'SET_ROUTER_STACK_POINTER'
-      })
+      }),
+      ...mapActions([
+        'readSearchHistory',
+        'deleteSearchHistoryByKey'
+      ])
     },
     watch: {
       smartSearch (newValue) {
@@ -213,6 +239,74 @@
             width: 400px;
             max-height: 500px;
             text-align: left;
+
+            .search-history {
+                .search-history-title {
+                    color: #828385;
+                    height: 60px;
+                    line-height: 60px;
+                    padding-left: 20px;
+                }
+
+                .history-search-box {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    flex-flow: row;
+                    flex-wrap: wrap;
+                    padding: 0 10px;
+
+                    .history-search-key {
+                        position: relative;
+                        font-size: 12px;
+                        padding: 5px 16px;
+                        background-color: #1a1c20;
+                        margin: 5px;
+                        border-radius: 5px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: #cccccc;
+
+                        .key-text {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 20px;
+                        }
+
+                        .delete-icon {
+                            position: absolute;
+                            right: 2px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 20px;
+                            font-size: 14px;
+                            z-index: -10;
+                            opacity: 0;
+                            transition: opacity 200ms;
+                        }
+
+                        .key-text:hover {
+                            color: #FFFFFF;
+                        }
+
+                        .delete-icon:hover {
+                            color: #FFFFFF;
+                        }
+                    }
+
+                    .history-search-key:hover {
+                        cursor: pointer;
+
+                        .delete-icon {
+                            z-index: 10;
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
 
             .hot-title-box {
                 color: #828385;

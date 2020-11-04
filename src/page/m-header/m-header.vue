@@ -94,7 +94,7 @@
 
 <script>
   import { Header, Icon, Input } from 'view-design'
-  import { mapGetters, mapMutations } from 'vuex'
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
   import MLogin from '../../components/m-login-box/m-login/m-login'
   import MUserSmallInfo from '../../components/m-user-small-info/m-user-small-info'
   import MLogout from '../../components/m-logout/m-logout'
@@ -172,6 +172,7 @@
         this.$refs.searchInput.blur()
         let router = `/search`
         this.setSearchKey(key)
+        this.addSearchHistory(key)
         if (this.$route.path !== router) {
           this.routerStack.push(router)
           this.setRouterStackPointer(this.routerStack.pointer)
@@ -313,7 +314,10 @@
         setNeedLogin: 'SET_NEED_LOGIN',
         setUserFavoriteDisst: 'SET_LOGIN_USER_FAVORITE_DISSTS',
         setUserFavoriteSongList: 'SET_LOGIN_USER_FAVORITE_SONG_LIST'
-      })
+      }),
+      ...mapActions([
+        'addSearchHistory'
+      ])
     },
     watch: {
       routerStackPointer () {

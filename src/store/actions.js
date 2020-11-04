@@ -1,5 +1,5 @@
 import * as types from './mutation-types'
-import { PLAY_HISTORY, playMode } from '../common/js/config'
+import { PLAY_HISTORY, playMode, SEARCH_HISTORY, SEARCH_HISTORY_MAX_LENGTH } from '../common/js/config'
 import { shuffle } from '../common/js/util'
 import yueMusicLocalStorage from '../common/js/localStorage'
 
@@ -136,6 +136,7 @@ export const deleteSongList = function ({ commit }) {
   commit(types.SET_PLAYING_STATUS, false)
 }
 
+// 播放历史记录
 export const addPlayHistorySong = function ({ commit }, song) {
   let playHistoryArr = getPlayHistorySong()
   let index = playHistoryArr.findIndex((item) => item.id + '' === song.id + '')
@@ -163,4 +164,42 @@ export const getPlayHistorySong = function () {
 
 export const readPlayHistory = function ({ commit }) {
   commit(types.SET_PLAY_HISTORY, getPlayHistorySong())
+}
+
+// 搜索历史记录
+export const addSearchHistory = function ({ commit }, searchKey) {
+  let searchHistoryArray = getSearchHistory()
+  let index = searchHistoryArray.findIndex((item) => item === searchKey)
+
+  if (searchHistoryArray.length !== 0 && index !== -1) {
+    searchHistoryArray.splice(index, 1)
+  }
+  searchHistoryArray.unshift(searchKey)
+
+  if (searchHistoryArray.length >= SEARCH_HISTORY_MAX_LENGTH) {
+    // 最多保存10个搜索记录，大于10个删除最老的搜索记录
+    searchHistoryArray.splice(SEARCH_HISTORY_MAX_LENGTH, searchHistoryArray.length - SEARCH_HISTORY_MAX_LENGTH)
+  }
+  // 重新保存LocalStorage
+  yueMusicLocalStorage.save(SEARCH_HISTORY, searchHistoryArray)
+  commit(types.SET_SEARCH_HISTORY, getSearchHistory())
+}
+
+export const deleteSearchHistoryByKey = function ({ commit }, key) {
+  let searchHistoryArray = getSearchHistory()
+  let index = searchHistoryArray.findIndex((item) => item === key)
+  if (index !== -1) {
+    searchHistoryArray.splice(index, 1)
+  }
+  // 重新保存LocalStorage
+  yueMusicLocalStorage.save(SEARCH_HISTORY, searchHistoryArray)
+  commit(types.SET_SEARCH_HISTORY, getSearchHistory())
+}
+
+export const getSearchHistory = function () {
+  return yueMusicLocalStorage.get(SEARCH_HISTORY)
+}
+
+export const readSearchHistory = function ({ commit }) {
+  commit(types.SET_SEARCH_HISTORY, getSearchHistory())
 }

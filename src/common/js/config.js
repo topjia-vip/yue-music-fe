@@ -13,3 +13,7 @@ export const operationType = {
 export const timeOut = 200
 
 export const PLAY_HISTORY = 'playHistory'
+
+export const SEARCH_HISTORY = 'searchHistory'
+
+export const SEARCH_HISTORY_MAX_LENGTH = 10
