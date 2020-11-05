@@ -234,9 +234,6 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
-                        display: flex;
-                        justify-content: flex-start;
-                        align-items: center;
 
                         .tag-icon {
                             margin-right: 3px;
@@ -260,12 +257,6 @@
                             display: inline-block;
                             right: 0;
                             margin-right: 20px;
-                        }
-
-                        .disst-name {
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
                         }
                     }
 
