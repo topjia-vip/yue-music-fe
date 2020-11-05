@@ -12,6 +12,13 @@
                                 发现音乐
                             </div>
                         </li>
+                        <li>
+                            <div class="tag-item" @click.stop="pushRouter('/video')"
+                                 :class="this.$route.path.indexOf('/video')!== -1?'tag-item-active':''">
+                                <Icon class="tag-icon" type="ios-videocam-outline" size="18"/>
+                                视频
+                            </div>
+                        </li>
                     </ul>
                 </li>
                 <li class="tags-item">
@@ -227,6 +234,9 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
 
                         .tag-icon {
                             margin-right: 3px;

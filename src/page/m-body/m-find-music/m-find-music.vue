@@ -2,29 +2,31 @@
     <Content ref="content" class="m-find-music">
         <!--导航栏-->
         <div class="m-find-music-nav">
-            <ul>
-                <li class="item" @click.stop="pushRouter('/findMusic/recommend')">
+            <div class="tag-box">
+                <div class="tag" @click.stop="selectRouter('recommend')">
                     <div class="title" :class="this.$route.path==='/findMusic/recommend'?'active':''">个性推荐</div>
-                </li>
+                </div>
 
-                <li class="item" @click.stop="pushRouter('/findMusic/dissts')">
+                <div class="tag" @click.stop="selectRouter('dissts')">
                     <div class="title" :class="this.$route.path==='/findMusic/dissts'?'active':''">歌单</div>
-                </li>
+                </div>
 
-                <li class="item" @click.stop="pushRouter('/findMusic/rank')">
+                <div class="tag" @click.stop="selectRouter('rank')">
                     <div class="title" :class="this.$route.path==='/findMusic/rank'?'active':''">排行榜</div>
-                </li>
+                </div>
 
-                <li class="item" @click.stop="pushRouter('/findMusic/singer')">
+                <div class="tag" @click.stop="selectRouter('singer')">
                     <div class="title" :class="this.$route.path==='/findMusic/singer'?'active':''">歌手</div>
-                </li>
+                </div>
 
-                <li class="item" @click.stop="pushRouter('/findMusic/new_song')">
+                <div class="tag" @click.stop="selectRouter('new_song')">
                     <div class="title" :class="this.$route.path==='/findMusic/new_song'?'active':''">最新音乐</div>
-                </li>
-            </ul>
+                </div>
+                <div class="active-line-box" ref="activeLine">
+                    <div class="active-line"></div>
+                </div>
+            </div>
         </div>
-        <div class="nav-line"></div>
         <m-slider ref="wrapper">
             <div ref="musicBox" class="m-find-music-box" @scroll="scrollValue">
                 <!--分类内容区-->
@@ -71,6 +73,34 @@
       this.$refs.content.$el.style.height = `${window.innerHeight - 102.1}px`
     },
     methods: {
+      selectRouter (router) {
+        let allRouter = '/findMusic/' + router
+        let translate = 1
+        switch (router) {
+          case 'recommend': {
+            translate = 0
+            break
+          }
+          case 'dissts': {
+            translate = 1
+            break
+          }
+          case 'rank': {
+            translate = 2
+            break
+          }
+          case 'singer': {
+            translate = 3
+            break
+          }
+          case 'new_song': {
+            translate = 4
+            break
+          }
+        }
+        this.$refs.activeLine.style.transform = `translate3d(${translate * 100}%, 0, 0)`
+        this.pushRouter(allRouter)
+      },
       scrollValue () {
         this.scrollTop = this.$refs.musicBox.scrollTop
         this.scrollHeight = this.$refs.musicBox.scrollHeight
@@ -115,6 +145,8 @@
 </script>
 
 <style lang="less">
+    @import "../../../common/css/theme/theme";
+
     .m-find-music {
         position: relative;
         z-index: 0;
@@ -126,33 +158,55 @@
         .m-find-music-nav {
             width: 100%;
             height: 50px;
-            line-height: 50px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-            ul {
+            .tag-box {
+                position: relative;
                 height: 50px;
-                list-style: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
 
-                .item {
+                .tag {
                     color: #828385;
-                    font-size: 14px;
-                    display: inline;
 
                     .title {
-                        display: inline-block;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                         height: 50px;
-                        width: 60px;
-                        margin: 0 10px;
+                        width: 80px;
                     }
 
                     .active {
-                        color: #FFFFFF;
-                        border-bottom: 1.5px solid #5C5E61;
+                        color: #FFFFFF !important;
                     }
 
                     .title:hover {
                         cursor: pointer;
-                        color: #FFFFFF;
+                        color: #cccccc;
+                    }
+                }
+
+                .active-line-box {
+                    position: absolute;
+                    left: 0;
+                    bottom: 2px;
+                    width: 80px;
+                    height: 4px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    transform: translate3d(0, 0, 0);
+                    transition: transform 200ms ease;
+
+                    .active-line {
+                        width: 60px;
+                        height: 100%;
+                        border-radius: 5px;
+                        background-color: @player-bar-color;
                     }
                 }
             }
@@ -184,7 +238,7 @@
             overflow-x: hidden;
             overflow-y: scroll;
             height: 94%;
-            padding: 0 30px 0 30px;
+            padding: 0 22px 0 30px;
         }
 
         .m-find-music-box {
