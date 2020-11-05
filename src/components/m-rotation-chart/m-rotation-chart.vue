@@ -100,10 +100,10 @@
         this.autoPlay()
       },
       autoPlay () {
-        // this.addClass(this.dots[this.currentIndex % this.imgElements.length].children[0], 'active')
-        // this.autoPlayTimer = setInterval(() => {
-        //   this.next()
-        // }, this.timeOut)
+        this.addClass(this.dots[this.currentIndex % this.imgElements.length].children[0], 'active')
+        this.autoPlayTimer = setInterval(() => {
+          this.next()
+        }, this.timeOut)
       },
       stopPlay () {
         clearInterval(this.autoPlayTimer)
