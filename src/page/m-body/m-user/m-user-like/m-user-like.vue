@@ -191,11 +191,12 @@
 </script>
 
 <style lang="less">
+    @import "../../../../common/css/theme/theme";
+
     .user-like-box {
         position: relative;
         z-index: 0;
         user-select: none;
-        background: #16181C;
         min-width: 820px;
         width: 100%;
         overflow: hidden;

@@ -85,7 +85,7 @@
                                  :class="$route.path === `/user/${favoriteDisst.disstId}`?'tag-item-active':''"
                             >
                                 <Icon class="tag-icon" type="md-musical-note" size="18"/>
-                                <span v-html="favoriteDisst.disstName"></span>
+                                <span class="disst-name" v-html="favoriteDisst.disstName"></span>
                                 <!--                                <div class="playing-icon" v-if="showPlayingIcon(favoriteDisst.dissid)">-->
                                 <!--                                    <img src="../../resources/images/wave.gif" alt="">-->
                                 <!--                                </div>-->
@@ -260,6 +260,12 @@
                             display: inline-block;
                             right: 0;
                             margin-right: 20px;
+                        }
+
+                        .disst-name {
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
                         }
                     }
 

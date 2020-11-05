@@ -63,7 +63,7 @@
         clientHeight: 0,
         showToTop: false,
         screenHeight: document.body.clientHeight,
-        transitionName: ''
+        transitionName: 'my-slide-left'
       }
     },
     mounted () {
@@ -155,7 +155,6 @@
         position: relative;
         z-index: 0;
         user-select: none;
-        background: #16181C;
         min-width: 820px;
         overflow: hidden;
 

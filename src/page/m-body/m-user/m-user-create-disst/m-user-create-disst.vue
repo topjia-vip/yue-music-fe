@@ -16,6 +16,7 @@
                                 <div class="user-img-box">
                                     <img class="user-img" ondragstart="return false"
                                          v-lazy="handleLazyImage(disst.headUrl)"
+                                         :key="disst.headUrl"
                                          :alt="disst.nickname">
                                 </div>
                                 <div class="user-name">
@@ -69,7 +70,7 @@
                 <m-tips class="tips" ref="tips" :width="180"/>
             </div>
         </m-slider>
-        <loading class="loading" v-if="!isShow"/>
+        <m-disstdetail-skeleton v-if="!isShow"/>
         <scroll-top v-if="showToTop" @toTop="toTop"/>
     </Content>
 </template>
@@ -91,10 +92,12 @@
   import MTips from '../../../../components/m-tips/m-tips'
   import MSlider from '../../../../components/m-slider/m-slider'
   import UserDefLazyImg from '../../../../resources/images/person_300.png'
+  import MDisstdetailSkeleton from '../../../../components/m-skeleton/m-disstdetail-skeleton'
 
   export default {
     name: 'm-user-create-disst',
     components: {
+      MDisstdetailSkeleton,
       MSlider,
       MTips,
       MToolsBtn,
@@ -377,11 +380,12 @@
 </script>
 
 <style lang="less">
+    @import "../../../../common/css/theme/theme";
+
     .m-user-create-disst-box {
         position: relative;
         z-index: 0;
         user-select: none;
-        background: #16181C;
         min-width: 820px;
         width: 100%;
         overflow: hidden;
@@ -399,14 +403,14 @@
                 position: relative;
 
                 .disst-detail-header {
-                    height: 170px;
-                    padding-left: 170px;
+                    height: 200px;
+                    padding-left: 200px;
 
                     .img-box {
                         position: absolute;
                         left: 0;
-                        width: 170px;
-                        height: 170px;
+                        width: 200px;
+                        height: 200px;
                         float: left;
 
                         .disst-detail-img {
@@ -420,7 +424,7 @@
                     .disst-detail-info-box {
                         padding-left: 30px;
                         width: 100%;
-                        height: 170px;
+                        height: 200px;
                         float: left;
 
                         .disst-title {
@@ -436,7 +440,7 @@
 
                         .create-user-box {
                             height: 30px;
-                            margin-top: 10px;
+                            margin-top: 20px;
                             font-size: 12px;
 
                             .user-img-box {
@@ -487,7 +491,8 @@
                         .disst-desc-box {
                             position: relative;
                             height: 40px;
-                            margin-top: 10px;
+                            margin-top: 20px;
+                            user-select: text;
 
                             .disst-desc {
                                 position: relative;

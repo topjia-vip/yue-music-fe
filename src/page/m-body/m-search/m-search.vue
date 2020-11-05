@@ -255,11 +255,12 @@
 </script>
 
 <style lang="less">
+    @import "../../../common/css/theme/theme";
+
     .m-search-box {
         position: relative;
         z-index: 0;
         user-select: none;
-        background: #16181C;
         min-width: 820px;
         width: 100%;
         height: 100%;

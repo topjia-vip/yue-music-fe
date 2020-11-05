@@ -48,7 +48,7 @@
     data () {
       return {
         showPlayList: false,
-        transitionName: 'slide-left'
+        transitionName: 'my-slide-left'
       }
     },
     mounted () {
@@ -112,6 +112,7 @@
 </script>
 
 <style lang="less">
+    @import "common/css/theme/theme";
 
     .body-bg {
         position: absolute;
@@ -121,6 +122,7 @@
         left: 0;
         font: 14px/1.5 Tahoma, Helvetica, Arial, '宋体', sans-serif;
         overflow: hidden;
+        background-color: @background-color-base;
 
         .line {
             width: 100%;
@@ -135,6 +137,10 @@
             z-index: 10;
             transform: translateX(100%);
             transition: transform 200ms;
+        }
+
+        .ivu-layout {
+            background-color: #16181C;
         }
     }
 </style>
