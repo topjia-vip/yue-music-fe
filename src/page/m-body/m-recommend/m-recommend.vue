@@ -1,11 +1,13 @@
 <template>
     <div class="m-recommend-box">
         <div class="info-page" v-if="isShow && !isError">
-            <m-focus ref="focus" :focus="focus"/>
-            <div class="content-box">
+            <m-focus ref="focus" :focus="focus" v-if="focus !== null"/>
+            <m-recommend-focus-skeleton v-else/>
+            <div class="content-box" v-if="playlist !== null && newSongList !== null">
                 <m-recomdisstlist :recom-play-list="playlist"/>
                 <m-newsonglist :new-song-list="newSongList"/>
             </div>
+            <m-recommend-disst-skeleton v-else/>
         </div>
         <m-recommend-skeleton v-if="!isShow && !isError"/>
         <m-error-page v-if="isError" @refresh="refresh"/>
@@ -27,15 +29,27 @@
   import MTips from '../../../components/m-tips/m-tips'
   import MErrorPage from '../../../components/m-error-page/m-error-page'
   import MRecommendSkeleton from '../../../components/m-skeleton/m-recommend-skeleton'
+  import MRecommendDisstSkeleton from '../../../components/m-skeleton/m-recommend-disst-skeleton'
+  import MRecommendFocusSkeleton from '../../../components/m-skeleton/m-recommend-focus-skeleton'
 
   export default {
     name: 'm-recommend',
-    components: { MRecommendSkeleton, MErrorPage, MTips, MNewsonglist, Loading, MRecomdisstlist, MFocus },
+    components: {
+      MRecommendFocusSkeleton,
+      MRecommendDisstSkeleton,
+      MRecommendSkeleton,
+      MErrorPage,
+      MTips,
+      MNewsonglist,
+      Loading,
+      MRecomdisstlist,
+      MFocus
+    },
     data () {
       return {
-        playlist: [],
-        newSongList: [],
-        focus: [],
+        playlist: null,
+        newSongList: null,
+        focus: null,
         isShow: false,
         isError: false
       }
