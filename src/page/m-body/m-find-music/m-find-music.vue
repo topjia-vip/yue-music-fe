@@ -75,6 +75,10 @@
     methods: {
       selectRouter (router) {
         let allRouter = '/findMusic/' + router
+        this.changeActiveLineStyle(router)
+        this.pushRouter(allRouter)
+      },
+      changeActiveLineStyle (router) {
         let translate = 1
         switch (router) {
           case 'recommend': {
@@ -99,7 +103,6 @@
           }
         }
         this.$refs.activeLine.style.transform = `translate3d(${translate * 100}%, 0, 0)`
-        this.pushRouter(allRouter)
       },
       scrollValue () {
         this.scrollTop = this.$refs.musicBox.scrollTop
@@ -139,6 +142,7 @@
           return
         }
         this.transitionName = toIndex < fromIndex ? 'my-slide-right' : 'my-slide-left'
+        this.changeActiveLineStyle(to.path.replace('/findMusic/', ''))
       }
     }
   }
@@ -200,7 +204,7 @@
                     justify-content: center;
                     align-items: center;
                     transform: translate3d(0, 0, 0);
-                    transition: transform 200ms ease;
+                    transition: transform 300ms ease;
 
                     .active-line {
                         width: 60px;
