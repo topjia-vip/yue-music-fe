@@ -1,20 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import FindMusic from '../page/m-body/m-find-music/m-find-music'
-import Recommend from '../page/m-body/m-recommend/m-recommend'
-import Disst from '../page/m-body/m-dissts/m-disst'
-import Rank from '../page/m-body/m-rank/m-rank'
-import Singer from '../page/m-body/m-singer/m-singer'
-import NewSong from '../page/m-body/m-new-song/m-new-song'
-import DisstDetail from '../page/m-body/m-disst-detail/m-disst-detail'
-import SingerDetail from '../page/m-body/m-singer-detail/m-singer-detail'
+import Recommend from '../page/m-body/m-find-music/m-music-recommend/m-recommend'
+import Disst from '../page/m-body/m-find-music/m-dissts/m-disst'
+import Rank from '../page/m-body/m-find-music/m-rank/m-rank'
+import Singer from '../page/m-body/m-find-music/m-singer/m-singer'
+import NewSong from '../page/m-body/m-find-music/m-new-song/m-new-song'
+import DisstDetail from '../page/m-body/m-find-music/m-dissts/m-disst-detail/m-disst-detail'
+import SingerDetail from '../page/m-body/m-find-music/m-singer/m-singer-detail/m-singer-detail'
 import UserCreateDisst
   from '../page/m-body/m-user/m-user-create-disst/m-user-create-disst'
 import UserLike from '../page/m-body/m-user/m-user-like/m-user-like'
-import TopInfo from '../page/m-body/m-rank-info/m-rank-info'
+import TopInfo from '../page/m-body/m-find-music/m-rank/m-rank-info/m-rank-info'
 import UserDetail from '../page/m-body/m-user/m-user-detail/m-user-detail'
 import UserEdit from '../page/m-body/m-user/m-user-edit/m-user-edit'
 import Search from '../page/m-body/m-search/m-search'
+import Video from '../page/m-body/m-video/m-video'
 
 Vue.use(VueRouter)
 
@@ -83,6 +84,16 @@ export default new VueRouter({
         }
       ],
       redirect: '/findMusic/recommend'
+    },
+    {
+      path: '/video',
+      name: 'video',
+      component: Video,
+      meta: {
+        title: '视频',
+        keepAlive: false,
+        index: 5
+      }
     },
     {
       path: '/disst/:disstId',

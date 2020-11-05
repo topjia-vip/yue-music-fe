@@ -112,19 +112,19 @@
 
 <script>
   import { Icon } from 'view-design'
-  import { getSingerList } from '../../../api/singer'
-  import { ERR_OK } from '../../../api/config'
-  import ScrollTop from '../../../components/scrollTop/scroll-top'
+  import { getSingerList } from '../../../../api/singer'
+  import { ERR_OK } from '../../../../api/config'
+  import ScrollTop from '../../../../components/scrollTop/scroll-top'
   import { mapMutations } from 'vuex'
-  import { getSingerListData } from '../../../common/js/requestData'
-  import { getSign } from '../../../common/js/sign'
-  import { createReqData } from '../../../common/js/createReqData'
-  import Loading from '../../../components/loading/loading'
-  import MErrorPage from '../../../components/m-error-page/m-error-page'
-  import { sleep } from '../../../common/js/util'
-  import MSingersSkeleton from '../../../components/m-skeleton/m-singers-skeleton'
-  import MSingerListSkeleton from '../../../components/m-skeleton/m-singer-list-skeleton'
-  import SingerDefLazyImg from '../../../resources/images/singer_300.png'
+  import { getSingerListData } from '../../../../common/js/requestData'
+  import { getSign } from '../../../../common/js/sign'
+  import { createReqData } from '../../../../common/js/createReqData'
+  import Loading from '../../../../components/loading/loading'
+  import MErrorPage from '../../../../components/m-error-page/m-error-page'
+  import { sleep } from '../../../../common/js/util'
+  import MSingersSkeleton from '../../../../components/m-skeleton/m-singers-skeleton'
+  import MSingerListSkeleton from '../../../../components/m-skeleton/m-singer-list-skeleton'
+  import SingerDefLazyImg from '../../../../resources/images/singer_300.png'
 
   export default {
     name: 'm-singer',

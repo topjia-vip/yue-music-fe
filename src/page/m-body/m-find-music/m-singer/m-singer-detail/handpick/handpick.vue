@@ -39,12 +39,12 @@
 </template>
 
 <script>
-  import MSongList from '../../../../components/m-song-list/m-song-list'
+  import MSongList from '../../../../../../components/m-song-list/m-song-list'
   import { Icon } from 'view-design'
-  import MAlbumList from '../../../../components/m-album-list/m-album-list'
-  import MLocationPlaySong from '../../../../components/m-location-play-song/m-location-play-song'
-  import { listHasSong } from '../../../../common/js/util'
-  import MSingerSongList from '../../../../components/m-singer-song-list/m-singer-song-list'
+  import MAlbumList from '../../../../../../components/m-album-list/m-album-list'
+  import MLocationPlaySong from '../../../../../../components/m-location-play-song/m-location-play-song'
+  import { listHasSong } from '../../../../../../common/js/util'
+  import MSingerSongList from '../../../../../../components/m-singer-song-list/m-singer-song-list'
 
   export default {
     name: 'handpick',

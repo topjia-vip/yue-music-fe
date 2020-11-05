@@ -28,16 +28,16 @@
 
 <script>
   import { Icon } from 'view-design'
-  import MSongList from '../../../../components/m-song-list/m-song-list'
-  import { getSingerSongListData } from '../../../../common/js/requestData'
-  import { getSign } from '../../../../common/js/sign'
-  import { getSingerSongList } from '../../../../api/singer'
-  import { ERR_OK } from '../../../../api/config'
-  import { _normalizeSongs, listHasSong } from '../../../../common/js/util'
-  import Loading from '../../../../components/loading/loading'
-  import { createReqData } from '../../../../common/js/createReqData'
-  import MLocationPlaySong from '../../../../components/m-location-play-song/m-location-play-song'
-  import MSingerSongList from '../../../../components/m-singer-song-list/m-singer-song-list'
+  import MSongList from '../../../../../../components/m-song-list/m-song-list'
+  import { getSingerSongListData } from '../../../../../../common/js/requestData'
+  import { getSign } from '../../../../../../common/js/sign'
+  import { getSingerSongList } from '../../../../../../api/singer'
+  import { ERR_OK } from '../../../../../../api/config'
+  import { _normalizeSongs, listHasSong } from '../../../../../../common/js/util'
+  import Loading from '../../../../../../components/loading/loading'
+  import { createReqData } from '../../../../../../common/js/createReqData'
+  import MLocationPlaySong from '../../../../../../components/m-location-play-song/m-location-play-song'
+  import MSingerSongList from '../../../../../../components/m-singer-song-list/m-singer-song-list'
 
   export default {
     name: 'song-list',

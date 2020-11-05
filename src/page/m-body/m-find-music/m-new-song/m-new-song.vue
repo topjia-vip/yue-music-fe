@@ -67,18 +67,18 @@
 
 <script>
   import { Icon } from 'view-design'
-  import { getNewSong } from '../../../api/recommend'
-  import { ERR_OK } from '../../../api/config'
-  import { _normalizeSongs, handleTime, sleep } from '../../../common/js/util'
-  import Loading from '../../../components/loading/loading'
+  import { getNewSong } from '../../../../api/recommend'
+  import { ERR_OK } from '../../../../api/config'
+  import { _normalizeSongs, handleTime, sleep } from '../../../../common/js/util'
+  import Loading from '../../../../components/loading/loading'
   import { mapActions, mapMutations } from 'vuex'
-  import MRightClickMenu from '../../../components/m-right-click-menu/m-right-click-menu'
-  import { operationType } from '../../../common/js/config'
-  import { getNewSongData } from '../../../common/js/requestData'
-  import { getSign } from '../../../common/js/sign'
-  import { createReqData } from '../../../common/js/createReqData'
-  import MErrorPage from '../../../components/m-error-page/m-error-page'
-  import SongDefLazyImg from '../../../resources/images/playlist_300.png'
+  import MRightClickMenu from '../../../../components/m-right-click-menu/m-right-click-menu'
+  import { operationType } from '../../../../common/js/config'
+  import { getNewSongData } from '../../../../common/js/requestData'
+  import { getSign } from '../../../../common/js/sign'
+  import { createReqData } from '../../../../common/js/createReqData'
+  import MErrorPage from '../../../../components/m-error-page/m-error-page'
+  import SongDefLazyImg from '../../../../resources/images/playlist_300.png'
 
   export default {
     name: 'm-new-song',

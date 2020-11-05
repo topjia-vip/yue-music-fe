@@ -66,13 +66,13 @@
 </template>
 
 <script>
-  import Title from '../../../../components/m-title/m-title'
+  import Title from '../../../../../components/m-title/m-title'
   import { Icon } from 'view-design'
-  import { scrollToTop } from '../../../../common/js/util'
+  import { scrollToTop } from '../../../../../common/js/util'
   import { mapActions, mapMutations } from 'vuex'
-  import MRightClickMenu from '../../../../components/m-right-click-menu/m-right-click-menu'
-  import { operationType } from '../../../../common/js/config'
-  import SongDefLazyImg from '../../../../resources/images/playlist_300.png'
+  import MRightClickMenu from '../../../../../components/m-right-click-menu/m-right-click-menu'
+  import { operationType } from '../../../../../common/js/config'
+  import SongDefLazyImg from '../../../../../resources/images/playlist_300.png'
 
   export default {
     name: 'm-newsonglist',

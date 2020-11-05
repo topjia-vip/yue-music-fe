@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import MAlbumList from '../../../../components/m-album-list/m-album-list'
-import Loading from '../../../../components/loading/loading'
-import { getSingerAlbumsData } from '../../../../common/js/requestData'
-import { getSign } from '../../../../common/js/sign'
-import { getSingerAlbums } from '../../../../api/singer'
-import { ERR_OK } from '../../../../api/config'
-import { createReqData } from '../../../../common/js/createReqData'
+import MAlbumList from '../../../../../../components/m-album-list/m-album-list'
+import Loading from '../../../../../../components/loading/loading'
+import { getSingerAlbumsData } from '../../../../../../common/js/requestData'
+import { getSign } from '../../../../../../common/js/sign'
+import { getSingerAlbums } from '../../../../../../api/singer'
+import { ERR_OK } from '../../../../../../api/config'
+import { createReqData } from '../../../../../../common/js/createReqData'
 
 export default {
   name: 'albums',

@@ -215,12 +215,6 @@
             }
         }
 
-        .nav-line {
-            width: 100%;
-            height: 1px;
-            background: #303030;
-        }
-
         .my-slide-right-enter-active,
         .my-slide-left-enter-active {
             transition: all 200ms ease-in-out;

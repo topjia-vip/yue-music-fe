@@ -6,8 +6,8 @@
 
 <script>
   import { Carousel, CarouselItem, Icon } from 'view-design'
-  import Loading from '../../../../components/loading/loading'
-  import MRotationChart from '../../../../components/m-rotation-chart/m-rotation-chart'
+  import Loading from '../../../../../components/loading/loading'
+  import MRotationChart from '../../../../../components/m-rotation-chart/m-rotation-chart'
 
   export default {
     name: 'm-focus',

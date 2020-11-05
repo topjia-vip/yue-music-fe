@@ -30,15 +30,15 @@
 
 <script>
 
-  import Title from '../../../../components/m-title/m-title'
+  import Title from '../../../../../components/m-title/m-title'
   import { Icon } from 'view-design'
-  import { _normalizeSongs, scrollToTop } from '../../../../common/js/util'
+  import { _normalizeSongs, scrollToTop } from '../../../../../common/js/util'
   import { mapActions, mapMutations } from 'vuex'
-  import { disstDetailSongList } from '../../../../api/disst'
-  import { ERR_OK } from '../../../../api/config'
-  import { createDisstDetailData } from '../../../../common/js/createReqData'
-  import MDisstPlayLoading from '../../../../components/m-disst-play-loading/m-disst-play-loading'
-  import DisstDefLazyImg from '../../../../resources/images/album_300.png'
+  import { disstDetailSongList } from '../../../../../api/disst'
+  import { ERR_OK } from '../../../../../api/config'
+  import { createDisstDetailData } from '../../../../../common/js/createReqData'
+  import MDisstPlayLoading from '../../../../../components/m-disst-play-loading/m-disst-play-loading'
+  import DisstDefLazyImg from '../../../../../resources/images/album_300.png'
 
   export default {
     name: 'm-recomdisstlist',

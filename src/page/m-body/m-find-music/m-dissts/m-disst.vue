@@ -98,24 +98,24 @@
     dissList,
     disstCategoryGroup,
     disstDetailSongList
-  } from '../../../api/disst'
-  import { ERR_OK } from '../../../api/config'
-  import MPage from '../../../components/m-page/m-page'
-  import Loading from '../../../components/loading/loading'
-  import { _normalizeSongs, scrollToTop, sleep } from '../../../common/js/util'
+  } from '../../../../api/disst'
+  import { ERR_OK } from '../../../../api/config'
+  import MPage from '../../../../components/m-page/m-page'
+  import Loading from '../../../../components/loading/loading'
+  import { _normalizeSongs, scrollToTop, sleep } from '../../../../common/js/util'
   import { mapActions, mapMutations } from 'vuex'
   import {
     createDisstCategoryGroupData,
     createDisstDetailData,
     createDisstListData
-  } from '../../../common/js/createReqData'
+  } from '../../../../common/js/createReqData'
   import MDisstPlayLoading
-    from '../../../components/m-disst-play-loading/m-disst-play-loading'
-  import MPlayBtn from '../../../components/m-play-btn/m-play-btn'
-  import MErrorPage from '../../../components/m-error-page/m-error-page'
-  import MDisstsSkeleton from '../../../components/m-skeleton/m-dissts-skeleton'
-  import MDisstListSkeleton from '../../../components/m-skeleton/m-disst-list-skeleton'
-  import DisstDefLazyImg from '../../../resources/images/album_300.png'
+    from '../../../../components/m-disst-play-loading/m-disst-play-loading'
+  import MPlayBtn from '../../../../components/m-play-btn/m-play-btn'
+  import MErrorPage from '../../../../components/m-error-page/m-error-page'
+  import MDisstsSkeleton from '../../../../components/m-skeleton/m-dissts-skeleton'
+  import MDisstListSkeleton from '../../../../components/m-skeleton/m-disst-list-skeleton'
+  import DisstDefLazyImg from '../../../../resources/images/album_300.png'
 
   // 每页加载歌单的个数（QQ音乐API每页最大加载60个歌单）
   const DISST_NUM = 60

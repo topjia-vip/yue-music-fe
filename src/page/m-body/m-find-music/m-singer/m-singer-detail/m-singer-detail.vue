@@ -111,24 +111,24 @@
 <script>
   import { Content } from 'view-design'
   import { mapActions, mapGetters } from 'vuex'
-  import { getSingerAlbums, getSingerConcern, getSingerInfo, getSingerSongList } from '../../../api/singer'
-  import { ERR_OK } from '../../../api/config'
-  import { _normalizeSongs } from '../../../common/js/util'
-  import { operationType, timeOut } from '../../../common/js/config'
-  import MRightClickMenu from '../../../components/m-right-click-menu/m-right-click-menu'
-  import ScrollTop from '../../../components/scrollTop/scroll-top'
-  import MLocationPlaySong from '../../../components/m-location-play-song/m-location-play-song'
-  import Loading from '../../../components/loading/loading'
+  import { getSingerAlbums, getSingerConcern, getSingerInfo, getSingerSongList } from '../../../../../api/singer'
+  import { ERR_OK } from '../../../../../api/config'
+  import { _normalizeSongs } from '../../../../../common/js/util'
+  import { operationType, timeOut } from '../../../../../common/js/config'
+  import MRightClickMenu from '../../../../../components/m-right-click-menu/m-right-click-menu'
+  import ScrollTop from '../../../../../components/scrollTop/scroll-top'
+  import MLocationPlaySong from '../../../../../components/m-location-play-song/m-location-play-song'
+  import Loading from '../../../../../components/loading/loading'
   import Handpick from './handpick/handpick'
   import SongList from './song-list/song-list'
   import SingerInfo from './singer-info/singer-info'
-  import { getSingerAlbumsData, getSingerConcernData, getSingerSongListData } from '../../../common/js/requestData'
-  import { getSign } from '../../../common/js/sign'
+  import { getSingerAlbumsData, getSingerConcernData, getSingerSongListData } from '../../../../../common/js/requestData'
+  import { getSign } from '../../../../../common/js/sign'
   import Albums from './albums/albums'
-  import { createReqData, createSingerInfoData } from '../../../common/js/createReqData'
-  import MSlider from '../../../components/m-slider/m-slider'
-  import MSingerDetailSkeleton from '../../../components/m-skeleton/m-singer-detail-skeleton'
-  import SingerDefLazyImg from '../../../resources/images/singer_300.png'
+  import { createReqData, createSingerInfoData } from '../../../../../common/js/createReqData'
+  import MSlider from '../../../../../components/m-slider/m-slider'
+  import MSingerDetailSkeleton from '../../../../../components/m-skeleton/m-singer-detail-skeleton'
+  import SingerDefLazyImg from '../../../../../resources/images/singer_300.png'
 
   export default {
     name: 'm-singer-detail',
@@ -356,7 +356,7 @@
 </script>
 
 <style lang="less">
-    @import "../../../common/css/theme/theme";
+    @import "../../../../../common/css/theme/theme";
 
     .m-singer-detail-box {
         position: relative;

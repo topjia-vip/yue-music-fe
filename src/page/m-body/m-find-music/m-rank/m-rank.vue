@@ -67,20 +67,20 @@
 
 <script>
   import { Icon } from 'view-design'
-  import { initTopDetail, topListInfo } from '../../../api/rank'
-  import { ERR_OK } from '../../../api/config'
+  import { initTopDetail, topListInfo } from '../../../../api/rank'
+  import { ERR_OK } from '../../../../api/config'
   import elementResizeDetectorMaker from 'element-resize-detector'
-  import Loading from '../../../components/loading/loading'
-  import { getRankInfoData, getTopListData } from '../../../common/js/requestData'
-  import { getSign } from '../../../common/js/sign'
-  import { createReqData } from '../../../common/js/createReqData'
+  import Loading from '../../../../components/loading/loading'
+  import { getRankInfoData, getTopListData } from '../../../../common/js/requestData'
+  import { getSign } from '../../../../common/js/sign'
+  import { createReqData } from '../../../../common/js/createReqData'
   import { mapActions, mapMutations } from 'vuex'
-  import { _normalizeSongs, sleep } from '../../../common/js/util'
-  import MDisstPlayLoading from '../../../components/m-disst-play-loading/m-disst-play-loading'
-  import MPlayBtn from '../../../components/m-play-btn/m-play-btn'
-  import MErrorPage from '../../../components/m-error-page/m-error-page'
-  import { dissList } from '../../../api/disst'
-  import MRankSkeleton from '../../../components/m-skeleton/m-rank-skeleton'
+  import { _normalizeSongs, sleep } from '../../../../common/js/util'
+  import MDisstPlayLoading from '../../../../components/m-disst-play-loading/m-disst-play-loading'
+  import MPlayBtn from '../../../../components/m-play-btn/m-play-btn'
+  import MErrorPage from '../../../../components/m-error-page/m-error-page'
+  import { dissList } from '../../../../api/disst'
+  import MRankSkeleton from '../../../../components/m-skeleton/m-rank-skeleton'
 
   export default {
     name: 'm-rank',
