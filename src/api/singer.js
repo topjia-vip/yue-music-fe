@@ -33,10 +33,9 @@ export function getSingerAlbums (reqData) {
 }
 
 export function getSingerConcern (reqData, singerMid) {
-  const url = `${BASE_URL}/${MUSIC_REQUEST}/singer/concern`
+  const url = `${BASE_URL}/${MUSIC_REQUEST}/singer/concern?singerMid=${singerMid}`
   const data = {
-    reqData: aesMinEncrypt(JSON.stringify(reqData)),
-    singerMid
+    reqData: aesMinEncrypt(JSON.stringify(reqData))
   }
   return axios.post(url, data).then(res => {
     return Promise.resolve(res.data)
