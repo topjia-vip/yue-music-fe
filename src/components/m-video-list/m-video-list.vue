@@ -1,7 +1,7 @@
 <template>
     <div class="video-box" v-if="videos.length !== 0">
         <div class="video-item" v-for="(video,index) in videos" :key="index">
-            <div class="video-image" ref="imageBox">
+            <div class="video-image" ref="imageBox" @click="playVideo(video)">
                 <img class="image"
                      ondragstart="return false"
                      v-lazy="handleLazyImage(video.mvPicUrl)"
@@ -9,7 +9,7 @@
                      :alt="video.mvTitle"
                 >
                 <div class="img-mask"></div>
-                <m-play-btn class="play-icon-box" :font-size="60"/>
+                <m-play-btn class="play-icon-box" :font-size="60" @play="playVideo(video)"/>
                 <div class="visit-num-box">
                     <div class="visit-num">
                         <Icon class="icon" type="md-videocam" size="16"/>
@@ -19,7 +19,7 @@
                 <div class="video-bottom"></div>
             </div>
             <div class="mv-title">
-                <span class="title-text" v-html="video.mvTitle"/>
+                <span class="title-text" v-html="video.mvTitle" @click="playVideo(video)"/>
             </div>
             <div class="mv-singers">
                 <div class="singer-name-box" v-for="(singer,singerIndex) in video.singers" :key="singerIndex">
@@ -85,6 +85,9 @@
       this.autoImageBoxHeight()
     },
     methods: {
+      playVideo (video) {
+        this.$emit('playVideo', video)
+      },
       toSingerDetail (singer) {
         this.$emit('toSingerDetail', singer)
       },

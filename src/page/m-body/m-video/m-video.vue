@@ -25,7 +25,7 @@
                 <transition :name="transitionName">
                     <keep-alive>
                         <router-view :scrollTop="scrollTop" :clientHeight="clientHeight" :scrollHeight="scrollHeight"
-                                     @toSingerDetail="toSingerDetail"/>
+                                     @toSingerDetail="toSingerDetail" @playVideo="playVideo"/>
                     </keep-alive>
                 </transition>
             </div>
@@ -68,6 +68,16 @@
     methods: {
       toSingerDetail (singer) {
         let router = `/singer/${singer.singerName}/${singer.singerMid}`
+        if (this.$route.path !== router) {
+          this.routerStack.push(router)
+          this.setRouterStackPointer(this.routerStack.pointer)
+          this.$router.replace({
+            path: router
+          })
+        }
+      },
+      playVideo (video) {
+        let router = `/video/${video.vid}`
         if (this.$route.path !== router) {
           this.routerStack.push(router)
           this.setRouterStackPointer(this.routerStack.pointer)

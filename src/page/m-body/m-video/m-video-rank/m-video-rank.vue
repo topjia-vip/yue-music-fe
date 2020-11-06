@@ -56,14 +56,14 @@
                         <div class="num" :class="index < 3?'top':''">{{index+1}}</div>
                     </div>
                     <!--图片-->
-                    <div class="mv-image-box">
-                        <m-play-btn class="play-icon-box" :font-size="50"/>
+                    <div class="mv-image-box" @click="playVideo(mv)">
+                        <m-play-btn class="play-icon-box" :font-size="50" @play="playVideo(mv)"/>
                         <div class="img-mask"></div>
                         <img class="image" :src="mv.mvPicUrl" :alt="mv.mvTitle">
                     </div>
                     <!--基本信息-->
                     <div class="mv-info-box">
-                        <div class="mv-name" v-html="mv.mvTitle"/>
+                        <div class="mv-name" v-html="mv.mvTitle" @click="playVideo(mv)"/>
                         <div class="mv-singer-box">
                             <div class="mv-singer" v-for="(singer,singerIndex) in mv.singers" :key="singerIndex">
                                 <span class="singer-name" v-html="singer.singerName" @click="toSingerDetail(singer)"/>
@@ -141,6 +141,9 @@
         this.$nextTick(() => {
           this.mvRankData = res.mvRankData
         })
+      },
+      playVideo (video) {
+        this.$emit('playVideo', video)
       },
       selectAreaType (type) {
         this.areaType = type

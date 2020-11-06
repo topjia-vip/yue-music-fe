@@ -237,3 +237,91 @@ export function getVideosData (start, size, areaId, versionId, order) {
     }
   }
 }
+
+export function getVideoPlayUrlData (vid) {
+  return {
+    'getMvUrl': {
+      'module': 'gosrf.Stream.MvUrlProxy',
+      'method': 'GetMvUrls',
+      'param': {
+        'vids': [
+          vid
+        ],
+        'request_typet': 10001,
+        'addrtype': 3
+      }
+    },
+    'comm': {
+      'ct': 24,
+      'cv': 4747474,
+      'g_tk': 34936803,
+      'uin': 1256957450,
+      'format': 'json',
+      'platform': 'yqq'
+    }
+  }
+}
+
+export function getVideoInfoAndOtherVideoData (vid) {
+  return {
+    'comm': {
+      'ct': 24,
+      'cv': 4747474
+    },
+    'mvinfo': {
+      'module': 'video.VideoDataServer',
+      'method': 'get_video_info_batch',
+      'param': {
+        'vidlist': [
+          vid
+        ],
+        'required': [
+          'vid',
+          'type',
+          'sid',
+          'cover_pic',
+          'duration',
+          'singers',
+          'video_switch',
+          'msg',
+          'name',
+          'desc',
+          'playcnt',
+          'pubdate',
+          'isfav',
+          'gmid'
+        ]
+      }
+    },
+    'other': {
+      'module': 'video.VideoLogicServer',
+      'method': 'rec_video_byvid',
+      'param': {
+        'vid': vid,
+        'required': [
+          'vid',
+          'type',
+          'sid',
+          'cover_pic',
+          'duration',
+          'singers',
+          'video_switch',
+          'msg',
+          'name',
+          'desc',
+          'playcnt',
+          'pubdate',
+          'isfav',
+          'gmid',
+          'uploader_headurl',
+          'uploader_nick',
+          'uploader_encuin',
+          'uploader_uin',
+          'uploader_hasfollow',
+          'uploader_follower_num'
+        ],
+        'support': 1
+      }
+    }
+  }
+}

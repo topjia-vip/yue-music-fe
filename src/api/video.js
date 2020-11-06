@@ -51,3 +51,23 @@ export function getVideos (reqData) {
     return Promise.resolve(res.data)
   })
 }
+
+export function getVideoPlayUrl (reqData, vid) {
+  const url = `${BASE_URL}/${MUSIC_REQUEST}/video/video_play_url?vid=${vid}`
+  const data = {
+    reqData: aesMinEncrypt(JSON.stringify(reqData))
+  }
+  return axios.post(url, data).then(res => {
+    return Promise.resolve(res.data)
+  })
+}
+
+export function getVideoInfoAndOtherVideo (reqData, vid) {
+  const url = `${BASE_URL}/${MUSIC_REQUEST}/video/video_info_other?vid=${vid}`
+  const data = {
+    reqData: aesMinEncrypt(JSON.stringify(reqData))
+  }
+  return axios.post(url, data).then(res => {
+    return Promise.resolve(res.data)
+  })
+}

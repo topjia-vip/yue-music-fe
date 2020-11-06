@@ -19,6 +19,7 @@ import Video from '../page/m-body/m-video/m-video'
 import VideoRecommend from '../page/m-body/m-video/m-video-recommend/m-video-recommend'
 import VideoRank from '../page/m-body/m-video/m-video-rank/m-video-rank'
 import Videos from '../page/m-body/m-video/m-videos/m-videos'
+import VideoPlayer from '../page/m-body/m-video/m-video-play-page/m-video-play-page'
 
 Vue.use(VueRouter)
 
@@ -125,6 +126,16 @@ export default new VueRouter({
         }
       ],
       redirect: '/video/recommend'
+    },
+    {
+      path: '/video/:videoId',
+      name: 'video_player',
+      component: VideoPlayer,
+      meta: {
+        title: '视频播放',
+        keepAlive: false,
+        index: 5
+      }
     },
     {
       path: '/disst/:disstId',

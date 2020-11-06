@@ -3,7 +3,8 @@
         <!-- 最新推荐 -->
         <div class="m-video-recommend">
             <div class="title">最新推荐</div>
-            <m-video-list :videos="allVideo" @toSingerDetail="toSingerDetail" v-if="allVideo.length !== 0"/>
+            <m-video-list :videos="allVideo" @toSingerDetail="toSingerDetail" @playVideo='playVideo'
+                          v-if="allVideo.length !== 0"/>
             <m-video-list-skeleton v-else/>
         </div>
     </div>
@@ -49,6 +50,9 @@
         if (res.code === ERR_OK) {
           this.allVideo = res.videos
         }
+      },
+      playVideo (video) {
+        this.$emit('playVideo', video)
       },
       toSingerDetail (singer) {
         this.$emit('toSingerDetail', singer)
