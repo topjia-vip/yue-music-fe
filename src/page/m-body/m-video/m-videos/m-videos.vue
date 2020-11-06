@@ -31,7 +31,7 @@
             </div>
         </div>
         <!--视频列表-->
-        <m-video-list :videos="videos" @toSingerDetail="toSingerDetail" v-if="videos !== null"/>
+        <m-video-list :videos="videos" @toSingerDetail="toSingerDetail" v-if="videos !== null" ref="videos"/>
         <m-video-list-skeleton v-else/>
         <div class="max-videos" v-if="!hasMoreVideos">
             <span class="tip">没有更多视频啦~~</span>
@@ -73,7 +73,7 @@
         start: 0,
         tags: null,
         videos: null,
-        hasMoreVideos: true
+        hasMoreVideos: true,
       }
     },
     created () {

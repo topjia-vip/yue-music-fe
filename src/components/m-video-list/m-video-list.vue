@@ -1,7 +1,7 @@
 <template>
     <div class="video-box" v-if="videos.length !== 0">
         <div class="video-item" v-for="(video,index) in videos" :key="index">
-            <div class="video-image">
+            <div class="video-image" ref="imageBox">
                 <img class="image"
                      ondragstart="return false"
                      v-lazy="handleLazyImage(video.mvPicUrl)"
@@ -45,6 +45,11 @@
         type: Array
       }
     },
+    data () {
+      return {
+        screenWidth: document.body.clientWidth
+      }
+    },
     computed: {
       // 图片懒加载 v-lazy配置对象
       handleLazyImage () {
@@ -70,6 +75,15 @@
         }
       }
     },
+    mounted () {
+      this.$nextTick(() => {
+        window.addEventListener('resize', () => {
+          window.screenWidth = document.body.clientWidth
+          this.screenWidth = window.screenWidth
+        })
+      })
+      this.autoImageBoxHeight()
+    },
     methods: {
       toSingerDetail (singer) {
         this.$emit('toSingerDetail', singer)
@@ -81,6 +95,17 @@
         } else {
           return number
         }
+      },
+      autoImageBoxHeight () {
+        let elements = this.$refs.imageBox
+        for (let i = 0; i < elements.length; i++) {
+          elements[i].style.height = `${elements[i].clientWidth * 0.56}px`
+        }
+      }
+    },
+    watch: {
+      screenWidth () {
+        this.autoImageBoxHeight()
       }
     }
   }
