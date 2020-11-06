@@ -203,3 +203,37 @@ export function getTopListData (topId, period) {
     }, 'comm': { 'ct': 24, 'cv': 0 }
   }
 }
+
+/****************************MV******************************/
+export function getMVRankListData (areaType) {
+  return {
+    'comm': { 'ct': 24, 'cv': 0 },
+    'request': {
+      'method': 'get_video_rank_list',
+      'param': {
+        'rank_type': 0,
+        'area_type': areaType,
+        'required': ['vid', 'name', 'singers', 'cover_pic', 'pubdate']
+      },
+      'module': 'video.VideoRankServer'
+    }
+  }
+}
+
+export function getVideosTags () {
+  return {
+    'comm': { 'ct': 24 },
+    'mv_tag': { 'module': 'MvService.MvInfoProServer', 'method': 'GetAllocTag', 'param': {} }
+  }
+}
+
+export function getVideosData (start, size, areaId, versionId, order) {
+  return {
+    'comm': { 'ct': 24 },
+    'mv_list': {
+      'module': 'MvService.MvInfoProServer',
+      'method': 'GetAllocMvInfo',
+      'param': { 'start': start, 'size': size, 'version_id': versionId, 'area_id': areaId, 'order': order }
+    }
+  }
+}

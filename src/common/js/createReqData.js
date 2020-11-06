@@ -256,18 +256,18 @@ export function createSingerInfoData (singermid) {
   }
 }
 
-/****************************用户信息******************************/
-export function createUserInfoData (userName) {
+/****************************MV******************************/
+export function createRecommendVideo (lan) {
   return {
-    url: 'http://c.y.qq.com/rsc/fcgi-bin/fcg_get_profile_homepage.fcg',
+    url: 'https://c.y.qq.com/mv/fcgi-bin/getmv_by_tag',
     params: [
       {
         key: 'g_tk_new_20200303',
-        value: '235955490'
+        value: '2079303087'
       },
       {
         key: 'g_tk',
-        value: '235955490'
+        value: '2079303087'
       },
       {
         key: 'loginUin',
@@ -287,7 +287,7 @@ export function createUserInfoData (userName) {
       },
       {
         key: 'outCharset',
-        value: 'utf-8'
+        value: 'GB2312'
       },
       {
         key: 'notice',
@@ -302,196 +302,15 @@ export function createUserInfoData (userName) {
         value: '0'
       },
       {
-        key: 'cid',
-        value: '205360838'
+        key: 'cmd',
+        value: 'shoubo'
       },
       {
-        key: 'ct',
-        value: '20'
-      },
-      {
-        key: 'userid',
-        value: userName
-      },
-      {
-        key: 'reqfrom',
-        value: '1'
-      },
-      {
-        key: 'reqtype',
-        value: '0'
+        key: 'lan',
+        value: lan
       }
     ]
   }
-}
-
-export function createUserFavoriteDissts (userName) {
-  return {
-    url: 'http://c.y.qq.com/fav/fcgi-bin/fcg_get_profile_order_asset.fcg',
-    params: [
-      {
-        key: 'g_tk_new_20200303',
-        value: '139748594'
-      },
-      {
-        key: 'g_tk',
-        value: '454411234'
-      },
-      {
-        key: 'loginUin',
-        value: '0'
-      },
-      {
-        key: 'hostUin',
-        value: 0
-      },
-      {
-        key: 'format',
-        value: 'json'
-      },
-      {
-        key: 'inCharset',
-        value: 'utf8'
-      },
-      {
-        key: 'outCharset',
-        value: 'utf-8'
-      },
-      {
-        key: 'notice',
-        value: 0
-      },
-      {
-        key: 'platform',
-        value: 'yqq.json'
-      },
-      {
-        key: 'needNewCode',
-        value: 0
-      },
-      {
-        key: 'cid',
-        value: 205360956
-      },
-      {
-        key: 'ct',
-        value: 20
-      },
-      {
-        key: 'userid',
-        value: userName
-      },
-      {
-        key: 'reqtype',
-        value: 3
-      },
-      {
-        key: 'sin',
-        value: 0
-      },
-      {
-        key: 'ein',
-        value: 10
-      }
-    ]
-  }
-}
-
-export function createUserFavoriteSongList (userName, disstId) {
-  return {
-    url: 'http://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg',
-    params: [
-      {
-        key: 'type',
-        value: 1
-      },
-      {
-        key: 'json',
-        value: 1
-      },
-      {
-        key: 'utf8',
-        value: 1
-      },
-      {
-        key: 'onlysong',
-        value: 1
-      },
-      {
-        key: 'nosign',
-        value: 1
-      },
-      {
-        key: 'new_format',
-        value: 1
-      },
-      {
-        key: 'song_begin',
-        value: 0
-      },
-      {
-        key: 'song_num',
-        value: 100
-      },
-      {
-        key: 'ctx',
-        value: 1
-      },
-      {
-        key: 'disstid',
-        value: disstId
-      },
-      {
-        key: '_',
-        value: 1590566500870
-      },
-      {
-        key: 'g_tk_new_20200303',
-        value: 139748594
-      },
-      {
-        key: 'userid',
-        value: userName
-      },
-      {
-        key: 'g_tk',
-        value: 454411234
-      },
-      {
-        key: 'loginUin',
-        value: userName
-      },
-      {
-        key: 'hostUin',
-        value: 0
-      },
-      {
-        key: 'format',
-        value: 'json'
-      },
-      {
-        key: 'inCharset',
-        value: 'utf8'
-      },
-      {
-        key: 'outCharset',
-        value: 'utf-8'
-      },
-      {
-        key: 'notice',
-        value: 0
-      },
-      {
-        key: 'platform',
-        value: 'yqq.json'
-      },
-      {
-        key: 'needNewCode',
-        value: 0
-      }
-    ]
-  }
-
 }
 
 /****************************搜索******************************/

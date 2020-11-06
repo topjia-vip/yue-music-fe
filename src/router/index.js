@@ -16,6 +16,9 @@ import UserDetail from '../page/m-body/m-user/m-user-detail/m-user-detail'
 import UserEdit from '../page/m-body/m-user/m-user-edit/m-user-edit'
 import Search from '../page/m-body/m-search/m-search'
 import Video from '../page/m-body/m-video/m-video'
+import VideoRecommend from '../page/m-body/m-video/m-video-recommend/m-video-recommend'
+import VideoRank from '../page/m-body/m-video/m-video-rank/m-video-rank'
+import Videos from '../page/m-body/m-video/m-videos/m-videos'
 
 Vue.use(VueRouter)
 
@@ -89,11 +92,39 @@ export default new VueRouter({
       path: '/video',
       name: 'video',
       component: Video,
-      meta: {
-        title: '视频',
-        keepAlive: false,
-        index: 5
-      }
+      children: [
+        {
+          path: 'recommend',
+          name: 'recommend',
+          component: VideoRecommend,
+          meta: {
+            title: '视频推荐',
+            keepAlive: true,
+            index: 0
+          }
+        },
+        {
+          path: 'rank',
+          name: 'rank',
+          component: VideoRank,
+          meta: {
+            title: '视频排行榜',
+            keepAlive: true,
+            index: 1
+          }
+        },
+        {
+          path: 'videos',
+          name: 'videos',
+          component: Videos,
+          meta: {
+            title: '视频库',
+            keepAlive: true,
+            index: 2
+          }
+        }
+      ],
+      redirect: '/video/recommend'
     },
     {
       path: '/disst/:disstId',
