@@ -49,32 +49,37 @@
                     </div>
                 </div>
             </div>
-            <div class="mv-rank-list-box" v-if="mvRankData !== null">
-                <div class="mv-item" v-for="(mv,index) in mvRankData" :key="index">
-                    <!--排名-->
-                    <div class="rank-num-box">
-                        <div class="num" :class="index < 3?'top':''">{{index+1}}</div>
-                    </div>
-                    <!--图片-->
-                    <div class="mv-image-box" @click="playVideo(mv)">
-                        <m-play-btn class="play-icon-box" :font-size="50" @play="playVideo(mv)"/>
-                        <div class="img-mask"></div>
-                        <img class="image" :src="mv.mvPicUrl" :alt="mv.mvTitle">
-                    </div>
-                    <!--基本信息-->
-                    <div class="mv-info-box">
-                        <div class="mv-name" v-html="mv.mvTitle" @click="playVideo(mv)"/>
-                        <div class="mv-singer-box">
-                            <div class="mv-singer" v-for="(singer,singerIndex) in mv.singers" :key="singerIndex">
-                                <span class="singer-name" v-html="singer.singerName" @click="toSingerDetail(singer)"/>
-                                <span class="division" v-if="singerIndex !== mv.singers.length - 1">/</span>
-                            </div>
-                        </div>
-                        <div class="create-time">{{handleTime(mv.createTime)}}</div>
-                    </div>
-                </div>
-            </div>
-            <m-video-rank-list-skeleton v-else/>
+            <!--            <div class="mv-rank-list-box" v-if="mvRankData !== null">-->
+            <!--                <div class="mv-item" v-for="(mv,index) in mvRankData" :key="index">-->
+            <!--                    &lt;!&ndash;排名&ndash;&gt;-->
+            <!--                    <div class="rank-num-box">-->
+            <!--                        <div class="num" :class="index < 3?'top':''">{{index+1}}</div>-->
+            <!--                    </div>-->
+            <!--                    &lt;!&ndash;图片&ndash;&gt;-->
+            <!--                    <div class="mv-image-box" @click="playVideo(mv)">-->
+            <!--                        <m-play-btn class="play-icon-box" :font-size="50" @play="playVideo(mv)"/>-->
+            <!--                        <div class="img-mask"></div>-->
+            <!--                        <img class="image" :src="mv.mvPicUrl" :alt="mv.mvTitle">-->
+            <!--                    </div>-->
+            <!--                    &lt;!&ndash;基本信息&ndash;&gt;-->
+            <!--                    <div class="mv-info-box">-->
+            <!--                        <div class="mv-name" v-html="mv.mvTitle" @click="playVideo(mv)"/>-->
+            <!--                        <div class="mv-singer-box">-->
+            <!--                            <div class="mv-singer" v-for="(singer,singerIndex) in mv.singers" :key="singerIndex">-->
+            <!--                                <span class="singer-name" v-html="singer.singerName" @click="toSingerDetail(singer)"/>-->
+            <!--                                <span class="division" v-if="singerIndex !== mv.singers.length - 1">/</span>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                        <div class="create-time">{{handleTime(mv.createTime)}}</div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--            <m-video-rank-list-skeleton v-else/>-->
+            <!--视频列表-->
+            <m-video-list :videos="mvRankData" @toSingerDetail="toSingerDetail" @playVideo="playVideo"
+                          v-if="mvRankData !== null"
+                          ref="videos"/>
+            <m-video-list-skeleton v-else/>
         </div>
     </div>
 </template>
@@ -88,10 +93,14 @@
   import MPlayBtn from '../../../../components/m-play-btn/m-play-btn'
   import MVideoRankHeaderSkeleton from '../../../../components/m-skeleton/m-video-rank-header-skeleton'
   import MVideoRankListSkeleton from '../../../../components/m-skeleton/m-video-rank-list-skeleton'
+  import MVideoList from '../../../../components/m-video-list/m-video-list'
+  import MVideoListSkeleton from '../../../../components/m-skeleton/m-video-list-skeleton'
 
   export default {
     name: 'm-video-rank',
     components: {
+      MVideoListSkeleton,
+      MVideoList,
       MVideoRankListSkeleton,
       MVideoRankHeaderSkeleton,
       MPlayBtn,
@@ -164,7 +173,6 @@
     @import "../../../../common/css/theme/theme";
 
     .m-video-rank-box {
-        max-width: 1040px;
         margin: 20px auto 0 auto;
         padding-bottom: 40px;
 

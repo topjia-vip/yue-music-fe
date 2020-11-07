@@ -10,7 +10,7 @@
                 >
                 <div class="img-mask"></div>
                 <m-play-btn class="play-icon-box" :font-size="60" @play="playVideo(video)"/>
-                <div class="visit-num-box">
+                <div class="visit-num-box" v-if="video.listenNum">
                     <div class="visit-num">
                         <Icon class="icon" type="md-videocam" size="16"/>
                         <span>{{handleVisitNum(video.listenNum)}}</span>
@@ -45,11 +45,6 @@
         type: Array
       }
     },
-    data () {
-      return {
-        screenWidth: document.body.clientWidth
-      }
-    },
     computed: {
       // 图片懒加载 v-lazy配置对象
       handleLazyImage () {
@@ -75,15 +70,6 @@
         }
       }
     },
-    mounted () {
-      this.$nextTick(() => {
-        window.addEventListener('resize', () => {
-          window.screenWidth = document.body.clientWidth
-          this.screenWidth = window.screenWidth
-        })
-      })
-      this.autoImageBoxHeight()
-    },
     methods: {
       playVideo (video) {
         this.$emit('playVideo', video)
@@ -98,17 +84,6 @@
         } else {
           return number
         }
-      },
-      autoImageBoxHeight () {
-        let elements = this.$refs.imageBox
-        for (let i = 0; i < elements.length; i++) {
-          elements[i].style.height = `${elements[i].clientWidth * 0.56}px`
-        }
-      }
-    },
-    watch: {
-      screenWidth () {
-        this.autoImageBoxHeight()
       }
     }
   }

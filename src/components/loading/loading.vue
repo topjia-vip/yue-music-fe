@@ -1,6 +1,6 @@
 <template>
     <div class="loading">
-        <scale-loader :color="'rgba(255, 255, 255, 0.5)'"></scale-loader>
+        <scale-loader :color="color"></scale-loader>
     </div>
 </template>
 
@@ -11,6 +11,12 @@
     name: 'loading',
     components: {
       ScaleLoader
+    },
+    props: {
+      color: {
+        type: String,
+        default: '#FFFFFF'
+      }
     }
   }
 </script>

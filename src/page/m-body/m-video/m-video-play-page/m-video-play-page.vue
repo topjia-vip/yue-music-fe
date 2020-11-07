@@ -2,7 +2,8 @@
     <div class="m-video-play-page-box">
         <div class="m-video-play-page-content">
             <!-- 视频播放器 -->
-            <m-video-player :playUrl="playUrl" :videoUrls="videoUrls" @changeUrl="changeUrl"/>
+            <m-video-player :currentVideo='currentVideo' :playUrl="playUrl" :videoUrls="videoUrls"
+                            @changeUrl="changeUrl"/>
         </div>
     </div>
 </template>
