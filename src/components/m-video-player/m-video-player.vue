@@ -133,6 +133,10 @@
         openVolume: true
       }
     },
+    beforeRouteLeave (to, from, next) {
+      this.initVideoStatus()
+      next()
+    },
     created () {
       this.touch = {}
       this.volumeTouch = {}
@@ -161,7 +165,15 @@
       },
       initVideoStatus () {
         this.openOtherUrl = false
+        this.video.src = ''
         this.videoWaiting = true
+        this.canPlay = false
+        this.playStatus = false // 播放状态 true --> 播放 false---> 暂停
+        this.currentTime = 0
+        this.percent = 0
+        this.volumePercent = 0.4 // 默认音量40%
+        this.moveInControls = false // 是否移动到控制栏
+        this.openVolume = true
       },
       loadstart () {
         console.log('loadstart')
