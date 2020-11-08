@@ -231,7 +231,6 @@
         z-index: 999;
         padding: 5px 310px 5px 240px;
         border-top: 0.1px solid #363636;
-        box-shadow: -3px 4px 5px #7d7d7d;
         background: @mini-player-background-color;
 
         .player-tools {
@@ -387,19 +386,23 @@
         .volume-box {
             height: 40px;
             width: 140px;
-            display: inline-block;
             position: absolute;
             right: 130px;
             padding: 0 5px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            top: 6px;
 
             .icon-box {
                 height: 40px;
                 width: 24px;
-                line-height: 40px;
                 font-size: 24px;
-                float: left;
                 color: @icon-color;
                 margin-right: 6px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .icon-box:hover {
@@ -409,11 +412,13 @@
 
             .volume-bar-box {
                 height: 40px;
-                padding: 12px 2px;
                 width: 100px;
-                float: left;
+                display: flex;
+                justify-content: center;
+                align-items: center;
 
                 .ex-bar {
+                    width: 100%;
                     height: 16px;
                     padding: 6px 0;
 
@@ -464,6 +469,7 @@
             right: 0;
             padding: 0 5px;
             display: inline-block;
+            top: 5px;
         }
 
         .current-play-song {

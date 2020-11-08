@@ -153,6 +153,11 @@
             -ms-overflow-style: none;
         }
 
+        // 火狐
+        scrollbar-color: transparent transparent;
+        scrollbar-track-color: transparent;
+        -ms-scrollbar-track-color: transparent;
+
         .m-user-detail-box-content {
             /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
             -ms-overflow-style: none;

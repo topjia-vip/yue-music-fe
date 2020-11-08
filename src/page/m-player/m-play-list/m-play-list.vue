@@ -30,30 +30,28 @@
         <div class="play-list-info" v-if="listMode === 0">
             <!--列表展示-->
             <div class="song-list">
-                <ul>
-                    <li class="song-item" v-for="(song,index) in sequenceList" :key="index"
-                        :class="[index%2===0?'':'odd',index === curSelectSong?'song-select':'',song.id + '' === currentPlaySong.id + ''?'song-playing':'']"
-                        @click="selectSong(index)"
-                        @dblclick="selectItem(song,index)"
-                    >
-                        <div class="play-status-icon" v-if="song.mid === currentPlaySong.mid">
-                            <Icon type="ios-play" size="17" v-if="playStatus"/>
-                            <Icon type="ios-pause" size="17" v-else/>
-                        </div>
-                        <div class="song-name">
-                            <span class="title" v-html="song.title"></span>
-                            <span class="subTitle" v-if="song.subTitle" v-html="'('+song.subTitle+')'"></span>
-                        </div>
-                        <div class="singer">
+                <div class="song-item" v-for="(song,index) in sequenceList" :key="index"
+                     :class="[index%2===0?'':'odd',index === curSelectSong?'song-select':'',song.id + '' === currentPlaySong.id + ''?'song-playing':'']"
+                     @click="selectSong(index)"
+                     @dblclick="selectItem(song,index)"
+                >
+                    <div class="play-status-icon" v-if="song.mid === currentPlaySong.mid">
+                        <Icon type="ios-play" size="17" v-if="playStatus"/>
+                        <Icon type="ios-pause" size="17" v-else/>
+                    </div>
+                    <div class="song-name">
+                        <span class="title" v-html="song.title"></span>
+                        <span class="subTitle" v-if="song.subTitle" v-html="'('+song.subTitle+')'"></span>
+                    </div>
+                    <div class="singer">
                              <span v-for="(singer) in song.singers" :key="singer.singerMid"
                                    v-html="singer.singerName" :title="singer.singerName"
                                    @click="toSingerDetail(singer)" @dblclick.stop=""></span>
-                        </div>
-                        <div class="song-time">
-                            {{_handleTime(song.duration)}}
-                        </div>
-                    </li>
-                </ul>
+                    </div>
+                    <div class="song-time">
+                        {{_handleTime(song.duration)}}
+                    </div>
+                </div>
             </div>
             <!--没有列表时显示-->
             <div class="no-song-list" v-if="sequenceList.length === 0">
@@ -315,30 +313,38 @@
         }
 
         .play-list-info {
-            height: 86%;
+            height: 95%;
             overflow-y: scroll;
             overflow-x: hidden;
+            padding: 0 0 40px 0;
 
             .song-list {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                flex-flow: column;
+
                 .song-item {
                     position: relative;
-                    list-style: none;
                     height: 30px;
-                    line-height: 30px;
                     font-size: 12px;
                     background: #2D2F33;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
 
                     .play-status-icon {
                         position: absolute;
                         left: 0;
                         width: 30px;
-                        text-align: center;
                         color: @player-bar-color;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                     }
 
                     .song-name {
                         width: 360px;
-                        display: inline-block;
                         padding-left: 30px;
                         overflow: hidden;
                         text-overflow: ellipsis;
@@ -353,7 +359,6 @@
                     .singer {
                         width: 160px;
                         padding-left: 10px;
-                        display: inline-block;
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
@@ -366,12 +371,11 @@
                     }
 
                     .song-time {
-                        float: right;
-                        right: 0;
                         width: 60px;
                         color: #828385;
-                        text-align: center;
-                        display: inline-block;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                     }
 
                 }
@@ -434,6 +438,11 @@
             /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
             -ms-overflow-style: none;
         }
+
+        // 火狐
+        scrollbar-color: transparent transparent;
+        scrollbar-track-color: transparent;
+        -ms-scrollbar-track-color: transparent;
 
         .play-list-info::-webkit-scrollbar {
             /*滚动条整体样式*/

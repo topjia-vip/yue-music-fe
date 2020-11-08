@@ -434,6 +434,11 @@
                 }
             }
         }
+
+        // 火狐
+        scrollbar-color: transparent transparent;
+        scrollbar-track-color: transparent;
+        -ms-scrollbar-track-color: transparent;
     }
 
     .m-small-search-box {

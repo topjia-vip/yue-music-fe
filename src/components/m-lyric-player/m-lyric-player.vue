@@ -143,6 +143,13 @@
     }
 
     .lyric-wrapper::-webkit-scrollbar {
+        // 火狐
         display: none;
+    }
+
+    .lyric-wrapper {
+        scrollbar-color: transparent transparent;
+        scrollbar-track-color: transparent;
+        -ms-scrollbar-track-color: transparent;
     }
 </style>

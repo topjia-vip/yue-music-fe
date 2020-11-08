@@ -571,6 +571,11 @@
             -ms-overflow-style: none;
         }
 
+        // 火狐
+        scrollbar-color: transparent transparent;
+        scrollbar-track-color: transparent;
+        -ms-scrollbar-track-color: transparent;
+
         .m-user-create-disst-box-content::-webkit-scrollbar {
             /*滚动条整体样式*/
             width: 8px; /*高宽分别对应横竖滚动条的尺寸*/

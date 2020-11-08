@@ -204,6 +204,7 @@
                 height: 30px;
                 line-height: 30px;
                 padding: 0 2px 0 10px;
+                list-style: none;
 
                 .tags-item {
                     margin-bottom: 10px;
@@ -230,6 +231,7 @@
                     .tag-ul {
                         width: 100%;
                         height: 100%;
+                        list-style: none;
 
                         .tag-item {
                             color: @tags-text-color;
@@ -291,6 +293,11 @@
         .m-tags-box {
             height: 100%;
         }
+
+        // 火狐
+        scrollbar-color: transparent transparent;
+        scrollbar-track-color: transparent;
+        -ms-scrollbar-track-color: transparent;
 
         .m-tags-box::-webkit-scrollbar {
             /*滚动条整体样式*/
