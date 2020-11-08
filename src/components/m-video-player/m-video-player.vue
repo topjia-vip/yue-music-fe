@@ -1,8 +1,11 @@
 <template>
     <div class="m-video-player-box"
+         :class="smallMode?'m-small-video-player-box':''"
+         ref="videoPlayerBox"
          @mouseenter="playerMouseenter"
          @mouseleave="playerMouseleave"
          @mousemove="playerMousemove"
+         @mousedown.prevent.stop="smallModeMove($event)"
     >
         <video class="video"
                ref="video"
@@ -13,7 +16,7 @@
                @waiting="waiting"
                @playing="playing"
                @timeupdate="updateTime"
-               @click="changePlayStatus"
+               @click="fullPlayerChangePlayStatus"
                :poster="currentVideo?currentVideo.mvPicUrl:''"
                :src="playUrl?playUrl.url:''">
         </video>
@@ -144,12 +147,14 @@
         moveInControls: false, // 是否移动到控制栏
         openVolume: true,
         videoSrcError: false,
-        isPictureInPicture: false
+        isPictureInPicture: false,
+        smallMode: false // 是否为小屏播放模式
       }
     },
     created () {
       this.touch = {}
       this.volumeTouch = {}
+      this.smallTouch = {}
     },
     mounted () {
       this.$nextTick(() => {
@@ -168,6 +173,52 @@
       })
     },
     methods: {
+      // 小屏模式
+      small () {
+        this.$refs.videoPlayerBox.style.left = '201px'
+        this.$refs.videoPlayerBox.style.top = '52px'
+        this.smallMode = true
+      },
+      // 小屏模式拖拽
+      smallModeMove (e) {
+        if (this.smallMode) {
+          this.smallTouch.initiated = true
+          let disx = e.pageX - this.$refs.videoPlayerBox.offsetLeft
+          let disy = e.pageY - this.$refs.videoPlayerBox.offsetTop
+          document.onmousemove = (e) => {
+            if (!this.smallTouch.initiated) {
+              return
+            }
+            // 边界判断
+            let bg = document.getElementsByClassName('body-bg')[0]
+            let left = e.pageX - disx
+            let top = e.pageY - disy
+            if (left < 201) {
+              left = 201
+            } else if (left > bg.offsetWidth - this.$refs.videoPlayerBox.clientWidth) {
+              left = bg.offsetWidth - this.$refs.videoPlayerBox.clientWidth
+            }
+
+            if (top < 52) {
+              top = 52
+            } else if (top > bg.clientHeight - this.$refs.videoPlayerBox.clientHeight - 51) {
+              top = bg.clientHeight - this.$refs.videoPlayerBox.clientHeight - 51
+            }
+            this.$refs.videoPlayerBox.style.left = left + 'px'
+            this.$refs.videoPlayerBox.style.top = top + 'px'
+          }
+          document.onmouseup = (e) => {
+            this.smallTouch.initiated = false
+            document.onmouseup = null
+          }
+        }
+      },
+      // 大屏模式
+      full () {
+        this.$refs.videoPlayerBox.style.left = 0
+        this.$refs.videoPlayerBox.style.top = 0
+        this.smallMode = false
+      },
       // 画中画模式播放
       enterPictureInPicture () {
         if (this.canPlay) {
@@ -194,6 +245,11 @@
         }
         this.initVideoStatus()
         this.$emit('changeUrl', url)
+      },
+      fullPlayerChangePlayStatus () {
+        if (!this.smallMode) {
+          this.changePlayStatus()
+        }
       },
       changePlayStatus () {
         if (this.canPlay) {
@@ -575,6 +631,7 @@
             background-color: #00000057;
             transform: translate3d(0, 0, 0);
             transition: transform 200ms;
+            cursor: default;
 
             .play-progress-bar-box {
                 width: 100%;
@@ -792,5 +849,14 @@
                 }
             }
         }
+    }
+
+    .m-small-video-player-box {
+        position: fixed;
+        width: 600px;
+        background: #000000;
+        overflow: hidden;
+        z-index: 1000;
+        cursor: move;
     }
 </style>

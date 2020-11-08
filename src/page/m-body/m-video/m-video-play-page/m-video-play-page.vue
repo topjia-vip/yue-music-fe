@@ -76,7 +76,6 @@
         otherVideos: null,
         currentVideo: null,
         showToTop: false,
-        scrollTop: 0,
         screenHeight: document.body.clientHeight
       }
     },
@@ -150,11 +149,27 @@
         this.$refs.wrapper.scrollToTop(this.$refs.scroll, timeOut)
       },
       scroll () {
-        this.scrollTop = this.$refs.scroll.scrollTop
-        if (this.scrollTop > 100) {
+        let scrollTop = this.$refs.scroll.scrollTop
+        if (scrollTop > 100) {
           this.showToTop = true
         } else {
           this.showToTop = false
+        }
+        // 判断是否可进入/退出画中画模式
+        if (!this.$refs.video.smallMode) {
+          if (scrollTop >= this.$refs.video.$el.clientHeight) {
+            // 进入画中画模式
+            this.$nextTick(() => {
+              this.$refs.video.small()
+            })
+          }
+        } else {
+          if (scrollTop <= 50) {
+            // 进入画中画模式
+            this.$nextTick(() => {
+              this.$refs.video.full()
+            })
+          }
         }
       },
       changeUrl (url) {
