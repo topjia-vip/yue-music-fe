@@ -148,7 +148,9 @@
         openVolume: true,
         videoSrcError: false,
         isPictureInPicture: false,
-        smallMode: false // 是否为小屏播放模式
+        smallMode: false, // 是否为小屏播放模式
+        left: 201,
+        top: 52
       }
     },
     created () {
@@ -175,9 +177,11 @@
     methods: {
       // 小屏模式
       small () {
-        this.$refs.videoPlayerBox.style.left = '201px'
-        this.$refs.videoPlayerBox.style.top = '52px'
-        this.smallMode = true
+        this.$nextTick(() => {
+          this.$refs.videoPlayerBox.style.left = `${this.left}px`
+          this.$refs.videoPlayerBox.style.top = `${this.top}px`
+          this.smallMode = true
+        })
       },
       // 小屏模式拖拽
       smallModeMove (e) {
@@ -206,6 +210,8 @@
             }
             this.$refs.videoPlayerBox.style.left = left + 'px'
             this.$refs.videoPlayerBox.style.top = top + 'px'
+            this.left = left
+            this.top = top
           }
           document.onmouseup = (e) => {
             this.smallTouch.initiated = false
