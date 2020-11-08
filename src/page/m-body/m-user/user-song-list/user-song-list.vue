@@ -31,9 +31,11 @@
                           v-if="song.subTitle" v-html="song.subTitle"></span>
                 </div>
                 <div class="singer">
-                                <span v-for="(singer,singerIndex) in song.singers" :key="singerIndex"
-                                      v-html="singer.singerName" :title="singer.singerName"
-                                      @click.stop="toSingerDetail(singer)" @dblclick.stop=""></span>
+                    <div class="singer-name-box" v-for="(singer,singerIndex) in song.singers" :key="singerIndex">
+                        <span class="singer-name" v-html="singer.singerName" @click="toSingerDetail(singer)"
+                              @dblclick.stop=""/>
+                        <span class="division" v-if="singerIndex !== song.singers.length - 1">/</span>
+                    </div>
                 </div>
                 <div class="album">
                     <span class="album-title" v-html="song.album"></span>
@@ -253,18 +255,25 @@
             .singer {
                 width: 25%;
                 float: left;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
                 padding-right: 10px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                color: #8b8b8c;
 
-                span {
-                    margin-right: 5px;
-                }
+                .singer-name-box {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
 
-                span:hover {
-                    cursor: pointer;
-                    color: #FFFFFF;
+                    .division {
+                        margin: 0 2px;
+                    }
+
+                    .singer-name:hover {
+                        cursor: pointer;
+                        color: @player-bar-color;
+                    }
                 }
             }
 
@@ -284,12 +293,16 @@
         }
 
         .item:hover {
-            background: #4342402e;
+            background: #4342401f;
         }
 
         .song-playing {
-            color: #FFFFFF;
-            background: #4342402e;
+            color: #FFFFFF !important;
+            background: rgba(97, 96, 94, 0.25) !important;
+
+            .singer {
+                color: #FFFFFF;
+            }
         }
     }
 </style>

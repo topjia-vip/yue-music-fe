@@ -193,6 +193,8 @@
             line-height: 60px;
             color: #ADAFB2;
             padding: 0 60px 0 55px;
+            display: flex;
+            justify-content: flex-start;
 
             .play-status-icon {
                 position: absolute;

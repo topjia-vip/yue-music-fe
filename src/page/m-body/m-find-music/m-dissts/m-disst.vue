@@ -45,37 +45,35 @@
             <!--歌单展示-->
             <div class="container" v-if="isShowDisst">
                 <div class="m-dissts-box">
-                    <ul>
-                        <li class="item disst-item"
-                            v-for="(disst,index) in disstsData.dissts" :key="disst.disstId">
-                            <div class="disst-bottom"></div>
-                            <div class="disst-img-box">
-                                <div class="visitnum-box">
-                                    <div class="visitnum">
-                                        <Icon type="ios-headset"/>
-                                        <span>{{handleVisitNum(disst.visitnum)}}</span>
-                                    </div>
-                                </div>
-                                <img ondragstart="return false" class="disst-img"
-                                     v-lazy="handleLazyImage(disst.disstLogo)"
-                                     :alt="disst.disstName"
-                                     :key="disst.disstLogo"
-                                >
-                                <div class="img-mask" @click="songListDetail(disst)"></div>
-                                <m-play-btn class="play-icon-box" :font-size="60"
-                                            @play="playDisst(index)"/>
-                                <div class="create-user">
-                                    <div class="user-name-box">
-                                        <i class="fa fa-user-o" aria-hidden="true"></i>
-                                        <div v-html="disst.nickname"/>
-                                    </div>
+                    <div class="item disst-item"
+                         v-for="(disst,index) in disstsData.dissts" :key="disst.disstId">
+                        <div class="disst-bottom"></div>
+                        <div class="disst-img-box">
+                            <div class="visitnum-box">
+                                <div class="visitnum">
+                                    <Icon type="ios-headset"/>
+                                    <span>{{handleVisitNum(disst.visitnum)}}</span>
                                 </div>
                             </div>
-                            <div class="disst-name" @click="songListDetail(disst)">
-                                {{disst.disstName}}
+                            <img ondragstart="return false" class="disst-img"
+                                 v-lazy="handleLazyImage(disst.disstLogo)"
+                                 :alt="disst.disstName"
+                                 :key="disst.disstLogo"
+                            >
+                            <div class="img-mask" @click="songListDetail(disst)"></div>
+                            <m-play-btn class="play-icon-box" :font-size="60"
+                                        @play="playDisst(index)"/>
+                            <div class="create-user">
+                                <div class="user-name-box">
+                                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                                    <div v-html="disst.nickname"/>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                        <div class="disst-name" @click="songListDetail(disst)">
+                            <span class="text" v-html="disst.disstName"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <m-disst-list-skeleton v-else/>
@@ -323,6 +321,8 @@
 </script>
 
 <style lang="less">
+    @import "../../../../common/css/theme/theme";
+
     .m-disst-box {
         position: relative;
         padding-top: 20px;
@@ -468,13 +468,15 @@
                 width: 100%;
                 position: relative;
                 margin-right: -15px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                flex-wrap: wrap;
 
                 .item {
                     position: relative;
                     width: 25%;
-                    list-style: none;
                     padding: 0 15px 20px 0;
-                    display: inline-block;
                 }
 
                 @media (min-width: 1070px) {
@@ -637,21 +639,21 @@
                     }
 
                     .disst-name {
-                        position: relative;
-                        margin-top: 10px;
-                        height: 50px;
+                        margin-top: 5px;
                         overflow: hidden;
                         text-overflow: ellipsis;
                         display: -webkit-box;
                         -webkit-line-clamp: 2;
                         -webkit-box-orient: vertical;
-                        color: #ADAFB2;
-                        padding-top: 5px;
-                    }
 
-                    .disst-name:hover {
-                        cursor: pointer;
-                        color: #FFFFFF;
+                        .text {
+                            color: #FFFFFF;
+                        }
+
+                        .text:hover {
+                            cursor: pointer;
+                            color: @player-bar-color;
+                        }
                     }
                 }
             }

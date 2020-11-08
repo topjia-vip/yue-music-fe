@@ -3,19 +3,19 @@
         <div class="m-tags-box">
             <ul class="tags-ul">
                 <li class="tags-item">
-                    <div class="tag-title">推荐</div>
+                    <div class="tag-title">在线音乐</div>
                     <ul class="tag-ul">
                         <li>
                             <div class="tag-item" @click.stop="pushRouter('/findMusic/recommend')"
                                  :class="this.$route.path.indexOf('/findMusic')!== -1?'tag-item-active':''">
-                                <Icon class="tag-icon" type="ios-musical-notes-outline" size="18"/>
+                                <Icon class="tag-icon" type="md-musical-notes" size="18"/>
                                 发现音乐
                             </div>
                         </li>
                         <li>
                             <div class="tag-item" @click.stop="pushRouter('/video')"
                                  :class="this.$route.path.indexOf('/video')!== -1?'tag-item-active':''">
-                                <Icon class="tag-icon" type="ios-videocam-outline" size="18"/>
+                                <Icon class="tag-icon" type="md-videocam" size="18"/>
                                 视频
                             </div>
                         </li>
@@ -28,7 +28,7 @@
                             <div @click.stop="pushRouter('/like')" class="tag-item"
                                  :class="this.$route.path === '/like'?'tag-item-active':''"
                             >
-                                <Icon class="tag-icon" type="ios-heart-outline" size="18"/>
+                                <Icon class="tag-icon" type="md-heart" size="18"/>
                                 我喜欢
                                 <div class="dot" ref="dot"></div>
                                 <div class="playing-icon" v-if="_listHasSong(favoriteSongList)">
@@ -38,13 +38,13 @@
                         </li>
                         <li>
                             <div class="tag-item">
-                                <Icon class="tag-icon" type="ios-musical-note-outline" size="18"/>
+                                <Icon class="tag-icon" type="ios-musical-notes" size="18"/>
                                 本地音乐
                             </div>
                         </li>
                         <li>
                             <div class="tag-item">
-                                <Icon class="tag-icon" type="ios-cloud-download-outline" size="18"/>
+                                <Icon class="tag-icon" type="md-cloud-download" size="18"/>
                                 下载管理
                             </div>
                         </li>
@@ -78,7 +78,7 @@
                         <Icon v-else class="tool-btn" type="ios-arrow-down" size="18" title="展开"
                               @click="favoriteDisstShow=true"/>
                     </div>
-                    <ul v-show="favoriteDisstShow">
+                    <ul class="tag-ul" v-show="favoriteDisstShow">
                         <li v-for="(favoriteDisst) in userFavoriteDissts" :key="favoriteDisst.disstId"
                             :title="favoriteDisst.disstName">
                             <div class="tag-item" @click.stop="songListDetail(favoriteDisst)"
@@ -203,13 +203,15 @@
             .tags-ul {
                 height: 30px;
                 line-height: 30px;
+                padding: 0 2px 0 10px;
 
                 .tags-item {
                     margin-bottom: 10px;
 
                     .tag-title {
                         position: relative;
-                        padding-left: 10px;
+                        padding-left: 20px;
+                        font-size: 12px;
                         color: @tags-title-text-color;
 
                         .tool-btn {
@@ -225,51 +227,57 @@
                         }
                     }
 
-                    .tag-item {
-                        color: @tags-text-color;
-                        padding-left: 20px;
-                        position: relative;
-                        padding-right: 30px;
+                    .tag-ul {
                         width: 100%;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
+                        height: 100%;
 
-                        .tag-icon {
-                            margin-right: 3px;
+                        .tag-item {
+                            color: @tags-text-color;
+                            padding-left: 20px;
+                            position: relative;
+                            padding-right: 30px;
+                            width: 100%;
+                            border-radius: 5px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            margin: 10px 0;
+
+                            .tag-icon {
+                                font-weight: bold;
+                                margin-right: 3px;
+                            }
+
+                            .dot {
+                                display: inline-block;
+                                width: 6px;
+                                height: 6px;
+                                border-radius: 50%;
+                                background: @favorite-color;
+                                position: absolute;
+                                top: 12px;
+                                margin-left: 5px;
+                                opacity: 0;
+                                transition: all 0.2s ease-in-out;
+                            }
+
+                            .playing-icon {
+                                position: absolute;
+                                display: inline-block;
+                                right: 0;
+                                margin-right: 20px;
+                            }
                         }
 
-                        .dot {
-                            display: inline-block;
-                            width: 6px;
-                            height: 6px;
-                            border-radius: 50%;
-                            background: @favorite-color;
-                            position: absolute;
-                            top: 12px;
-                            margin-left: 5px;
-                            opacity: 0;
-                            transition: all 0.2s ease-in-out;
+                        .tag-item-active {
+                            background: @player-bar-color !important;
+                            color: @tags-text-hover-color !important;
                         }
 
-                        .playing-icon {
-                            position: absolute;
-                            display: inline-block;
-                            right: 0;
-                            margin-right: 20px;
+                        .tag-item:hover {
+                            cursor: pointer;
+                            background: #2e2e2f;
                         }
-                    }
-
-                    .tag-item-active {
-                        background: @tag-active-background-color;
-                        color: @tags-text-hover-color;
-                        border-left: 3px solid @tag-active-border-color;
-                        padding-left: 17px;
-                    }
-
-                    .tag-item:hover {
-                        cursor: pointer;
-                        color: @tags-text-hover-color;
                     }
                 }
             }

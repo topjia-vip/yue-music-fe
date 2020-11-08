@@ -186,7 +186,9 @@
       })
     },
     updated () {
-      this.showDetailBtn = this.$refs.descBox.clientWidth - 40 <= this.$refs.descText.offsetWidth
+      if (this.$refs.descBox) {
+        this.showDetailBtn = this.$refs.descBox.clientWidth - 40 <= this.$refs.descText.offsetWidth
+      }
     },
     methods: {
       _initDisstDetail (disstId) {

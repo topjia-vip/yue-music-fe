@@ -200,7 +200,6 @@
         min-width: 820px;
         width: 100%;
         overflow: hidden;
-        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
 
         .m-user-like-box-content {
             position: relative;

@@ -25,7 +25,6 @@
                     <div class="load-bar" :style="`width:${currentSongLoad}%`"></div>
                     <div ref="progress" class="play-progressed-bar"></div>
                     <div ref="progressBtn" class="btn" @mousedown.prevent="progressTouchStart($event,'song')">
-                        <div class="dot"></div>
                         <clip-loader style="position: absolute;top: -13px; left: 0;" size="12px"
                                      color="rgb(135, 133, 133)"
                                      :loading="sequenceList.length !== 0 && !playReady"></clip-loader>
@@ -47,7 +46,6 @@
                         <div ref="volumeProgress" class="volume-progressed-bar"></div>
                         <div ref="volumeProgressBtn" class="btn"
                              @mousedown.prevent="progressTouchStart($event,'volume')">
-                            <div class="dot"></div>
                         </div>
                     </div>
                 </div>
@@ -359,24 +357,9 @@
                         width: 12px;
                         height: 12px;
                         border-radius: 50%;
-                        background: @player-bar-btn-background-color;
-                        -webkit-box-shadow: 0 0 2px @player-bar-btn-box-shadow-color;
-                        box-shadow: 0 0 2px @player-bar-btn-box-shadow-color;
+                        background: @player-bar-color;
                         top: -4px;
                         left: -6px;
-
-                        .dot {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            right: 0;
-                            bottom: 0;
-                            margin: auto;
-                            width: 4px;
-                            height: 4px;
-                            background: @player-bar-color;
-                            border-radius: 50%;
-                        }
 
                         .song-loading {
                             position: absolute;
@@ -392,7 +375,6 @@
 
                     .btn:hover {
                         cursor: pointer;
-                        box-shadow: 0 0 6px @player-bar-btn-box-shadow-color;
                     }
                 }
             }
@@ -456,31 +438,11 @@
                         width: 12px;
                         height: 12px;
                         border-radius: 50%;
-                        background: @player-bar-btn-background-color;
-                        -webkit-box-shadow: 0 0 2px @player-bar-btn-box-shadow-color;
-                        box-shadow: 0 0 2px @player-bar-btn-box-shadow-color;
+                        background: @player-bar-color;
                         top: -4px;
                         left: -6px;
                         opacity: 0;
                         z-index: -1;
-
-                        .dot {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            right: 0;
-                            bottom: 0;
-                            margin: auto;
-                            width: 4px;
-                            height: 4px;
-                            background: @player-bar-color;
-                            border-radius: 50%;
-                        }
-                    }
-
-                    .btn:hover {
-                        cursor: pointer;
-                        box-shadow: 0 0 6px @player-bar-btn-box-shadow-color;
                     }
                 }
 

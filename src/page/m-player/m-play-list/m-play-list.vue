@@ -134,9 +134,9 @@
     },
     mounted () {
       window.addEventListener('resize', () => {
-        this.$refs.playListBox.style.height = `${window.innerHeight * 0.7}px`
+        this.$refs.playListBox.style.height = `${window.innerHeight - 52}px`
       })
-      this.$refs.playListBox.style.height = `${window.innerHeight * 0.7}px`
+      this.$refs.playListBox.style.height = `${window.innerHeight - 52}px`
       this.readPlayHistory()
     },
     methods: {

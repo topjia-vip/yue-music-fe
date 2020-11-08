@@ -342,6 +342,8 @@
 </script>
 
 <style lang="less">
+    @import "../../../../common/css/theme/theme";
+
     .m-singer-box {
         position: relative;
         padding-top: 20px;
@@ -380,9 +382,9 @@
                 }
 
                 .tag-item-active {
-                    border: 1px solid #3a3b3b !important;
+                    border: 1px solid @player-bar-color !important;
                     color: #fff0f6 !important;
-                    background: #3a3b3b !important;
+                    background: @player-bar-color !important;
                 }
             }
 
@@ -617,7 +619,7 @@
 
                     span:hover {
                         cursor: pointer;
-                        color: #f2f2f2;
+                        color: @player-bar-color;
                     }
                 }
             }
@@ -641,7 +643,7 @@
 
                     span:hover {
                         cursor: pointer;
-                        color: #f2f2f2;
+                        color: @player-bar-color;
                     }
                 }
             }
