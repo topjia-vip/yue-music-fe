@@ -21,11 +21,18 @@
             <div class="mv-title">
                 <span class="title-text" v-html="video.mvTitle" @click="playVideo(video)"/>
             </div>
-            <div class="mv-singers">
+            <div class="mv-singers" v-if="video.singers && video.singers.length !== 0">
+                <div class="tip">歌手:</div>
                 <div class="singer-name-box" v-for="(singer,singerIndex) in video.singers" :key="singerIndex">
                     <span class="singer-name" v-html="singer.singerName" @click="toSingerDetail(singer)"/>
                     <span class="division" v-if="singerIndex !== video.singers.length - 1">/</span>
                 </div>
+            </div>
+            <div class="uploader" v-else>
+                <div class="tip">
+                    上传者:
+                </div>
+                <span class="uploader-name">{{video.uploaderNick}}</span>
             </div>
             <div class="mv-create-time">{{handleTime(video.createTime)}}</div>
         </div>
@@ -44,6 +51,20 @@
       videos: {
         type: Array
       }
+    },
+    data () {
+      return {
+        screenWidth: document.body.clientWidth
+      }
+    },
+    mounted () {
+      this.$nextTick(() => {
+        window.addEventListener('resize', () => {
+          window.screenWidth = document.body.clientWidth
+          this.screenWidth = window.screenWidth
+        })
+      })
+      this.calculationHeight()
     },
     computed: {
       // 图片懒加载 v-lazy配置对象
@@ -84,6 +105,18 @@
         } else {
           return number
         }
+      },
+      calculationHeight () {
+        let curWidth = this.$refs.imageBox[0].clientWidth
+        for (let i = 0; i < this.$refs.imageBox.length; i++) {
+          this.$refs.imageBox[i].style.height = `${curWidth * 0.56}px`
+        }
+      }
+    },
+    watch: {
+      screenWidth () {
+        // 自动计算图片框高度
+        this.calculationHeight()
       }
     }
   }
@@ -240,6 +273,11 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
 
+                .tip {
+                    color: #8b8b8c;
+                    margin-right: 5px;
+                }
+
                 .singer-name-box {
                     .singer-name {
                         color: #8b8b8c;
@@ -253,6 +291,30 @@
                         cursor: pointer;
                         color: @player-bar-color;
                     }
+                }
+            }
+
+            .uploader {
+                margin-top: 5px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+
+                .tip {
+                    color: #8b8b8c;
+                    margin-right: 5px;
+                }
+
+                .uploader-name {
+                    color: #8b8b8c;
+                }
+
+                .uploader-name:hover {
+                    cursor: pointer;
+                    color: @player-bar-color;
                 }
             }
 

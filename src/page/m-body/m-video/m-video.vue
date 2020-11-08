@@ -222,7 +222,7 @@
 
         .my-slide-right-enter-active,
         .my-slide-left-enter-active {
-            transition: transform 200ms ease-in-out;
+            transition: all 200ms ease-in-out;
             position: relative;
         }
 

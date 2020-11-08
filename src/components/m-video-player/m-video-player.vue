@@ -7,6 +7,7 @@
         <video class="video"
                ref="video"
                preload="auto"
+               v-show="!isPictureInPicture"
                @loadstart="loadstart"
                @canplay="canplay"
                @waiting="waiting"
@@ -16,9 +17,12 @@
                :poster="currentVideo?currentVideo.mvPicUrl:''"
                :src="playUrl?playUrl.url:''">
         </video>
-        <loading v-if="videoWaiting" :color="'#FFFFFF'" class="loading"/>
+        <div class="error-video-box" v-if="videoSrcError">
+            <span>视频播放链接已失效</span>
+        </div>
+        <loading v-if="!videoSrcError && videoWaiting" :color="'#FFFFFF'" class="loading"/>
         <!-- 暂停图标 -->
-        <div v-if="!videoWaiting && !playStatus" class="pause-btn-box">
+        <div v-if="!videoSrcError && !videoWaiting && !playStatus" class="pause-btn-box">
             <div class="pause-btn">
                 <Icon class="btn" type="md-play" size="60" @click="changePlayStatus"/>
             </div>
@@ -40,10 +44,10 @@
             <div class="play-tools-box">
                 <!--左边操作按钮-->
                 <div class="tools left-tools">
-                    <div class="btn-box play-btn-box">
-                        <Icon class="btn" v-if="!playStatus" type="md-play" size="20" @click="changePlayStatus"
+                    <div class="video-btn-box play-btn-box">
+                        <Icon class="video-btn" v-if="!playStatus" type="md-play" size="20" @click="changePlayStatus"
                               title="播放"/>
-                        <Icon class="btn" v-else type="md-pause" size="20" @click="changePlayStatus" title="暂停"/>
+                        <Icon class="video-btn" v-else type="md-pause" size="20" @click="changePlayStatus" title="暂停"/>
                     </div>
                     <div v-if="videoWaiting" class="video-waiting-tip">
                         <span class="text">视频缓冲中,请稍等..</span>
@@ -57,16 +61,20 @@
                 <!--右边操作按钮-->
                 <div class="tools right-tools">
                     <!--音量-->
-                    <div class="volume-box" @wheel.stop="mousewheelChangeVolume">
-                        <div class="btn-box volume-btn-box" @click="closeOrOpenVolume">
-                            <Icon class="btn" type="md-volume-up" size="20" v-if="openVolume"/>
-                            <Icon class="btn" type="md-volume-mute" size="20" v-if="!openVolume"/>
+                    <div class="volume-box"
+                         @mouseenter="hidden"
+                         @mouseleave="scrollY"
+                         @wheel.stop="mousewheelChangeVolume"
+                    >
+                        <div class="video-btn-box volume-btn-box" @click="closeOrOpenVolume">
+                            <Icon class="video-btn" type="md-volume-up" size="20" v-if="openVolume"/>
+                            <Icon class="video-btn" type="md-volume-mute" size="20" v-if="!openVolume"/>
                         </div>
                         <div class="volume-bar-box">
                             <div class="ex-bar" @mousedown="progressClick($event,'volume')">
                                 <div class="volume-bar" ref="volumeProgressBar">
                                     <div ref="volumeProgress" class="volume-progressed-bar"></div>
-                                    <div ref="volumeProgressBtn" class="btn"
+                                    <div ref="volumeProgressBtn" class="volume-btn"
                                          @mousedown.prevent="progressTouchStart($event,'volume')">
                                     </div>
                                 </div>
@@ -85,6 +93,10 @@
                                 <span class="text" :class="url.id === playUrl.id?'active':''" @click="changeUrl(url)">{{url.type}}</span>
                             </div>
                         </div>
+                    </div>
+                    <div class="video-btn-box">
+                        <Icon class="video-btn" type="ios-photos" size="20" title="进入画中画模式"
+                              @click="enterPictureInPicture"/>
                     </div>
                 </div>
             </div>
@@ -130,12 +142,10 @@
         percent: 0,
         volumePercent: 0.4, // 默认音量40%
         moveInControls: false, // 是否移动到控制栏
-        openVolume: true
+        openVolume: true,
+        videoSrcError: false,
+        isPictureInPicture: false
       }
-    },
-    beforeRouteLeave (to, from, next) {
-      this.initVideoStatus()
-      next()
     },
     created () {
       this.touch = {}
@@ -147,9 +157,36 @@
         this.openControls()
         this._offset(this.$refs.volumeProgressBar.clientWidth * this.volumePercent, 'volume')
         this.video.volume = this.volumePercent
+        // 进入画中画模式时候执行
+        this.video.addEventListener('enterpictureinpicture', (event) => {
+          this.isPictureInPicture = true
+        })
+        // 退出画中画模式时候执行
+        this.video.addEventListener('leavepictureinpicture', () => {
+          this.isPictureInPicture = false
+        })
       })
     },
     methods: {
+      // 画中画模式播放
+      enterPictureInPicture () {
+        if (this.canPlay) {
+          this.video.requestPictureInPicture()
+        }
+      },
+      exitPictureInPicture () {
+        try {
+          document.exitPictureInPicture()
+        } catch (e) {
+          console.log(e)
+        }
+      },
+      hidden () {
+        this.$emit('hidden')
+      },
+      scrollY () {
+        this.$emit('scrollY')
+      },
       changeUrl (url) {
         this.openOtherUrl = false
         if (url.id === this.playUrl.id) {
@@ -164,6 +201,12 @@
         }
       },
       initVideoStatus () {
+        this.$nextTick(() => {
+          if (this.isPictureInPicture) {
+            this.isPictureInPicture = false
+            document.exitPictureInPicture()
+          }
+        })
         this.openOtherUrl = false
         this.video.src = ''
         this.videoWaiting = true
@@ -176,23 +219,19 @@
         this.openVolume = true
       },
       loadstart () {
-        console.log('loadstart')
         this.videoWaiting = true
         this.playStatus = false
       },
       canplay () {
-        console.log('canplay')
         this.play()
         this.playStatus = true
       },
       waiting () {
-        console.log('waiting')
         this.videoWaiting = true
         this.playStatus = false
         this.canPlay = false
       },
       playing () {
-        console.log('playing')
         this.videoWaiting = false
         this.playStatus = true
         this.canPlay = true
@@ -438,6 +477,15 @@
           const offsetWidth = newPercent * barWidth
           this._offset(offsetWidth, 'video')
         }
+      },
+      videoUrls (value) {
+        if (value) {
+          if (value.length === 0) {
+            this.videoSrcError = true
+          } else {
+            this.videoSrcError = false
+          }
+        }
       }
     }
   }
@@ -459,6 +507,22 @@
             max-height: 600px;
             outline: none;
             display: block;
+        }
+
+        .error-video-box {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            span {
+                color: #FFFFFF;
+            }
         }
 
         .loading {
@@ -572,18 +636,18 @@
                     align-items: center;
                     flex-flow: wrap;
 
-                    .btn-box {
+                    .video-btn-box {
                         width: 30px;
                         height: 100%;
                         display: flex;
-                        justify-content: flex-start;
+                        justify-content: center;
                         align-items: center;
 
-                        .btn {
+                        .video-btn {
                             color: #FFFFFF;
                         }
 
-                        .btn:hover {
+                        .video-btn:hover {
                             cursor: pointer;
                             color: @player-bar-color;
                         }
@@ -708,7 +772,7 @@
                                     border-radius: 2px;
                                 }
 
-                                .btn {
+                                .volume-btn {
                                     position: absolute;
                                     width: 12px;
                                     height: 12px;
@@ -722,11 +786,6 @@
 
                             .ex-bar:hover {
                                 cursor: pointer;
-
-                                .btn {
-                                    opacity: 1;
-                                    z-index: 10;
-                                }
                             }
                         }
                     }

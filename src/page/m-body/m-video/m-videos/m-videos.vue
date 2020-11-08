@@ -77,6 +77,13 @@
         hasMoreVideos: true
       }
     },
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        if (vm.$refs.videos) {
+          vm.$refs.videos.calculationHeight()
+        }
+      })
+    },
     created () {
       this._initVideos()
     },

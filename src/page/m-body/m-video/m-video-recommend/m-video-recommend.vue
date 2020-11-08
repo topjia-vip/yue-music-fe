@@ -3,7 +3,7 @@
         <!-- 最新推荐 -->
         <div class="m-video-recommend">
             <div class="title">最新推荐</div>
-            <m-video-list :videos="allVideo" @toSingerDetail="toSingerDetail" @playVideo='playVideo'
+            <m-video-list ref="videoList" :videos="allVideo" @toSingerDetail="toSingerDetail" @playVideo='playVideo'
                           v-if="allVideo.length !== 0"/>
             <m-video-list-skeleton v-else/>
         </div>
@@ -30,6 +30,13 @@
     },
     created () {
       this._initVideos()
+    },
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        if (vm.$refs.videoList) {
+          vm.$refs.videoList.calculationHeight()
+        }
+      })
     },
     computed: {
       // 图片懒加载 v-lazy配置对象
