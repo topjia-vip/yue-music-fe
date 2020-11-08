@@ -97,9 +97,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="video-btn-box">
+                    <div class="video-btn-box" v-if="!fullMode">
                         <Icon class="video-btn" type="ios-photos" size="20" title="进入画中画模式"
                               @click="enterPictureInPicture"/>
+                    </div>
+                    <div class="video-btn-box">
+                        <Icon v-if="!fullMode" class="video-btn" type="md-expand" size="20" title="全屏播放"
+                              @click="fullPlay"/>
+                        <Icon v-else class="video-btn" type="md-contract" size="20" title="复原"
+                              @click="cancelFullPlay"
+                        />
                     </div>
                 </div>
             </div>
@@ -149,6 +156,7 @@
         videoSrcError: false,
         isPictureInPicture: false,
         smallMode: false, // 是否为小屏播放模式
+        fullMode: false, // 是否为全屏播放模式
         left: 201,
         top: 52
       }
@@ -172,9 +180,59 @@
         this.video.addEventListener('leavepictureinpicture', () => {
           this.isPictureInPicture = false
         })
+        document.addEventListener('fullscreenchange', () => {
+          this.changeFullMode()
+        })
+        document.addEventListener('mozfullscreenchange', () => {
+          this.changeFullMode()
+        })
+        document.addEventListener('webkitfullscreenchange', () => {
+          this.changeFullMode()
+        })
+        document.addEventListener('msfullscreenchange', () => {
+          this.changeFullMode()
+        })
       })
     },
     methods: {
+      fullPlay () {
+        let ele = this.$refs.videoPlayerBox
+        if (ele.requestFullscreen) {
+          ele.requestFullscreen()
+        } else if (ele.mozRequestFullScreen) {
+          ele.mozRequestFullScreen()
+        } else if (ele.webkitRequestFullScreen) {
+          ele.webkitRequestFullScreen()
+        } else if (ele.msRequestFullScreen) {
+          ele.msRequestFullScreen()
+        }
+      },
+      cancelFullPlay () {
+        let de = document
+        if (de.exitFullscreen) {
+          de.exitFullscreen()
+        } else if (de.mozCancelFullScreen) {
+          de.mozCancelFullScreen()
+        } else if (de.webkitCancelFullScreen) {
+          de.webkitCancelFullScreen()
+        } else if (de.msCancelFullScreen) {
+          de.msCancelFullScreen()
+        }
+      },
+      changeFullMode () {
+        this.fullMode = !this.fullMode
+        if (this.fullMode) {
+          this.$nextTick(() => {
+            this.$refs.video.style.maxHeight = 'none'
+            this.$refs.video.style.height = '100%'
+          })
+        } else {
+          this.$nextTick(() => {
+            this.$refs.video.style.maxHeight = '600px'
+            this.$refs.video.style.height = 'none'
+          })
+        }
+      },
       // 小屏模式
       small () {
         this.$nextTick(() => {
