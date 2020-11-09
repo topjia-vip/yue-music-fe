@@ -6,14 +6,14 @@
                     <div class="tag-title">在线音乐</div>
                     <ul class="tag-ul">
                         <li>
-                            <div class="tag-item" @click.stop="pushRouter('/findMusic/recommend')"
+                            <div class="tag-item" @mousedown.stop="pushRouter('/findMusic/recommend')"
                                  :class="this.$route.path.indexOf('/findMusic')!== -1?'tag-item-active':''">
                                 <Icon class="tag-icon" type="md-musical-notes" size="18"/>
                                 发现音乐
                             </div>
                         </li>
                         <li>
-                            <div class="tag-item" @click.stop="pushRouter('/video')"
+                            <div class="tag-item" @mousedown.stop="pushRouter('/video')"
                                  :class="this.$route.path.indexOf('/video')!== -1?'tag-item-active':''">
                                 <Icon class="tag-icon" type="md-videocam" size="18"/>
                                 视频
@@ -25,7 +25,7 @@
                     <div class="tag-title">我的音乐</div>
                     <ul class="tag-ul">
                         <li v-if="loginUser">
-                            <div @click.stop="pushRouter('/like')" class="tag-item"
+                            <div @mousedown.stop="pushRouter('/like')" class="tag-item"
                                  :class="this.$route.path === '/like'?'tag-item-active':''"
                             >
                                 <Icon class="tag-icon" type="md-heart" size="18"/>
@@ -81,7 +81,7 @@
                     <ul class="tag-ul" v-show="favoriteDisstShow">
                         <li v-for="(favoriteDisst) in userFavoriteDissts" :key="favoriteDisst.disstId"
                             :title="favoriteDisst.disstName">
-                            <div class="tag-item" @click.stop="songListDetail(favoriteDisst)"
+                            <div class="tag-item" @mousedown.stop="songListDetail(favoriteDisst)"
                                  :class="$route.path === `/user/${favoriteDisst.disstId}`?'tag-item-active':''"
                             >
                                 <Icon class="tag-icon" type="md-musical-note" size="18"/>
@@ -198,7 +198,7 @@
         .m-tags-box {
             overflow-x: hidden;
             overflow-y: scroll;
-            border-right: 0.1px solid @tags-border-color;
+            border-right: 0.1px solid @tags-background-color;
 
             .tags-ul {
                 height: 30px;

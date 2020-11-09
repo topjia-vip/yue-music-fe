@@ -386,7 +386,7 @@
 
                         .icon:hover {
                             cursor: pointer;
-                            color: @font-color;
+                            color: @player-bar-color;
                         }
                     }
 
@@ -400,7 +400,7 @@
 
                         .icon:hover {
                             cursor: pointer;
-                            color: @font-color;
+                            color: @player-bar-color;
                         }
                     }
 

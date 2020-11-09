@@ -7,7 +7,7 @@
                 <div class="song-info-album">专辑</div>
                 <div class="song-info-time">时长</div>
             </li>
-            <li class="item song-info" v-for="(song,index) in hiLights" :key="songlist[index].mid"
+            <li class="item song-info" v-for="(song,index) in hiLights" :key="index"
                 @click="selectItem(index)"
                 @dblclick="playSong(songlist[index])"
                 @contextmenu.prevent="openMenu($event,index)"
@@ -173,6 +173,8 @@
 </script>
 
 <style lang="less">
+    @import "../../../../common/css/theme/theme";
+
     .m-search-song-list {
         padding: 0 30px 20px 30px;
 
@@ -208,7 +210,7 @@
 
         em {
             font-style: normal;
-            color: #2e6bb0 !important;
+            color: @player-bar-color !important;
         }
 
         .item {
@@ -222,7 +224,7 @@
                 position: absolute;
                 left: 30px;
                 width: 55px;
-                color: #A62626;
+                color: @player-bar-color;
                 padding-left: 10px;
             }
 
@@ -248,13 +250,13 @@
                 }
 
                 .love-btn:hover {
-                    color: #d65958;
+                    color: @favorite-color;
                     cursor: pointer;
                     margin-right: 5px;
                 }
 
                 .unlove-btn {
-                    color: #d65958;
+                    color: @favorite-color;
                     cursor: pointer;
                     margin-right: 5px;
                 }

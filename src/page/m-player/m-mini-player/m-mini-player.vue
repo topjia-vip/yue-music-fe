@@ -230,7 +230,7 @@
         bottom: 0;
         z-index: 999;
         padding: 5px 310px 5px 240px;
-        border-top: 0.1px solid #363636;
+        border-top: 0.1px solid @mini-player-background-color;
         background: @mini-player-background-color;
 
         .player-tools {

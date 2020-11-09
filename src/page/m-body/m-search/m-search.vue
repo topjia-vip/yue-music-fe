@@ -1,20 +1,78 @@
 <template>
     <Content class="m-search-box" ref="searchBox">
-        <m-slider ref="wrapper">
+        <!-- 搜索提示 -->
+        <div class="search-title">
+            搜索"<span class="highlight">{{searchKey}}</span>"
+        </div>
+        <!-- 标签tag -->
+        <div class="search-tags">
+            <div class="tags-box">
+                <div class="tag song">
+                <span class="text" :class="mode===0?'active':''"
+                      @mousedown="tagMousedown('song')"
+                      @mouseup="tagMouseup('song')"
+                      @mouseleave="tagMouseleave('song')"
+                      @click="selectMode(0)">
+                    歌曲
+                </span>
+                    <div class="active-line" v-if="mode===0"></div>
+                </div>
+                <div class="tag video">
+                <span class="text" :class="mode===1?'active':''"
+                      @mousedown="tagMousedown('video')"
+                      @mouseup="tagMouseup('video')"
+                      @mouseleave="tagMouseleave('video')"
+                      @click="selectMode(1)">
+                    视频
+                </span>
+                    <div class="active-line" v-if="mode===1"></div>
+                </div>
+                <div class="tag album">
+                <span class="text" :class="mode===2?'active':''"
+                      @mousedown="tagMousedown('album')"
+                      @mouseup="tagMouseup('album')"
+                      @mouseleave="tagMouseleave('album')"
+                      @click="selectMode(2)">
+                    专辑
+                </span>
+                    <div class="active-line" v-if="mode===2"></div>
+                </div>
+                <div class="tag song-list">
+                <span class="text" :class="mode===3?'active':''"
+                      @mousedown="tagMousedown('song-list')"
+                      @mouseup="tagMouseup('song-list')"
+                      @mouseleave="tagMouseleave('song-list')"
+                      @click="selectMode(3)">
+                    歌单
+                </span>
+                    <div class="active-line" v-if="mode===3"></div>
+                </div>
+                <div class="tag lyric">
+                <span class="text" :class="mode===4?'active':''"
+                      @mousedown="tagMousedown('lyric')"
+                      @mouseup="tagMouseup('lyric')"
+                      @mouseleave="tagMouseleave('lyric')"
+                      @click="selectMode(4)">
+                    歌词
+                </span>
+                    <div class="active-line" v-if="mode===4"></div>
+                </div>
+                <div class="tag singer">
+                <span class="text" :class="mode===5?'active':''"
+                      @mousedown="tagMousedown('singer')"
+                      @mouseup="tagMouseup('singer')"
+                      @mouseleave="tagMouseleave('singer')"
+                      @click="selectMode(5)">
+                    歌手
+                </span>
+                    <div class="active-line" v-if="mode===5"></div>
+                </div>
+            </div>
+            <span class="search-result-num" v-if="searchRes">找到{{searchRes.totalnum}}首歌曲</span>
+        </div>
+        <!-- 搜索内容 -->
+        <m-slider class="wrapper" ref="wrapper">
             <div class="search-content-box" ref="scroll" @scroll="scroll">
-                <div class="search-title">
-                    搜索"<span class="highlight">{{searchKey}}</span>"
-                    <span v-if="searchRes">，找到{{searchRes.totalnum}}首歌曲</span>
-                </div>
-                <div class="search-tags">
-                    <div class="tag song">
-                        <span class="active">歌曲</span>
-                        <div class="active-line"></div>
-                    </div>
-                    <div class="tag album">专辑</div>
-                    <div class="tag song-list">歌单</div>
-                    <div class="tag lyric">歌词</div>
-                </div>
                 <!--单曲搜索-->
                 <div class="search-song-result-box" v-if="isShow && !isError">
                     <!--最佳匹配-->
@@ -130,7 +188,8 @@
         clientHeight: 0,
         isShow: false,
         screenHeight: document.body.clientHeight,
-        isError: false
+        isError: false,
+        mode: 0
       }
     },
     mounted () {
@@ -143,6 +202,27 @@
       this._search()
     },
     methods: {
+      selectMode (mode) {
+        if (this.mode === mode) {
+          return
+        }
+        this.mode = mode
+        this.toTop()
+        // TODO 根据mode改变搜索内容
+      },
+      // 鼠标点击标签时样式改变
+      tagMousedown (className) {
+        let dom = document.getElementsByClassName(className)[0]
+        dom.style.transform = 'translate3d(2px,2px,0)'
+      },
+      tagMouseup (className) {
+        let dom = document.getElementsByClassName(className)[0]
+        dom.style.transform = 'translate3d(0,0,0)'
+      },
+      tagMouseleave (className) {
+        let dom = document.getElementsByClassName(className)[0]
+        dom.style.transform = 'translate3d(0,0,0)'
+      },
       // 定位
       location () {
         let index = this.searchRes.songList.findIndex((item) => item.id + '' === this.currentPlaySong.id + '')
@@ -213,6 +293,7 @@
             if (res.message === 'success') {
               this.searchRes.songList = this.searchRes.songList.concat(_normalizeSongs(res.songList))
               this.searchRes.hiLights = this.searchRes.hiLights.concat(res.hiLights)
+              this.searchRes.totalnum = res.totalnum
               if (res.zhida !== null) {
                 this.bestSearch = res.zhida
               } else {
@@ -266,158 +347,194 @@
         height: 100%;
         overflow: hidden;
 
-        .search-content-box {
-            position: relative;
-            height: 100%;
+        .highlight {
+            color: @player-bar-color;
+        }
+
+        .search-title {
+            height: 80px;
+            padding: 0 30px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #242425;
+            color: #919192;
+            font-size: 16px;
+        }
+
+        .search-tags {
             width: 100%;
-            overflow-y: scroll;
-            overflow-x: hidden;
+            padding: 0 30px 20px 30px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-            .highlight {
-                color: #2e6bb0;
-            }
-
-            .search-title {
-                height: 80px;
-                line-height: 80px;
-                color: #dcdde4;
-                padding: 0 30px 20px 30px;
-            }
-
-            .search-tags {
-                width: 100%;
-                height: 30px;
-                line-height: 30px;
-                padding: 0 30px 20px 30px;
+            .tags-box {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
 
                 .tag {
-                    display: inline-block;
                     width: 60px;
+                    height: 30px;
                     font-size: 16px;
-                    color: #dcdde4;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    flex-flow: column;
+
+                    .text {
+                        color: #dcdde4;
+                    }
+
+                    .text:hover {
+                        cursor: pointer;
+                        color: @player-bar-color;
+                    }
 
                     .active {
-                        color: #2e6bb0;
+                        color: @player-bar-color;
                     }
 
                     .active-line {
                         height: 4px;
                         width: 32px;
-                        background: #2e6bb0;
+                        background: @player-bar-color;
                         border-radius: 4px;
                     }
                 }
             }
 
-            .search-song-result-box {
-                margin-top: 10px;
-
-                .title {
-                    height: 30px;
-                    line-height: 30px;
-                    color: #828385;
-                    background: #1c1e23;
-                    padding: 0 30px 20px 30px;
-                }
-
-                .best-search-content {
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
-                    height: 80px;
-                    padding: 10px 30px;
-                    border-bottom: 1px solid #333333;
-
-                    .content {
-                        width: 200px;
-                        height: 60px;
-                        padding: 5px 5px;
-                        background: #1c1e22;
-
-                        .img-box {
-                            width: 50px;
-                            height: 50px;
-                            float: left;
-
-                            img {
-                                width: 100%;
-                                height: 100%;
-                                display: block;
-                            }
-                        }
-
-                        .info-content {
-                            display: flex;
-                            justify-content: space-around;
-                            align-items: start;
-                            flex-flow: column;
-                            height: 50px;
-                            font-size: 14px;
-                            color: #dcdde4;
-                            padding-left: 10px;
-
-                            .info {
-                                width: 100%;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                                white-space: nowrap;
-                            }
-
-                            .song-num {
-                                color: #918e8e;
-                                font-size: 12px;
-                            }
-                        }
-                    }
-
-                    .content:hover {
-                        cursor: pointer;
-                        background: #202226;
-                    }
-                }
+            .search-result-num {
+                color: #616162;
+                font-size: 12px;
             }
         }
 
-        .search-content-box {
-            /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
-            -ms-overflow-style: none;
-        }
+        .wrapper {
+            padding-bottom: 150px;
 
-        // 火狐
-        scrollbar-color: transparent transparent;
-        scrollbar-track-color: transparent;
-        -ms-scrollbar-track-color: transparent;
+            .search-content-box {
+                position: relative;
+                height: 100%;
+                width: 100%;
+                overflow-y: scroll;
+                overflow-x: hidden;
 
-        .search-content-box::-webkit-scrollbar {
-            /*滚动条整体样式*/
-            width: 8px; /*高宽分别对应横竖滚动条的尺寸*/
-            height: 1px;
-        }
+                .search-song-result-box {
+                    margin-top: 10px;
 
-        /*定义滚动条轨道 内阴影+圆角*/
+                    .best-search {
 
-        .search-content-box::-webkit-scrollbar-track-piece {
-            -webkit-border-radius: 2em;
-            -moz-border-radius: 2em;
-            border-radius: 2em;
-        }
+                        .title {
+                            height: 30px;
+                            line-height: 30px;
+                            color: #828385;
+                            background: #242425;
+                            padding: 0 30px 20px 30px;
+                        }
 
-        /*定义滑块 内阴影+圆角*/
+                        .best-search-content {
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                            height: 80px;
+                            padding: 10px 30px;
+                            border-bottom: 1px solid #333333;
 
-        .search-content-box::-webkit-scrollbar-thumb {
-            /*滚动条里面小方块*/
-            border-radius: 10px;
-            background-color: #2F3134;
-        }
+                            .content {
+                                width: 200px;
+                                height: 60px;
+                                padding: 5px 5px;
+                                background: #242425;
 
-        /*---鼠标点击滚动条显示样式--*/
+                                .img-box {
+                                    width: 50px;
+                                    height: 50px;
+                                    float: left;
 
-        .search-content-box::-webkit-scrollbar-thumb:hover {
-            background-color: #3B3C40;
-        }
+                                    img {
+                                        width: 100%;
+                                        height: 100%;
+                                        display: block;
+                                    }
+                                }
 
-        .search-content-box::-webkit-scrollbar-thumb:active {
-            background-color: #3B3C40;
+                                .info-content {
+                                    display: flex;
+                                    justify-content: space-around;
+                                    align-items: start;
+                                    flex-flow: column;
+                                    height: 50px;
+                                    font-size: 14px;
+                                    color: #dcdde4;
+                                    padding-left: 10px;
+
+                                    .info {
+                                        width: 100%;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        white-space: nowrap;
+                                    }
+
+                                    .song-num {
+                                        color: #918e8e;
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+
+                            .content:hover {
+                                cursor: pointer;
+                                background: #323232;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .search-content-box {
+                /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
+                -ms-overflow-style: none;
+            }
+
+            // 火狐
+            scrollbar-color: transparent transparent;
+            scrollbar-track-color: transparent;
+            -ms-scrollbar-track-color: transparent;
+
+            .search-content-box::-webkit-scrollbar {
+                /*滚动条整体样式*/
+                width: 8px; /*高宽分别对应横竖滚动条的尺寸*/
+                height: 1px;
+            }
+
+            /*定义滚动条轨道 内阴影+圆角*/
+
+            .search-content-box::-webkit-scrollbar-track-piece {
+                -webkit-border-radius: 2em;
+                -moz-border-radius: 2em;
+                border-radius: 2em;
+            }
+
+            /*定义滑块 内阴影+圆角*/
+
+            .search-content-box::-webkit-scrollbar-thumb {
+                /*滚动条里面小方块*/
+                border-radius: 10px;
+                background-color: #2F3134;
+            }
+
+            /*---鼠标点击滚动条显示样式--*/
+
+            .search-content-box::-webkit-scrollbar-thumb:hover {
+                background-color: #3B3C40;
+            }
+
+            .search-content-box::-webkit-scrollbar-thumb:active {
+                background-color: #3B3C40;
+            }
         }
     }
 </style>

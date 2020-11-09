@@ -127,7 +127,7 @@
         .line {
             width: 100%;
             height: 2px;
-            background-image: linear-gradient(141deg, #4f4f4f 0%, #893e12 50%, #565656 100%);
+            background-color: @header-background-color;
         }
 
         .play-list {
@@ -140,7 +140,7 @@
         }
 
         .ivu-layout {
-            background-color: #16181C;
+            background-color: @background-color-base;
         }
     }
 </style>

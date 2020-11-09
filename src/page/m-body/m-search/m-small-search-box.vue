@@ -227,6 +227,8 @@
 </script>
 
 <style lang="less">
+    @import "../../../common/css/theme/theme";
+
     .m-small-search-box {
         position: absolute;
         top: 36px;
@@ -242,7 +244,7 @@
         overflow-x: hidden;
 
         .highlight {
-            color: #2e6bb0;
+            color: @player-bar-color;
         }
 
         .hot-search-title {
