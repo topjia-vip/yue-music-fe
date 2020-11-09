@@ -186,7 +186,7 @@
             line-height: 30px;
             padding: 0 60px 0 55px;
             font-size: 12px;
-            color: #8E8E8F;
+            color: @font-tow-color;
 
             .song-info-name {
                 width: 45%;
@@ -214,7 +214,7 @@
             list-style: none;
             height: 60px;
             line-height: 60px;
-            color: #ADAFB2;
+            color: @font-base-color;
             padding: 0 60px 0 55px;
             display: flex;
             justify-content: flex-start;
@@ -223,7 +223,7 @@
                 position: absolute;
                 left: 0;
                 width: 55px;
-                color: @player-bar-color;
+                color: @font-active-color;
                 padding-left: 10px;
             }
 
@@ -231,7 +231,6 @@
                 position: absolute;
                 left: 0;
                 width: 55px;
-                color: #ffffff;
                 padding-left: 10px;
             }
 
@@ -245,6 +244,7 @@
                 padding-right: 10px;
 
                 .love-btn {
+                    color: @no-favorite-color;
                     margin-right: 5px;
                 }
 
@@ -265,7 +265,7 @@
                 }
 
                 .subTitle {
-                    color: #999999 !important;
+                    color: @font-tow-color;
                 }
             }
 
@@ -276,7 +276,6 @@
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
-                color: #8b8b8c;
 
                 .singer-name-box {
                     overflow: hidden;
@@ -287,9 +286,13 @@
                         margin: 0 2px;
                     }
 
+                    .singer-name {
+                        color: @font-tow-color;
+                    }
+
                     .singer-name:hover {
                         cursor: pointer;
-                        color: @player-bar-color;
+                        color: @font-active-color;
                     }
                 }
             }
@@ -301,10 +304,11 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 padding-right: 10px;
+                color: @font-tow-color;
 
                 span:hover {
                     cursor: pointer;
-                    color: #FFFFFF;
+                    color: @font-active-color;
                 }
             }
 
@@ -312,6 +316,7 @@
                 position: absolute;
                 right: 0;
                 width: 60px;
+                color: @font-tow-color;
             }
         }
 
@@ -320,11 +325,32 @@
         }
 
         .song-playing {
-            color: #FFFFFF !important;
+            color: @font-active-color;
             background: rgba(97, 96, 94, 0.25) !important;
 
+            .song-time {
+                color: @font-active-color;
+            }
+
             .singer {
-                color: #FFFFFF;
+
+                .singer-name-box {
+
+                    .singer-name {
+                        color: @font-active-color;
+                    }
+                }
+            }
+
+            .album {
+                color: @font-active-color;
+            }
+
+            .song-name-box {
+
+                .subTitle {
+                    color: @font-active-color;
+                }
             }
         }
     }

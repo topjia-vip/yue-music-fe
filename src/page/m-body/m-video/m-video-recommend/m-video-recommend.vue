@@ -79,7 +79,7 @@
 
             .title {
                 font-size: 17px;
-                color: #FFFFFF;
+                color: @font-base-color;
             }
         }
     }

@@ -334,13 +334,13 @@
                     -webkit-app-region: no-drag;
 
                     .btn {
-                        color: #918f90;
+                        color: @font-base-color;
                         font-size: 24px;
                     }
 
                     .btn:hover {
                         cursor: pointer;
-                        color: #ffffff;
+                        color: @font-active-color;
                     }
                 }
 
@@ -351,13 +351,13 @@
                     -webkit-app-region: no-drag;
 
                     .btn {
-                        color: #918f90;
+                        color: @font-base-color;
                         font-size: 24px;
                     }
 
                     .btn:hover {
                         cursor: pointer;
-                        color: #ffffff;
+                        color: @font-active-color;
                     }
                 }
 
@@ -421,7 +421,7 @@
 
                                 .song-name {
                                     user-select: text;
-                                    color: #ffffff;
+                                    color: @font-base-color;
                                     overflow: hidden;
                                     text-overflow: ellipsis;
                                     white-space: nowrap;
@@ -498,7 +498,7 @@
                                 width: 12px;
                                 height: 12px;
                                 border-radius: 50%;
-                                background: @player-bar-color;
+                                background: @font-active-color;
                                 top: -4px;
                                 left: -6px;
                                 opacity: 0;
@@ -524,23 +524,26 @@
                             height: 40px;
                             line-height: 40px;
                             left: 0;
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
 
                             .love-btn-box {
                                 display: inline-block;
 
                                 .love-btn {
-                                    color: #ADAFB2;
+                                    color: @no-favorite-color;
                                     margin-right: 5px;
                                 }
 
                                 .love-btn:hover {
-                                    color: #d65958;
+                                    color: @favorite-color;
                                     cursor: pointer;
                                     margin-right: 5px;
                                 }
 
                                 .unlove-btn {
-                                    color: #d65958;
+                                    color: @favorite-color;
                                     cursor: pointer;
                                     margin-right: 5px;
                                 }
@@ -548,7 +551,7 @@
 
                             .playTime {
                                 font-size: 12px;
-                                color: #a9a9a9;
+                                color: @font-tow-color;
                                 display: inline-block;
 
                                 .time {
@@ -567,11 +570,11 @@
 
                             .btn {
                                 cursor: pointer;
-                                color: #ffffff;
+                                color: @font-base-color;
                             }
 
                             .btn:hover {
-                                color: @player-bar-color;
+                                color: @font-active-color;
                             }
 
                             .prev {
@@ -581,7 +584,7 @@
                             }
 
                             .play, .pause {
-                                color: @player-bar-color;
+                                color: @font-active-color;
                                 font-size: 40px;
                                 margin: 0 20px;
                             }
@@ -599,6 +602,9 @@
                             height: 40px;
                             line-height: 40px;
                             right: 0;
+                            display: flex;
+                            justify-content: flex-end;
+                            align-items: center;
                         }
                     }
                 }

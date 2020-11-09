@@ -219,7 +219,7 @@
         user-select: none;
         width: 600px;
         height: 300px;
-        background: #2D2F33;
+        background: @play-list-background-color;
         box-shadow: 0 0 2px #000000;
 
         .heard {
@@ -240,7 +240,7 @@
                     line-height: 30px;
                     font-size: 12px;
                     text-align: center;
-                    color: #828385;
+                    color: @font-tow-color;
                 }
 
                 .now-play-list {
@@ -259,7 +259,7 @@
 
                 .btn-active {
                     background: #3A3A3F !important;
-                    color: #DCDDE4 !important;
+                    color: @font-base-color !important;
                 }
             }
 
@@ -267,12 +267,12 @@
                 position: absolute;
                 right: 0;
                 margin-right: 15px;
-                color: #828385;
+                color: @font-tow-color;
             }
 
             .close:hover {
                 cursor: pointer;
-                color: #DCDDE4;
+                color: @font-active-color;
             }
         }
 
@@ -284,7 +284,7 @@
             border-bottom: 0.5px solid #454545;
 
             .song-sum {
-                color: #828385;
+                color: @font-tow-color;
                 line-height: 30px;
                 font-size: 12px;
                 display: inline-block;
@@ -295,7 +295,7 @@
                 height: 30px;
                 line-height: 30px;
                 cursor: pointer;
-                color: #828385;
+                color: @font-tow-color;
 
                 .clear-icon {
                     position: relative;
@@ -308,7 +308,7 @@
             }
 
             .clear-all:hover {
-                color: #DCDDE4;
+                color: @font-active-color;
             }
         }
 
@@ -337,7 +337,7 @@
                         position: absolute;
                         left: 0;
                         width: 30px;
-                        color: @player-bar-color;
+                        color: @font-active-color;
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -349,10 +349,10 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
-                        color: #DCDDE4;
+                        color: @font-base-color;
 
                         .subTitle {
-                            color: #5F5F63 !important;
+                            color: @font-tow-color !important;
                         }
                     }
 
@@ -362,7 +362,7 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
-                        color: #5F5F63;
+                        color: @font-tow-color;
 
                         span {
                             margin-right: 5px;
@@ -372,7 +372,7 @@
 
                     .song-time {
                         width: 60px;
-                        color: #828385;
+                        color: @font-tow-color;
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -388,11 +388,11 @@
                     background: #323438;
 
                     .singer {
-                        color: #DCDDE4;
+                        color: @font-base-color;
                     }
 
                     .song-time {
-                        color: #DCDDE4;
+                        color: @font-base-color;
                     }
                 }
 
@@ -400,11 +400,11 @@
                     background: #3A3C40 !important;
 
                     .singer {
-                        color: #DCDDE4;
+                        color: @font-base-color;
                     }
 
                     .song-time {
-                        color: #DCDDE4;
+                        color: @font-base-color;
                     }
                 }
 
@@ -412,11 +412,11 @@
                     background: #3A3C40 !important;
 
                     .singer {
-                        color: #DCDDE4;
+                        color: @font-base-color;
                     }
 
                     .song-time {
-                        color: #DCDDE4;
+                        color: @font-base-color;
                     }
                 }
             }
@@ -424,11 +424,11 @@
             .no-song-list {
                 margin-top: 150px;
                 text-align: center;
-                color: #828385;
+                color: @font-tow-color;
 
                 .toFindMusic {
                     cursor: pointer;
-                    color: #DCDDE4;
+                    color: @font-active-color;
                     text-decoration: underline;
                 }
             }

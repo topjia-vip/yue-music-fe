@@ -23,26 +23,28 @@
 </script>
 
 <style lang="less">
+    @import "../../common/css/theme/theme";
+
     .location-song {
         bottom: 115px;
         right: 15px;
         z-index: 2;
         position: fixed;
         cursor: pointer;
-        background: #171717;
-    }
+        background: @to-top-background-color;
 
-    .location {
-        width: 30px;
-        height: 30px;
-        text-align: center;
-        line-height: 30px;
-        border: 1px solid #6d6d6d;
-        color: #6d6d6d;
-    }
+        .location {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid @to-top-color;
+            color: @to-top-color;
+        }
 
-    .location:hover {
-        border: 1px solid #888888;
-        color: #888888;
+        .location:hover {
+            border: 1px solid @to-top-hover-color;
+            color: @to-top-hover-color;
+        }
     }
 </style>

@@ -345,18 +345,19 @@
 </script>
 
 <style lang="less">
+    @import "../../../../../common/css/theme/theme";
+
     .m-rank-info-box {
         position: relative;
         z-index: 0;
         user-select: none;
-        background: #16181C;
         min-width: 820px;
         width: 100%;
         overflow: hidden;
 
         ::selection {
-            background: #d3d3d3;
-            color: #ffffff;
+            background: @font-tow-color;
+            color: @font-base-color;
         }
 
         .m-rank-info-box-content {
@@ -409,7 +410,7 @@
                         float: left;
 
                         .rank-name {
-                            color: #E7E7E7;
+                            color: @font-base-color;
                             font-size: 20px;
                             user-select: text;
 
@@ -425,12 +426,12 @@
                             width: 70px;
                             height: 65px;
                             line-height: 65px;
-                            color: #999999;
+                            color: @font-tow-color;
                             margin-top: 5px;
 
                             .select-text:hover {
                                 cursor: pointer;
-                                color: #ffffff;
+                                color: @font-base-color;
                             }
 
                             .select-box {
@@ -455,11 +456,11 @@
 
                                 .item:hover {
                                     cursor: pointer;
-                                    color: #ffffff;
+                                    color: @font-base-color;
                                 }
 
                                 .selected {
-                                    color: #ffffff;
+                                    color: @font-base-color;
                                     background: #2b2d32;
                                 }
 
@@ -504,17 +505,17 @@
                                 .select::-webkit-scrollbar-thumb {
                                     /*滚动条里面小方块*/
                                     border-radius: 10px;
-                                    background-color: #3B3C40;
+                                    background-color: @scrollbar-thumb-background-color;
                                 }
 
                                 /*---鼠标点击滚动条显示样式--*/
 
                                 .select::-webkit-scrollbar-thumb:hover {
-                                    background-color: #3B3C40;
+                                    background-color: @scrollbar-thumb-hover-color;
                                 }
 
                                 .select::-webkit-scrollbar-thumb:active {
-                                    background-color: #3B3C40;
+                                    background-color: @scrollbar-thumb-active-color;
                                 }
                             }
 
@@ -523,7 +524,7 @@
                         .update-time {
                             height: 65px;
                             line-height: 65px;
-                            color: #999999;
+                            color: @font-tow-color;
                             margin-top: 5px;
                         }
 
@@ -549,7 +550,7 @@
 
                             .play-btn {
                                 background-image: linear-gradient(141deg, rgb(17, 224, 246) 0%, rgb(203, 52, 218) 51%, rgb(230, 57, 162) 75%);
-                                color: #E7E7E7;
+                                color: @font-base-color;
                             }
 
                             .play-btn:hover {
@@ -594,17 +595,17 @@
         .m-rank-info-box-content::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: #2F3134;
+            background-color: @scrollbar-thumb-background-color;
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-rank-info-box-content::-webkit-scrollbar-thumb:hover {
-            background-color: #3B3C40;
+            background-color: @scrollbar-thumb-hover-color;
         }
 
         .m-rank-info-box-content::-webkit-scrollbar-thumb:active {
-            background-color: #3B3C40;
+            background-color: @scrollbar-thumb-active-color;
         }
     }
 </style>

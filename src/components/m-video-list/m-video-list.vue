@@ -255,12 +255,12 @@
                 -webkit-box-orient: vertical;
 
                 .title-text {
-                    color: #FFFFFF;
+                    color: @font-base-color;
                 }
 
                 .title-text:hover {
                     cursor: pointer;
-                    color: @player-bar-color;
+                    color: @font-active-color;
                 }
             }
 
@@ -274,13 +274,13 @@
                 white-space: nowrap;
 
                 .tip {
-                    color: #8b8b8c;
+                    color: @font-tow-color;
                     margin-right: 5px;
                 }
 
                 .singer-name-box {
                     .singer-name {
-                        color: #8b8b8c;
+                        color: @font-tow-color;
                     }
 
                     .division {
@@ -289,7 +289,7 @@
 
                     .singer-name:hover {
                         cursor: pointer;
-                        color: @player-bar-color;
+                        color: @font-active-color;
                     }
                 }
             }
@@ -304,24 +304,24 @@
                 white-space: nowrap;
 
                 .tip {
-                    color: #8b8b8c;
+                    color: @font-tow-color;
                     margin-right: 5px;
                 }
 
                 .uploader-name {
-                    color: #8b8b8c;
+                    color: @font-tow-color;
                 }
 
                 .uploader-name:hover {
                     cursor: pointer;
-                    color: @player-bar-color;
+                    color: @font-active-color;
                 }
             }
 
             .mv-create-time {
                 margin-top: 5px;
                 font-size: 12px;
-                color: #8b8b8c;
+                color: @font-tow-color;
             }
         }
 

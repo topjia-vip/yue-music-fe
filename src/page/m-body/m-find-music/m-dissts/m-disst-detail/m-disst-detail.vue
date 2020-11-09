@@ -43,7 +43,8 @@
                         </div>
                     </div>
                     <div class="disst-song-count">
-                        <span v-html="`歌曲${disst.songNum}`"></span>
+                        歌曲
+                        <span v-html="`${disst.songNum}`"></span>
                     </div>
                     <m-song-list :songlist="disst.songlist"
                                  :selectSong="selectSong"
@@ -394,18 +395,19 @@
 </script>
 
 <style lang="less">
+    @import "../../../../../common/css/theme/theme";
+
     .m-disst-detail-box {
         position: relative;
         z-index: 0;
         user-select: none;
-        background: #16181C;
         min-width: 820px;
         width: 100%;
         overflow: hidden;
 
         ::selection {
-            background: #d3d3d3;
-            color: #ffffff;
+            background: @font-tow-color;
+            color: @font-base-color;
         }
 
         .m-disst-detail-box-content {
@@ -446,7 +448,7 @@
                         float: left;
 
                         .disst-title {
-                            color: #E7E7E7;
+                            color: @font-base-color;
                             font-size: 20px;
                             user-select: text;
 
@@ -482,7 +484,7 @@
                                 max-width: 50%;
                                 float: left;
                                 margin-left: 5px;
-                                color: #E7E7E7;
+                                color: @font-base-color;
 
                                 span {
                                     overflow: hidden;
@@ -494,7 +496,7 @@
                             .disst-tag {
                                 float: left;
                                 line-height: 30px;
-                                color: #8E8E8F;
+                                color: @font-tow-color;
 
                                 span {
                                     margin-left: 10px;
@@ -512,7 +514,7 @@
                             .disst-desc {
                                 position: relative;
                                 width: 100%;
-                                color: #8E8E8F;
+                                color: @font-tow-color;
                                 padding: 0 40px 0 0;
 
                                 .desc {
@@ -532,13 +534,13 @@
 
                                 .open-desc-btn:hover {
                                     cursor: pointer;
-                                    color: #ffffff;
+                                    color: @font-active-color;
                                 }
                             }
 
                             .desc-box {
                                 position: absolute;
-                                color: #8E8E8F;
+                                color: @font-tow-color;
                                 background: #29292B;
                                 padding: 10px 10px;
                                 left: -10px;
@@ -557,7 +559,11 @@
                 .disst-song-count {
                     height: 30px;
                     margin-top: 30px;
-                    color: #fbfbfb;
+                    color: @font-base-color;
+
+                    span {
+                        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+                    }
                 }
             }
 
@@ -600,17 +606,17 @@
         .m-disst-detail-box-content::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: #2F3134;
+            background-color: @scrollbar-thumb-background-color;
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-disst-detail-box-content::-webkit-scrollbar-thumb:hover {
-            background-color: #3B3C40;
+            background-color: @scrollbar-thumb-hover-color;
         }
 
         .m-disst-detail-box-content::-webkit-scrollbar-thumb:active {
-            background-color: #3B3C40;
+            background-color: @scrollbar-thumb-active-color;
         }
     }
 

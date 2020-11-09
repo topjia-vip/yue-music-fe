@@ -189,16 +189,15 @@
     @import "../../common/css/theme/theme";
 
     .m-tags {
-        width: 200px;
-        max-width: 200px;
-        min-width: 200px;
+        width: 200.1px;
+        max-width: 200.1px;
+        min-width: 200.1px;
         user-select: none;
         background: @tags-background-color;
 
         .m-tags-box {
             overflow-x: hidden;
             overflow-y: scroll;
-            border-right: 0.1px solid @tags-background-color;
 
             .tags-ul {
                 height: 30px;
@@ -278,7 +277,7 @@
 
                         .tag-item:hover {
                             cursor: pointer;
-                            background: #2e2e2f;
+                            background: @tag-hover-background-color;
                         }
                     }
                 }

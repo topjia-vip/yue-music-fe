@@ -173,7 +173,7 @@
                 align-items: center;
 
                 .tag {
-                    color: #828385;
+                    color: @font-tow-color;
 
                     .title {
                         display: flex;
@@ -184,12 +184,12 @@
                     }
 
                     .active {
-                        color: #FFFFFF !important;
+                        color: @font-active-color !important;
                     }
 
                     .title:hover {
                         cursor: pointer;
-                        color: #cccccc;
+                        color: @font-active-color;
                     }
                 }
 
@@ -209,7 +209,7 @@
                         width: 60px;
                         height: 100%;
                         border-radius: 5px;
-                        background-color: @player-bar-color;
+                        background-color: @font-active-color;
                     }
                 }
             }
@@ -267,17 +267,17 @@
         .m-find-music-box::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: #2F3134;
+            background-color: @scrollbar-thumb-background-color;
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-find-music-box::-webkit-scrollbar-thumb:hover {
-            background-color: #3B3C40;
+            background-color: @scrollbar-thumb-hover-color;
         }
 
         .m-find-music-box::-webkit-scrollbar-thumb:active {
-            background-color: #3B3C40;
+            background-color: @scrollbar-thumb-active-color;
         }
     }
 </style>

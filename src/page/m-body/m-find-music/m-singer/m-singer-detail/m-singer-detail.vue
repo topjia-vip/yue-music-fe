@@ -371,8 +371,8 @@
         overflow: hidden;
 
         ::selection {
-            background: #d3d3d3;
-            color: #ffffff;
+            background: @font-tow-color;
+            color: @font-base-color;
         }
 
         .m-singer-detail-box-content {
@@ -414,7 +414,7 @@
                         float: left;
 
                         .singer-name {
-                            color: #E7E7E7;
+                            color: @font-base-color;
                             font-size: 20px;
                             user-select: text;
 
@@ -427,7 +427,7 @@
 
                         .singer-desc {
                             margin-top: 10px;
-                            color: #f2f2f2;
+                            color: @font-base-color;
                             width: 100%;
                             overflow: hidden;
                             text-overflow: ellipsis;
@@ -442,7 +442,7 @@
 
                         .singer-concern {
                             margin-top: 10px;
-                            color: #999999;
+                            color: @font-tow-color;
 
                             span {
                                 margin-right: 20px;
@@ -453,7 +453,7 @@
 
                         .song-sum {
                             margin-top: 10px;
-                            color: #999999;
+                            color: @font-tow-color;
 
                             span {
                                 margin-right: 20px;
@@ -470,20 +470,20 @@
                     .item {
                         list-style: none;
                         float: left;
-                        color: #f2f2f2;
+                        color: @font-base-color;
 
                         .box {
                             margin-right: 80px;
 
                             span:hover {
                                 cursor: pointer;
-                                color: #2cb5e8;
+                                color: @font-active-color;
                             }
                         }
 
                         .active {
-                            color: #2cb5e8 !important;
-                            border-bottom: 2px solid #2cb5e8;
+                            color: @font-active-color !important;
+                            border-bottom: 2px solid @font-active-color;
                         }
                     }
                 }
@@ -523,17 +523,17 @@
         .m-singer-detail-box-content::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: #2F3134;
+            background-color: @scrollbar-thumb-background-color;
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-singer-detail-box-content::-webkit-scrollbar-thumb:hover {
-            background-color: #3B3C40;
+            background-color: @scrollbar-thumb-hover-color;
         }
 
         .m-singer-detail-box-content::-webkit-scrollbar-thumb:active {
-            background-color: #3B3C40;
+            background-color: @scrollbar-thumb-active-color;
         }
     }
 

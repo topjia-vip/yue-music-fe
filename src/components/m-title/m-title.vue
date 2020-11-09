@@ -8,28 +8,31 @@
 </template>
 
 <script>
-export default {
-  name: 'm-title',
-  props: {
-    title: {
-      type: String
-    }
-  },
-  methods: {
-    moreClick () {
-      this.$emit('moreClick')
+  export default {
+    name: 'm-title',
+    props: {
+      title: {
+        type: String
+      }
+    },
+    methods: {
+      moreClick () {
+        this.$emit('moreClick')
+      }
     }
   }
-}
 </script>
 
 <style lang="less">
+    @import "../../common/css/theme/theme";
+
     .title-box {
-        color: #FFFFFF;
-        font-size: 16px;
+        color: @font-base-color;
+        font-size: 20px;
         height: 30px;
-        line-height: 30px;
-        border-bottom: 1px solid #303030;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
         .title {
             display: inline-block;
@@ -39,15 +42,15 @@ export default {
             display: inline-block;
             float: right;
             font-size: 12px;
-            color: #999999;
+            color: @font-tow-color;
         }
 
         .more:hover {
             cursor: pointer;
-            color: #FFFFFF;
+            color: @font-active-color;
 
             span {
-                border-bottom: 1px solid #FFFFFF;
+                border-bottom: 1px solid @font-active-color;
             }
         }
     }

@@ -119,7 +119,6 @@
   import { getSingerListData } from '../../../../common/js/requestData'
   import { getSign } from '../../../../common/js/sign'
   import { createReqData } from '../../../../common/js/createReqData'
-  import Loading from '../../../../components/loading/loading'
   import MErrorPage from '../../../../components/m-error-page/m-error-page'
   import { sleep } from '../../../../common/js/util'
   import MSingersSkeleton from '../../../../components/m-skeleton/m-singers-skeleton'
@@ -132,7 +131,6 @@
       MSingerListSkeleton,
       MSingersSkeleton,
       MErrorPage,
-      Loading,
       ScrollTop,
       Icon
     },
@@ -371,9 +369,9 @@
                     text-align: center;
                     line-height: 30px;
                     border-radius: 20px;
-                    border: 1px solid #383839;
+                    border: 1px solid #2b2b2c7a;
                     background: none;
-                    color: #BBBBBB;
+                    color: @font-tow-color;
                     margin-right: 10px;
                 }
 
@@ -382,9 +380,9 @@
                 }
 
                 .tag-item-active {
-                    border: 1px solid @player-bar-color !important;
-                    color: #fff0f6 !important;
-                    background: @player-bar-color !important;
+                    border: 1px solid @font-active-color !important;
+                    color: @font-base-color !important;
+                    background: @font-active-color !important;
                 }
             }
 
@@ -401,7 +399,7 @@
                     height: 22px;
                     text-align: center;
                     line-height: 22px;
-                    color: #BBBBBB;
+                    color: @font-tow-color;
                     display: inline-block;
                     border-radius: 4px;
 
@@ -417,7 +415,7 @@
 
                 .tag-name:hover {
                     border-radius: 4px;
-                    color: #DCDDE4;
+                    color: @font-base-color;
                     background: #2C2E32;
                 }
             }
@@ -442,7 +440,7 @@
                     cursor: pointer;
                     font-size: 12px;
                     text-align: center;
-                    color: #BBBBBB;
+                    color: @font-tow-color;
                     overflow-y: scroll;
 
                     ul {
@@ -456,7 +454,7 @@
                         }
 
                         .tag:hover {
-                            color: #DCDDE4;
+                            color: @font-base-color;
                             background: #49484880;
                         }
                     }
@@ -486,17 +484,17 @@
                 .genre-item::-webkit-scrollbar-thumb {
                     /*滚动条里面小方块*/
                     border-radius: 10px;
-                    background-color: #2F3134;
+                    background-color: @scrollbar-thumb-background-color;
                 }
 
                 /*---鼠标点击滚动条显示样式--*/
 
                 .genre-item::-webkit-scrollbar-thumb:hover {
-                    background-color: #3B3C40;
+                    background-color: @scrollbar-thumb-hover-color;
                 }
 
                 .genre-item::-webkit-scrollbar-thumb:active {
-                    background-color: #3B3C40;
+                    background-color: @scrollbar-thumb-active-color;
                 }
             }
 
@@ -521,7 +519,7 @@
                     cursor: pointer;
                     font-size: 12px;
                     text-align: center;
-                    color: #BBBBBB;
+                    color: @font-tow-color;
                     overflow: hidden;
 
                     ul {
@@ -535,7 +533,7 @@
                         }
 
                         .tag:hover {
-                            color: #DCDDE4;
+                            color: @font-base-color;
                             background: #49484880;
                         }
                     }
@@ -556,15 +554,15 @@
                     cursor: pointer;
                     height: 30px;
                     line-height: 30px;
-                    color: #999999;
+                    color: @font-tow-color;
                 }
 
                 .index-tag-title:hover {
-                    color: #f2f2f2;
+                    color: @font-active-color;
                 }
 
                 .index-tag-active {
-                    color: #f2f2f2 !important;
+                    color: @font-active-color !important;
                 }
             }
         }
@@ -612,14 +610,14 @@
                     text-align: center;
                     line-height: 30px;
                     font-size: 17px;
-                    color: #999999;
+                    color: @font-tow-color;
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
 
                     span:hover {
                         cursor: pointer;
-                        color: @player-bar-color;
+                        color: @font-active-color;
                     }
                 }
             }
@@ -636,21 +634,17 @@
                     text-align: center;
                     line-height: 30px;
                     font-size: 17px;
-                    color: #999999;
+                    color: @font-tow-color;
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
 
                     span:hover {
                         cursor: pointer;
-                        color: @player-bar-color;
+                        color: @font-active-color;
                     }
                 }
             }
-        }
-
-        .loading {
-            margin-top: 200px;
         }
 
         .not-singer {

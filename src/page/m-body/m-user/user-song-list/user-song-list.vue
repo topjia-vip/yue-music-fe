@@ -182,7 +182,7 @@
             list-style: none;
             line-height: 30px;
             padding-left: 55px;
-            color: #8E8E8F;
+            color: @font-tow-color;
 
             .song-info-name {
                 width: 45%;
@@ -204,14 +204,14 @@
             list-style: none;
             height: 60px;
             line-height: 60px;
-            color: #d9d9d9;
+            color: @font-base-color;
             padding-left: 55px;
 
             .play-status-icon {
                 position: absolute;
                 left: 0;
                 width: 55px;
-                color: @player-bar-color;
+                color: @font-active-color;
                 padding-left: 10px;
             }
 
@@ -219,7 +219,6 @@
                 position: absolute;
                 left: 0;
                 width: 55px;
-                color: #ffffff;
                 padding-left: 10px;
             }
 
@@ -232,6 +231,7 @@
                 padding-right: 10px;
 
                 .love-btn {
+                    color: @no-favorite-color;
                     margin-right: 5px;
                 }
 
@@ -248,7 +248,7 @@
                 }
 
                 .subTitle {
-                    color: #999999 !important;
+                    color: @font-tow-color;
                 }
             }
 
@@ -259,7 +259,7 @@
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
-                color: #8b8b8c;
+                color: @font-tow-color;
 
                 .singer-name-box {
                     overflow: hidden;
@@ -272,7 +272,7 @@
 
                     .singer-name:hover {
                         cursor: pointer;
-                        color: @player-bar-color;
+                        color: @font-active-color;
                     }
                 }
             }
@@ -284,6 +284,7 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 padding-right: 10px;
+                color: @font-tow-color;
 
                 span:hover {
                     cursor: pointer;
@@ -297,11 +298,21 @@
         }
 
         .song-playing {
-            color: #FFFFFF !important;
-            background: rgba(97, 96, 94, 0.25) !important;
+            color: @font-active-color;
+            background: rgba(97, 96, 94, 0.25);
+
+            .song-name-box {
+                .subTitle {
+                    color: @font-active-color;
+                }
+            }
 
             .singer {
-                color: #FFFFFF;
+                color: @font-active-color;
+            }
+
+            .album {
+                color: @font-active-color;
             }
         }
     }

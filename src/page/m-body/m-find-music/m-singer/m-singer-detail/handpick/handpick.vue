@@ -113,6 +113,8 @@
 </script>
 
 <style lang="less">
+    @import "../../../../../../common/css/theme/theme";
+
     .handpick-box {
         margin-top: 30px;
 
@@ -126,7 +128,7 @@
                 line-height: 30px;
 
                 .title {
-                    color: #f2f2f2;
+                    color: @font-base-color;
                     display: inline-block;
                 }
 
@@ -139,7 +141,7 @@
                     background-image: linear-gradient(141deg, rgb(17, 224, 246) 0%, rgb(203, 52, 218) 51%, rgb(230, 57, 162) 75%);
                     border-radius: 20px;
                     text-align: center;
-                    color: #E7E7E7;
+                    color: @font-base-color;
                     margin-left: 10px;
 
                     .play-icon {
@@ -156,15 +158,15 @@
                     display: inline-block;
                     float: right;
                     font-size: 12px;
-                    color: #999999;
+                    color: @font-tow-color;
                 }
 
                 .more:hover {
                     cursor: pointer;
-                    color: #FFFFFF;
+                    color: @font-active-color;
 
                     span {
-                        border-bottom: 1px solid #FFFFFF;
+                        border-bottom: 1px solid @font-active-color;
                     }
                 }
             }
@@ -180,7 +182,7 @@
                 line-height: 30px;
 
                 .title {
-                    color: #f2f2f2;
+                    color: @font-base-color;
                     display: inline-block;
                 }
 
@@ -188,15 +190,15 @@
                     display: inline-block;
                     float: right;
                     font-size: 12px;
-                    color: #999999;
+                    color: @font-tow-color;
                 }
 
                 .more:hover {
                     cursor: pointer;
-                    color: #FFFFFF;
+                    color: @font-active-color;
 
                     span {
-                        border-bottom: 1px solid #FFFFFF;
+                        border-bottom: 1px solid @font-active-color;
                     }
                 }
             }

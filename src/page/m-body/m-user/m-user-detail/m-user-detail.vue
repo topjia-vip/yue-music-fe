@@ -78,8 +78,8 @@
         overflow: hidden;
 
         ::selection {
-            background: #d3d3d3;
-            color: #ffffff;
+            background: @font-tow-color;
+            color: @font-base-color;
         }
 
         .m-user-detail-box-content {
@@ -121,7 +121,7 @@
 
                         .user-nick {
                             p {
-                                color: #f2f2f2;
+                                color: @font-base-color;
                                 font-size: 24px;
                                 display: inline-block
                             }
@@ -129,7 +129,7 @@
                             .modify-user-info-btn {
                                 font-size: 12px;
                                 float: right;
-                                color: #ffffff;
+                                color: @font-base-color;
                                 width: 90px;
                                 height: 20px;
                                 line-height: 20px;
@@ -214,17 +214,17 @@
         .m-user-detail-box-content::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: #2F3134;
+            background-color: @scrollbar-thumb-background-color;
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-user-detail-box-content::-webkit-scrollbar-thumb:hover {
-            background-color: #3B3C40;
+            background-color: @scrollbar-thumb-hover-color;
         }
 
         .m-user-detail-box-content::-webkit-scrollbar-thumb:active {
-            background-color: #3B3C40;
+            background-color: @scrollbar-thumb-active-color;
         }
     }
 </style>

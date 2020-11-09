@@ -24,37 +24,39 @@
 </template>
 
 <script>
-export default {
-  name: 'singer-info',
-  props: {
-    singerInfo: {
-      type: Object
-    }
-  },
-  methods: {
-    handleTxT (txt) {
-      if (!txt || txt === '') {
-        return '该歌手暂无简介'
+  export default {
+    name: 'singer-info',
+    props: {
+      singerInfo: {
+        type: Object
       }
-      let res = `${txt.replace(/(\r\n|\n|\r)/gm, '<br />')}`
-      return res
+    },
+    methods: {
+      handleTxT (txt) {
+        if (!txt || txt === '') {
+          return '该歌手暂无简介'
+        }
+        let res = `${txt.replace(/(\r\n|\n|\r)/gm, '<br />')}`
+        return res
+      }
     }
   }
-}
 </script>
 
 <style lang="less">
+    @import "../../../../../../common/css/theme/theme";
+
     .singer-info-box {
         margin-top: 30px;
         user-select: text;
 
         .singer-desc {
             margin-top: 20px;
-            color: #8E8E8F
+            color: @font-tow-color
         }
 
         .title {
-            color: #ffffff;
+            color: @font-base-color;
         }
 
         .singer-base-info {
@@ -62,7 +64,7 @@ export default {
 
             .base-info-box {
                 margin-top: 20px;
-                color: #8E8E8F;
+                color: @font-tow-color;
 
                 .base-info {
                     margin-bottom: 15px;
@@ -76,7 +78,7 @@ export default {
                 margin-top: 20px;
 
                 .info {
-                    color: #8E8E8F;
+                    color: @font-tow-color;
                     margin-top: 20px;
                 }
             }

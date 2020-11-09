@@ -214,14 +214,14 @@
                 position: relative;
 
                 .user-like-header {
-                    color: #ffffff;
+                    color: @font-base-color;
                     font-size: 20px;
                     margin-top: 20px;
                 }
 
                 .tags {
                     margin-top: 20px;
-                    color: #999999;
+                    color: @font-tow-color;
                     height: 30px;
                     line-height: 30px;
 
@@ -236,12 +236,12 @@
 
                     .btn:hover {
                         cursor: pointer;
-                        color: #ffffff;
+                        color: @font-active-color;
                     }
 
                     .active {
-                        color: #ffffff;
-                        border-bottom: 1px solid #ffffff;
+                        color: @font-active-color;
+                        border-bottom: 1px solid @font-active-color;
                     }
                 }
             }
@@ -276,17 +276,17 @@
         .m-user-like-box-content::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: #2F3134;
+            background-color: @scrollbar-thumb-background-color;
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-user-like-box-content::-webkit-scrollbar-thumb:hover {
-            background-color: #3B3C40;
+            background-color: @scrollbar-thumb-hover-color;
         }
 
         .m-user-like-box-content::-webkit-scrollbar-thumb:active {
-            background-color: #3B3C40;
+            background-color: @scrollbar-thumb-active-color;
         }
     }
 </style>

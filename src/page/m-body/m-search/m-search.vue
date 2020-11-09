@@ -348,7 +348,7 @@
         overflow: hidden;
 
         .highlight {
-            color: @player-bar-color;
+            color: @font-active-color;
         }
 
         .search-title {
@@ -385,29 +385,29 @@
                     flex-flow: column;
 
                     .text {
-                        color: #dcdde4;
+                        color: @font-base-color;
                     }
 
                     .text:hover {
                         cursor: pointer;
-                        color: @player-bar-color;
+                        color: @font-active-color;
                     }
 
                     .active {
-                        color: @player-bar-color;
+                        color: @font-active-color;
                     }
 
                     .active-line {
                         height: 4px;
                         width: 32px;
-                        background: @player-bar-color;
+                        background: @font-active-color;
                         border-radius: 4px;
                     }
                 }
             }
 
             .search-result-num {
-                color: #616162;
+                color: @font-tow-color;
                 font-size: 12px;
             }
         }
@@ -523,17 +523,17 @@
             .search-content-box::-webkit-scrollbar-thumb {
                 /*滚动条里面小方块*/
                 border-radius: 10px;
-                background-color: #2F3134;
+                background-color: @scrollbar-thumb-background-color;
             }
 
             /*---鼠标点击滚动条显示样式--*/
 
             .search-content-box::-webkit-scrollbar-thumb:hover {
-                background-color: #3B3C40;
+                background-color: @scrollbar-thumb-hover-color;
             }
 
             .search-content-box::-webkit-scrollbar-thumb:active {
-                background-color: #3B3C40;
+                background-color: @scrollbar-thumb-active-color;
             }
         }
     }

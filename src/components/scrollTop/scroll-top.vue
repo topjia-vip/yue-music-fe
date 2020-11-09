@@ -23,6 +23,7 @@
 </script>
 
 <style lang="less">
+    @import "../../common/css/theme/theme";
 
     .top_box {
         bottom: 80px;
@@ -30,20 +31,20 @@
         z-index: 8;
         position: fixed;
         cursor: pointer;
-        background: #171717;
-    }
+        background: @to-top-background-color;
 
-    .top {
-        width: 30px;
-        height: 30px;
-        text-align: center;
-        line-height: 30px;
-        border: 1px solid #6d6d6d;
-        color: #6d6d6d;
-    }
+        .top {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid @to-top-color;
+            color: @to-top-color;
+        }
 
-    .top:hover {
-        border: 1px solid #888888;
-        color: #888888;
+        .top:hover {
+            border: 1px solid @to-top-hover-color;
+            color: @to-top-hover-color;
+        }
     }
 </style>

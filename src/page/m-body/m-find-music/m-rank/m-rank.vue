@@ -195,6 +195,8 @@
 </script>
 
 <style lang="less">
+    @import "../../../../common/css/theme/theme";
+
     .m-rank-box {
         position: relative;
         padding-top: 20px;
@@ -204,7 +206,7 @@
         height: 100%;
 
         .title {
-            color: #FDFDFD;
+            color: @font-base-color;
         }
 
         .top-img {
@@ -218,7 +220,7 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            font-family: "Arial", "Microsoft YaHei", "\9ED1\4F53", "\5B8B\4F53", sans-serif;
+            font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
             padding: 2px 8px;
             background: #000000;
             border-radius: 13px;
@@ -287,7 +289,7 @@
                         width: 100%;
                         height: 100%;
                         z-index: 6;
-                        background: #232326;
+                        background: #242425;
                         border-radius: 10px;
                         position: relative;
                         transform: translateY(0px);
@@ -305,14 +307,14 @@
 
                             .top-title {
                                 font-size: 17px;
-                                color: #FFFFFF;
+                                color: @font-base-color;
                                 font-weight: normal;
                             }
 
                             .rank-song-item {
                                 margin-top: 10px;
                                 list-style: none;
-                                color: #7C7C7C;
+                                color: @font-tow-color;
                                 font-size: 12px;
 
                                 .rank-num {

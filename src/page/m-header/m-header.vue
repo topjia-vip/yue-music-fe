@@ -340,7 +340,7 @@
         padding: 12px 16px;
         position: relative;
         -webkit-app-region: drag;
-        color: @font-color;
+        color: @font-base-color;
 
         .m-header-wrapper {
             height: 26px;
@@ -371,7 +371,7 @@
                     height: 26px;
                     width: 60px;
                     float: left;
-                    color: #adafb2;
+                    color: @header-button-icon-color;
                     margin-right: 10px;
                     position: relative;
                     -webkit-app-region: no-drag;
@@ -386,7 +386,7 @@
 
                         .icon:hover {
                             cursor: pointer;
-                            color: @player-bar-color;
+                            color: @font-active-color;
                         }
                     }
 
@@ -400,13 +400,13 @@
 
                         .icon:hover {
                             cursor: pointer;
-                            color: @player-bar-color;
+                            color: @font-active-color;
                         }
                     }
 
                     .disabled {
                         cursor: default !important;
-                        color: #3c3c3c !important;
+                        color: @header-button-icon-disable-color !important;
                     }
                 }
 
@@ -427,19 +427,19 @@
                         width: 175px;
                         border: none;
                         outline: none;
-                        color: #FFFFFF;
-                        background: #181818;
+                        color: @font-base-color;
+                        background: @search-background-color;
                     }
 
                     .search-icon-box {
-                        color: #ADAFB2;
+                        color: @header-button-icon-color;
                         float: right;
                         height: 26px;
                         width: 26px;
                     }
 
                     .search-icon-box:hover {
-                        color: #FFFFFF;
+                        color: @font-active-color;
                         cursor: pointer;
                     }
                 }
@@ -479,17 +479,17 @@
                     }
 
                     .close-box:hover {
-                        color: @header-button-icon-hover-color;
+                        color: @font-active-color;
                         cursor: pointer;
                     }
 
                     .maximize-box:hover {
-                        color: @header-button-icon-hover-color;
+                        color: @font-active-color;
                         cursor: pointer;
                     }
 
                     .minimize-box:hover {
-                        color: @header-button-icon-hover-color;
+                        color: @font-active-color;
                         cursor: pointer;
                     }
                 }
@@ -505,7 +505,7 @@
                 }
 
                 .setting-box:hover {
-                    color: @header-button-icon-hover-color;
+                    color: @font-active-color;
                     cursor: pointer;
                 }
 
@@ -519,7 +519,7 @@
                 }
 
                 .setting-network:hover {
-                    color: @header-button-icon-hover-color;
+                    color: @font-active-color;
                     cursor: pointer;
                 }
 
@@ -572,11 +572,11 @@
                         cursor: pointer;
 
                         .user-name {
-                            color: @header-button-icon-hover-color;
+                            color: @font-active-color;
                         }
 
                         .down-select-icon {
-                            color: @header-button-icon-hover-color;
+                            color: @font-active-color;
                         }
                     }
 

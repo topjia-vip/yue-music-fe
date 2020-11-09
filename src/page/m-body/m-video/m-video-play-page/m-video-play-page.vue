@@ -230,14 +230,13 @@
         position: relative;
         z-index: 0;
         user-select: none;
-        background: #16181C;
         min-width: 820px;
         width: 100%;
         overflow: hidden;
 
         ::selection {
-            background: #d3d3d3;
-            color: #ffffff;
+            background: @font-tow-color;
+            color: @font-base-color;
         }
 
         .m-video-play-page-content {

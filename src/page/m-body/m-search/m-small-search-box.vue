@@ -244,7 +244,7 @@
         overflow-x: hidden;
 
         .highlight {
-            color: @player-bar-color;
+            color: @font-active-color;
         }
 
         .hot-search-title {
@@ -254,7 +254,7 @@
 
             .search-history {
                 .search-history-title {
-                    color: #828385;
+                    color: @font-tow-color;
                     height: 60px;
                     line-height: 60px;
                     padding: 0 20px;
@@ -271,7 +271,7 @@
 
                     .delete-all-icon:hover {
                         cursor: pointer;
-                        color: #FFFFFF;
+                        color: @font-active-color;
                     }
                 }
 
@@ -293,7 +293,7 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        color: #cccccc;
+                        color: @font-tow-color;
 
                         .key-text {
                             display: flex;
@@ -316,11 +316,11 @@
                         }
 
                         .key-text:hover {
-                            color: #FFFFFF;
+                            color: @font-active-color;
                         }
 
                         .delete-icon:hover {
-                            color: #FFFFFF;
+                            color: @font-active-color;
                         }
                     }
 
@@ -336,7 +336,7 @@
             }
 
             .hot-title-box {
-                color: #828385;
+                color: @font-tow-color;
                 height: 60px;
                 line-height: 60px;
                 padding-left: 20px;
@@ -370,7 +370,7 @@
 
                 .search-num {
                     display: inline-block;
-                    color: #5b5b5b;
+                    color: @font-tow-color;
                     font-size: 12px;
                 }
             }
@@ -391,12 +391,12 @@
                 height: 30px;
                 line-height: 30px;
                 padding-left: 20px;
-                color: #828385;
+                color: @font-tow-color;
             }
 
             .search-key:hover {
                 cursor: pointer;
-                color: #ffffff;
+                color: @font-active-color;
             }
 
             .title {
@@ -467,16 +467,16 @@
     .m-small-search-box::-webkit-scrollbar-thumb {
         /*滚动条里面小方块*/
         border-radius: 10px;
-        background-color: #414346;
+        background-color: @scrollbar-thumb-background-color;
     }
 
     /*---鼠标点击滚动条显示样式--*/
 
     .m-small-search-box::-webkit-scrollbar-thumb:hover {
-        background-color: #4c4d51;
+        background-color: @scrollbar-thumb-hover-color;
     }
 
     .m-small-search-box::-webkit-scrollbar-thumb:active {
-        background-color: #4c4d51;
+        background-color: @scrollbar-thumb-active-color;
     }
 </style>

@@ -237,7 +237,7 @@
             position: absolute;
             width: 200px;
             height: 40px;
-            color: @tools-color;
+            color: @font-base-color;
             left: 0;
             padding: 0 10px;
             text-align: center;
@@ -258,7 +258,7 @@
 
                 .tool-icon:hover {
                     cursor: pointer;
-                    color: @player-bar-color;
+                    color: @font-active-color;
                 }
             }
 
@@ -276,7 +276,7 @@
                 padding: 2.5px;
 
                 .play-icon {
-                    color: @player-bar-color;
+                    color: @font-active-color;
                     font-size: 38px;
                     position: relative;
                 }
@@ -287,7 +287,7 @@
                 padding: 2.5px;
 
                 .pause-icon {
-                    color: @player-bar-color;
+                    color: @font-active-color;
                     font-size: 38px;
                     position: relative;
                 }
@@ -311,7 +311,7 @@
             padding: 0 3px;
             font-size: 12px;
             text-align: center;
-            color: @time-color;
+            color: @font-tow-color;
             display: inline-block;
         }
 
@@ -347,7 +347,7 @@
                         position: relative;
                         width: 0;
                         height: 4px;
-                        background: @player-bar-color;
+                        background: @font-active-color;
                         border-radius: 2px;
                     }
 
@@ -356,7 +356,7 @@
                         width: 12px;
                         height: 12px;
                         border-radius: 50%;
-                        background: @player-bar-color;
+                        background: @font-active-color;
                         top: -4px;
                         left: -6px;
 
@@ -398,7 +398,7 @@
                 height: 40px;
                 width: 24px;
                 font-size: 24px;
-                color: @icon-color;
+                color: @font-tow-color;
                 margin-right: 6px;
                 display: flex;
                 justify-content: center;
@@ -407,7 +407,7 @@
 
             .icon-box:hover {
                 cursor: pointer;
-                color: @tools-color;
+                color: @font-active-color;
             }
 
             .volume-bar-box {
@@ -434,7 +434,7 @@
                         position: relative;
                         width: 0;
                         height: 4px;
-                        background: @player-bar-color;
+                        background: @font-active-color;
                         border-radius: 2px;
                     }
 
@@ -443,7 +443,7 @@
                         width: 12px;
                         height: 12px;
                         border-radius: 50%;
-                        background: @player-bar-color;
+                        background: @font-active-color;
                         top: -4px;
                         left: -6px;
                         opacity: 0;
@@ -479,8 +479,6 @@
             background: @current-play-song-background-color;
             top: -61px;
             left: 0;
-            border-top: 0.1px solid @current-play-song-border-color;
-            border-right: 0.1px solid @current-play-song-border-color;
             padding: 8px 30px 8px 5px;
             transform: translate3d(-100%, 0, 0);
             transition: transform 300ms;
@@ -572,7 +570,7 @@
                     width: 100%;
                     height: 22px;
                     line-height: 22px;
-                    color: @current-play-song-singer-color;
+                    color: @font-tow-color;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -582,7 +580,7 @@
                     }
 
                     span:hover {
-                        color: @current-play-song-name-color;
+                        color: @font-active-color;
                         cursor: pointer;
                     }
                 }

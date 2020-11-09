@@ -202,7 +202,7 @@
                     .rank-title {
                         font-weight: bold;
                         font-size: 30px;
-                        color: #FFFFFF;
+                        color: @font-base-color;
                     }
                 }
             }
@@ -225,16 +225,16 @@
                         width: 80px;
 
                         .text {
-                            color: #FFFFFF;
+                            color: @font-base-color;
                         }
 
                         .text:hover {
                             cursor: pointer;
-                            color: @player-bar-color;
+                            color: @font-active-color;
                         }
 
                         .active {
-                            color: @player-bar-color !important;
+                            color: @font-active-color !important;
                         }
                     }
 
@@ -254,7 +254,7 @@
                             width: 28px;
                             height: 100%;
                             border-radius: 5px;
-                            background-color: @player-bar-color;
+                            background-color: @font-active-color;
                         }
                     }
                 }

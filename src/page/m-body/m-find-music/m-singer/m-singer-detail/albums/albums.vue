@@ -10,57 +10,59 @@
 </template>
 
 <script>
-import MAlbumList from '../../../../../../components/m-album-list/m-album-list'
-import Loading from '../../../../../../components/loading/loading'
-import { getSingerAlbumsData } from '../../../../../../common/js/requestData'
-import { getSign } from '../../../../../../common/js/sign'
-import { getSingerAlbums } from '../../../../../../api/singer'
-import { ERR_OK } from '../../../../../../api/config'
-import { createReqData } from '../../../../../../common/js/createReqData'
+  import MAlbumList from '../../../../../../components/m-album-list/m-album-list'
+  import Loading from '../../../../../../components/loading/loading'
+  import { getSingerAlbumsData } from '../../../../../../common/js/requestData'
+  import { getSign } from '../../../../../../common/js/sign'
+  import { getSingerAlbums } from '../../../../../../api/singer'
+  import { ERR_OK } from '../../../../../../api/config'
+  import { createReqData } from '../../../../../../common/js/createReqData'
 
-export default {
-  name: 'albums',
-  components: { Loading, MAlbumList },
-  props: {
-    singerMid: {
-      type: String
-    }
-  },
-  data () {
-    return {
-      sortId: 0,
-      isShow: false,
-      singerAlbums: []
-    }
-  },
-  created () {
-    this.initAlbums()
-  },
-  methods: {
-    initAlbums () {
-      this.isShow = false
-      let singerAlbumsData = getSingerAlbumsData(this.singerMid, 0, this.sortId, 50)
-      let singerAlbumsSign = getSign(singerAlbumsData)
-      let reqData = createReqData(singerAlbumsSign, singerAlbumsData)
-      getSingerAlbums(reqData).then(res => {
-        if (res.code === ERR_OK) {
-          this.singerAlbums = res.data.albums
-        }
-        this.isShow = true
-      })
-    },
-    changeSortId: function (id) {
-      if (this.sortId === id) {
-        return
+  export default {
+    name: 'albums',
+    components: { Loading, MAlbumList },
+    props: {
+      singerMid: {
+        type: String
       }
-      this.sortId = id
+    },
+    data () {
+      return {
+        sortId: 0,
+        isShow: false,
+        singerAlbums: []
+      }
+    },
+    created () {
       this.initAlbums()
+    },
+    methods: {
+      initAlbums () {
+        this.isShow = false
+        let singerAlbumsData = getSingerAlbumsData(this.singerMid, 0, this.sortId, 50)
+        let singerAlbumsSign = getSign(singerAlbumsData)
+        let reqData = createReqData(singerAlbumsSign, singerAlbumsData)
+        getSingerAlbums(reqData).then(res => {
+          if (res.code === ERR_OK) {
+            this.singerAlbums = res.data.albums
+          }
+          this.isShow = true
+        })
+      },
+      changeSortId: function (id) {
+        if (this.sortId === id) {
+          return
+        }
+        this.sortId = id
+        this.initAlbums()
+      }
     }
   }
-}
 </script>
 
 <style lang="less">
+    @import "../../../../../../common/css/theme/theme";
+
     .album-list-box {
         width: 100%;
 
@@ -69,7 +71,7 @@ export default {
             height: 60px;
             line-height: 60px;
             font-size: 12px;
-            color: #999999;
+            color: @font-tow-color;
 
             .hot {
                 margin-right: 10px;
@@ -77,16 +79,16 @@ export default {
 
             .hot:hover {
                 cursor: pointer;
-                color: #ffffff;
+                color: @font-active-color;
             }
 
             .new:hover {
                 cursor: pointer;
-                color: #ffffff;
+                color: @font-active-color;
             }
 
             .active {
-                color: #ffffff;
+                color: @font-active-color;
             }
         }
 

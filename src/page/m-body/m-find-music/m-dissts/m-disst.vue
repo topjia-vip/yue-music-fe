@@ -340,7 +340,7 @@
             text-align: center;
             line-height: 22px;
             border-radius: 4px;
-            color: #DCDDE4;
+            color: @font-base-color;
             padding: 0 10px;
             display: inline-block;
         }
@@ -350,7 +350,7 @@
         }
 
         .sort-box {
-            color: #828385;
+            color: @font-tow-color;
             float: right;
             display: inline-block;
 
@@ -363,11 +363,11 @@
             }
 
             .btn-active {
-                color: #DCDDE4;
+                color: @font-active-color;
             }
 
             .btn:hover {
-                color: #DCDDE4;
+                color: @font-active-color;
             }
         }
 
@@ -390,7 +390,7 @@
 
             .list-title {
                 font-size: 14px;
-                color: #DCDDE4;
+                color: @font-base-color;
                 height: 50px;
                 line-height: 50px;
                 padding: 0 20px;
@@ -647,58 +647,16 @@
                         -webkit-box-orient: vertical;
 
                         .text {
-                            color: #FFFFFF;
+                            color: @font-base-color;
                         }
 
                         .text:hover {
                             cursor: pointer;
-                            color: @player-bar-color;
+                            color: @font-active-color;
                         }
                     }
                 }
             }
-        }
-
-        .list-content {
-            /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
-            -ms-overflow-style: none;
-        }
-
-        .list-content {
-            overflow: auto;
-            height: 100%;
-        }
-
-        .list-content::-webkit-scrollbar {
-            /*滚动条整体样式*/
-            width: 8px; /*高宽分别对应横竖滚动条的尺寸*/
-            height: 1px;
-        }
-
-        /*定义滚动条轨道 内阴影+圆角*/
-
-        .list-content::-webkit-scrollbar-track-piece {
-            -webkit-border-radius: 2em;
-            -moz-border-radius: 2em;
-            border-radius: 2em;
-        }
-
-        /*定义滑块 内阴影+圆角*/
-
-        .list-content::-webkit-scrollbar-thumb {
-            /*滚动条里面小方块*/
-            border-radius: 10px;
-            background-color: #414346;
-        }
-
-        /*---鼠标点击滚动条显示样式--*/
-
-        .list-content::-webkit-scrollbar-thumb:hover {
-            background-color: #4D4E52;
-        }
-
-        .list-content::-webkit-scrollbar-thumb:active {
-            background-color: #4D4E52;
         }
     }
 </style>
