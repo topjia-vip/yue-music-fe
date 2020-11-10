@@ -107,7 +107,7 @@
 </script>
 
 <style lang="less">
-    @import "../../common/css/theme/theme";
+    @import "../../common/css/theme/theme-active";
 
     .lyric-wrapper {
         width: 100%;

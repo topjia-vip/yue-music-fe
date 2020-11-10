@@ -9,37 +9,39 @@
 </template>
 
 <script>
-export default {
-  name: 'm-disst-list-skeleton',
-  mounted () {
-    window.addEventListener(('resize'), () => {
-      this.width = window.innerWidth
-    })
-    this.setHeight()
-  },
-  data () {
-    return {
-      list: new Array(30),
-      width: ''
-    }
-  },
-  methods: {
-    setHeight () {
-      let items = this.$refs.item
-      for (let i = 0; i < items.length; i++) {
-        items[i].style.height = this.$refs.item[0].clientWidth + 'px'
+  export default {
+    name: 'm-disst-list-skeleton',
+    mounted () {
+      window.addEventListener(('resize'), () => {
+        this.width = window.innerWidth
+      })
+      this.setHeight()
+    },
+    data () {
+      return {
+        list: new Array(30),
+        width: ''
+      }
+    },
+    methods: {
+      setHeight () {
+        let items = this.$refs.item
+        for (let i = 0; i < items.length; i++) {
+          items[i].style.height = this.$refs.item[0].clientWidth + 'px'
+        }
+      }
+    },
+    watch: {
+      width () {
+        this.setHeight()
       }
     }
-  },
-  watch: {
-    width () {
-      this.setHeight()
-    }
   }
-}
 </script>
 
 <style lang="less">
+    @import "../../common/css/skeleton/skeleton";
+
     .list-box {
         margin-top: 20px;
         margin-right: -15px;
@@ -61,21 +63,6 @@ export default {
             .item-box {
                 width: 20%;
             }
-        }
-    }
-
-    .skeleton {
-        background: linear-gradient(90deg, #303031 25%, #373737 37%, #303031 63%);
-        background-size: 400% 100%;
-        animation: skeleton-loading 2s ease infinite;
-    }
-
-    @keyframes skeleton-loading {
-        0% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0 50%;
         }
     }
 </style>

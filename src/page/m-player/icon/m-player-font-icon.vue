@@ -80,7 +80,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../common/css/theme/theme";
 
     .left-tools {
         display: flex;
@@ -88,12 +87,12 @@
         align-items: center;
 
         .icon-btn {
-            color: @font-tow-color;
+            color: var(--font-tow-color);
         }
 
         .icon-btn:hover {
             cursor: pointer;
-            color: @font-active-color;
+            color: var(--font-active-color);
         }
 
         .play-mode-box {
@@ -115,10 +114,10 @@
                 line-height: 30px;
                 transition: 0.5s;
                 font-size: 12px;
-                background: #000000;
+                background: var(--select-active-background-color);
                 top: -35px;
                 left: -30px;
-                color: @font-base-color;
+                color: var(--font-base-color);
                 opacity: 0;
                 z-index: -1;
                 text-align: center;
@@ -154,8 +153,8 @@
                 height: 30px;
                 line-height: 30px;
                 text-align: center;
-                background: #2A2C30;
-                color: #56565A;
+                background: var(--select-active-background-color);
+                color: var(--font-base-color);
                 font-size: 12px;
                 position: absolute;
                 top: -30px;
@@ -165,7 +164,7 @@
 
             .playing-tips-icon {
                 position: absolute;
-                color: #2A2C30;
+                color: var(--select-active-background-color);
                 top: -12px;
                 font-size: 20px;
             }

@@ -219,8 +219,6 @@
 </script>
 
 <style lang="less">
-    @import '../../../common/css/theme/theme';
-
     .player {
         user-select: none;
         height: 51px;
@@ -230,14 +228,14 @@
         bottom: 0;
         z-index: 999;
         padding: 5px 310px 5px 240px;
-        border-top: 0.1px solid @mini-player-background-color;
-        background: @mini-player-background-color;
+        border-top: 0.1px solid var(--mini-player-background-color);
+        background: var(--mini-player-background-color);
 
         .player-tools {
             position: absolute;
             width: 200px;
             height: 40px;
-            color: @font-base-color;
+            color: var(--font-base-color);
             left: 0;
             padding: 0 10px;
             text-align: center;
@@ -258,7 +256,7 @@
 
                 .tool-icon:hover {
                     cursor: pointer;
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                 }
             }
 
@@ -276,7 +274,7 @@
                 padding: 2.5px;
 
                 .play-icon {
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                     font-size: 38px;
                     position: relative;
                 }
@@ -287,7 +285,7 @@
                 padding: 2.5px;
 
                 .pause-icon {
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                     font-size: 38px;
                     position: relative;
                 }
@@ -311,7 +309,7 @@
             padding: 0 3px;
             font-size: 12px;
             text-align: center;
-            color: @font-tow-color;
+            color: var(--font-tow-color);
             display: inline-block;
         }
 
@@ -333,13 +331,13 @@
                 .play-progress-bar {
                     position: relative;
                     height: 4px;
-                    background: @play-progress-bar-color;
+                    background: var(--play-progress-bar-color);
                     border-radius: 2px;
 
                     .load-bar {
                         position: absolute;
                         height: 4px;
-                        background: @load-bar-color;
+                        background: var(--load-bar-color);
                         border-radius: 2px;
                     }
 
@@ -347,7 +345,7 @@
                         position: relative;
                         width: 0;
                         height: 4px;
-                        background: @font-active-color;
+                        background: var(--font-active-color);
                         border-radius: 2px;
                     }
 
@@ -356,7 +354,7 @@
                         width: 12px;
                         height: 12px;
                         border-radius: 50%;
-                        background: @font-active-color;
+                        background: var(--font-active-color);
                         top: -4px;
                         left: -6px;
 
@@ -398,7 +396,7 @@
                 height: 40px;
                 width: 24px;
                 font-size: 24px;
-                color: @font-tow-color;
+                color: var(--font-tow-color);
                 margin-right: 6px;
                 display: flex;
                 justify-content: center;
@@ -407,7 +405,7 @@
 
             .icon-box:hover {
                 cursor: pointer;
-                color: @font-active-color;
+                color: var(--font-active-color);
             }
 
             .volume-bar-box {
@@ -426,7 +424,7 @@
                         position: relative;
                         width: 100%;
                         height: 4px;
-                        background: @play-progress-bar-color;
+                        background: var(--play-progress-bar-color);
                         border-radius: 2px;
                     }
 
@@ -434,7 +432,7 @@
                         position: relative;
                         width: 0;
                         height: 4px;
-                        background: @font-active-color;
+                        background: var(--font-active-color);
                         border-radius: 2px;
                     }
 
@@ -443,7 +441,7 @@
                         width: 12px;
                         height: 12px;
                         border-radius: 50%;
-                        background: @font-active-color;
+                        background: var(--font-active-color);
                         top: -4px;
                         left: -6px;
                         opacity: 0;
@@ -476,7 +474,7 @@
             width: 200px;
             height: 60px;
             position: absolute;
-            background: @current-play-song-background-color;
+            background: var(--current-play-song-background-color);
             top: -61px;
             left: 0;
             padding: 8px 30px 8px 5px;
@@ -487,12 +485,12 @@
                 position: absolute;
                 right: 8px;
                 top: 12px;
-                color: @no-favorite-color;
+                color: var(--no-favorite-color);
                 margin-right: 5px;
             }
 
             .love-btn:hover {
-                color: @favorite-color;
+                color: var(--favorite-color);
                 cursor: pointer;
                 margin-right: 5px;
             }
@@ -501,7 +499,7 @@
                 position: absolute;
                 right: 8px;
                 top: 12px;
-                color: @favorite-color;
+                color: var(--favorite-color);
                 cursor: pointer;
                 margin-right: 5px;
             }
@@ -556,7 +554,7 @@
                     width: 100%;
                     height: 22px;
                     line-height: 22px;
-                    color: @current-play-song-name-color;
+                    color: var(--current-play-song-name-color);
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -570,7 +568,7 @@
                     width: 100%;
                     height: 22px;
                     line-height: 22px;
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -580,7 +578,7 @@
                     }
 
                     span:hover {
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                         cursor: pointer;
                     }
                 }

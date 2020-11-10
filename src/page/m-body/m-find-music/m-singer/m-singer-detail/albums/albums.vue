@@ -61,8 +61,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../../../common/css/theme/theme";
-
     .album-list-box {
         width: 100%;
 
@@ -71,7 +69,7 @@
             height: 60px;
             line-height: 60px;
             font-size: 12px;
-            color: @font-tow-color;
+            color: var(--font-tow-color);
 
             .hot {
                 margin-right: 10px;
@@ -79,16 +77,16 @@
 
             .hot:hover {
                 cursor: pointer;
-                color: @font-active-color;
+                color: var(--font-active-color);
             }
 
             .new:hover {
                 cursor: pointer;
-                color: @font-active-color;
+                color: var(--font-active-color);
             }
 
             .active {
-                color: @font-active-color;
+                color: var(--font-active-color);
             }
         }
 

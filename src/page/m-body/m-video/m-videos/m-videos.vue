@@ -169,8 +169,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../common/css/theme/theme";
-
     .m-videos-box {
         position: relative;
         padding-bottom: 40px;
@@ -200,18 +198,26 @@
                     border-radius: 15px;
 
                     .tag-text {
-                        color: #FFFFFF;
+                        color: var(--font-tow-color);
                     }
                 }
 
                 .select {
-                    background-color: @player-bar-color !important;
-                    border: 1px solid @player-bar-color !important;
+                    .tag-text {
+                        color: #FFFFFF !important;
+                    }
+
+                    background-color: var(--player-bar-color) !important;
+                    border: 1px solid var(--player-bar-color) !important;
                 }
 
                 .tag:hover {
                     cursor: pointer;
-                    background-color: #2b2b2c;
+                    background-color: var(--singer-tag-hover-background-color);
+
+                    .tag-text {
+                        color: var(--font-active-color);
+                    }
                 }
             }
         }
@@ -243,17 +249,17 @@
                 align-items: flex-end;
 
                 .order {
-                    color: #FFFFFF;
+                    color: var(--font-base-color);
                     font-size: 12px;
                 }
 
                 .order:hover {
                     cursor: pointer;
-                    color: @player-bar-color;
+                    color: var(--player-bar-color);
                 }
 
                 .select {
-                    color: @player-bar-color !important;
+                    color: var(--player-bar-color) !important;
                 }
             }
         }

@@ -4,43 +4,43 @@
             <div class="m-list-btn" @click="isShowSelect = !isShowSelect">
                 <span v-html="categoryName"/>
                 <Icon type="ios-arrow-down"></Icon>
+                <!--下拉菜单-->
+                <div class="m-select" v-if="isShowSelect">
+                    <i class="triangle fa fa-caret-up fa-2x" aria-hidden="true"></i>
+                    <div class="m-list">
+                        <div class="list-title">
+                            添加标签
+                        </div>
+                        <div class="list-line"></div>
+                        <div class="list-content">
+                            <div class="list-btn all-dissts" @click="selectTag(10000000,'全部歌单')"
+                                 :class="categoryId ===10000000?'btn-active':'' ">
+                                全部歌单
+                            </div>
+                            <div class="disst-category"
+                                 v-for="(categoryGroup,index) in categoryGroups"
+                                 v-if="index != 0"
+                                 :key="index">
+                                <div class="category-group-name">
+                                    {{categoryGroup.categoryGroupName}}
+                                </div>
+                                <div class="content">
+                                    <div class="list-btn category-item"
+                                         v-for="(item,itemIndex) in categoryGroup.categories"
+                                         :key="itemIndex"
+                                         @click="selectTag(item.categoryId,item.categoryName)"
+                                         :class="categoryId ===item.categoryId?'btn-active':'' ">
+                                        <span v-html="item.categoryName"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="sort-box">
                 <span class="btn new" :class="this.sortId === 5?'btn-active':''" @click="changeSort(5)">最新</span>
                 <span class="btn hot" :class="this.sortId === 2?'btn-active':''" @click="changeSort(2)">最热</span>
-            </div>
-            <!--下拉菜单-->
-            <div class="m-select" v-if="isShowSelect">
-                <i class="triangle fa fa-caret-up fa-2x" aria-hidden="true"></i>
-                <div class="m-list">
-                    <div class="list-title">
-                        添加标签
-                    </div>
-                    <div class="list-line"></div>
-                    <div class="list-content">
-                        <div class="list-btn all-dissts" @click="selectTag(10000000,'全部歌单')"
-                             :class="categoryId ===10000000?'btn-active':'' ">
-                            全部歌单
-                        </div>
-                        <div class="disst-category"
-                             v-for="(categoryGroup,index) in categoryGroups"
-                             v-if="index != 0"
-                             :key="index">
-                            <div class="category-group-name">
-                                {{categoryGroup.categoryGroupName}}
-                            </div>
-                            <ul>
-                                <li class="list-btn category-item"
-                                    v-for="(item,itemIndex) in categoryGroup.categories"
-                                    :key="itemIndex"
-                                    @click="selectTag(item.categoryId,item.categoryName)"
-                                    :class="categoryId ===item.categoryId?'btn-active':'' ">
-                                    <span v-html="item.categoryName"></span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!--歌单展示-->
             <div class="container" v-if="isShowDisst">
@@ -321,8 +321,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../common/css/theme/theme";
-
     .m-disst-box {
         position: relative;
         padding-top: 20px;
@@ -333,24 +331,164 @@
 
         .m-list-btn {
             cursor: pointer;
-            background: #25272B;
+            background: var(--select-dropdown-background-color);
             font-size: 12px;
             min-width: 55px;
             height: 22px;
             text-align: center;
             line-height: 22px;
             border-radius: 4px;
-            color: @font-base-color;
+            color: var(--font-base-color);
             padding: 0 10px;
             display: inline-block;
+
+            .m-select {
+                .triangle {
+                    position: absolute;
+                    color: var(--select-dropdown-background-color);
+                    top: 32px;
+                    left: 33px;
+                }
+
+                .m-list {
+                    transition: 0s;
+                    background: var(--select-dropdown-background-color);
+                    width: 540px;
+                    height: 410px;
+                    border-radius: 4px;
+                    position: absolute;
+                    z-index: 10;
+                    top: 49px;
+                    left: 0;
+
+                    .list-title {
+                        font-size: 14px;
+                        color: var(--font-base-color);
+                        height: 50px;
+                        line-height: 50px;
+                        padding: 0 20px;
+                    }
+
+                    .list-line {
+                        height: 1px;
+                        background: var(--select-dropdown-background-color);
+                    }
+
+                    .list-content {
+                        height: 359px;
+                        overflow-y: scroll;
+                        padding: 0 20px;
+
+                        .list-btn {
+                            position: relative;
+                            height: 30px;
+                            line-height: 30px;
+                            cursor: pointer;
+                            color: #828385;
+                            text-align: center;
+                            font-size: 12px;
+                            border: 1px solid #37393D;
+                            margin: 0 0 -1px -1px;
+                        }
+
+                        .btn-active {
+                            color: var(--font-base-color);
+                            background: var(--select-active-background-color);
+                        }
+
+                        .list-btn:hover {
+                            color: var(--font-base-color);
+                            background: var(--select-active-background-color);
+                        }
+
+                        .all-dissts {
+                            width: 100%;
+                            margin-top: 10px;
+                        }
+
+                        .disst-category {
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: flex-start;
+
+                            .category-group-name {
+                                width: 17%;
+                                color: var(--font-base-color);
+                                float: left;
+                                text-align: center;
+                                position: relative;
+                                top: 12px;
+                                font-size: 17px;
+                            }
+
+                            .content {
+                                width: 82%;
+                                margin-bottom: 20px;
+                                margin-top: 10px;
+                                display: flex;
+                                justify-content: flex-start;
+                                align-items: center;
+                                flex-wrap: wrap;
+
+                                .category-item {
+                                    width: 20%;
+                                    display: inline-block;
+                                }
+                            }
+                        }
+                    }
+
+                    .list-content {
+                        /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
+                        -ms-overflow-style: none;
+                    }
+
+                    // 火狐
+                    scrollbar-color: transparent transparent;
+                    scrollbar-track-color: transparent;
+                    -ms-scrollbar-track-color: transparent;
+
+                    .list-content::-webkit-scrollbar {
+                        /*滚动条整体样式*/
+                        width: 8px; /*高宽分别对应横竖滚动条的尺寸*/
+                        height: 1px;
+                    }
+
+                    /*定义滚动条轨道 内阴影+圆角*/
+
+                    .list-content::-webkit-scrollbar-track-piece {
+                        -webkit-border-radius: 2em;
+                        -moz-border-radius: 2em;
+                        border-radius: 2em;
+                    }
+
+                    /*定义滑块 内阴影+圆角*/
+
+                    .list-content::-webkit-scrollbar-thumb {
+                        /*滚动条里面小方块*/
+                        border-radius: 10px;
+                        background-color: var(--scrollbar-thumb-background-color);
+                    }
+
+                    /*---鼠标点击滚动条显示样式--*/
+
+                    .list-content::-webkit-scrollbar-thumb:hover {
+                        background-color: var(--scrollbar-thumb-hover-color);
+                    }
+
+                    .list-content::-webkit-scrollbar-thumb:active {
+                        background-color: var(--scrollbar-thumb-active-color);
+                    }
+                }
+            }
         }
 
         .m-list-btn:hover {
-            background: #2C2E32;
+            background: var(--select-dropdown-hover-background-color);
         }
 
         .sort-box {
-            color: @font-tow-color;
+            color: var(--font-tow-color);
             float: right;
             display: inline-block;
 
@@ -363,100 +501,11 @@
             }
 
             .btn-active {
-                color: @font-active-color;
+                color: var(--font-active-color);
             }
 
             .btn:hover {
-                color: @font-active-color;
-            }
-        }
-
-        .triangle {
-            position: absolute;
-            color: #2D2F33;
-            top: 32px;
-            left: 33px;
-        }
-
-        .m-list {
-            transition: 0s;
-            background: #2D2F33;
-            width: 540px;
-            height: 410px;
-            border-radius: 4px;
-            position: absolute;
-            z-index: 10;
-            top: 51px;
-
-            .list-title {
-                font-size: 14px;
-                color: @font-base-color;
-                height: 50px;
-                line-height: 50px;
-                padding: 0 20px;
-            }
-
-            .list-line {
-                height: 1px;
-                background: #37393D;
-            }
-
-            .list-content {
-                height: 359px;
-                overflow-y: scroll;
-                padding: 0 20px;
-
-                .list-btn {
-                    position: relative;
-                    height: 30px;
-                    line-height: 30px;
-                    cursor: pointer;
-                    color: #828385;
-                    text-align: center;
-                    font-size: 12px;
-                    border: 1px solid #37393D;
-                    margin: 0 0 -1px -1px;
-                }
-
-                .btn-active {
-                    color: #DCDDE4;
-                    background: #37393D;
-                }
-
-                .list-btn:hover {
-                    color: #DCDDE4;
-                    background: #37393D;
-                }
-
-                .all-dissts {
-                    width: 100%;
-                    margin-top: 10px;
-                }
-
-                .disst-category {
-                    .category-group-name {
-                        width: 17%;
-                        color: #DCDDE4;
-                        float: left;
-                        text-align: center;
-                        position: relative;
-                        top: 12px;
-                        font-size: 17px;
-                    }
-
-                    ul {
-                        width: 82%;
-                        list-style: none;
-                        float: left;
-                        margin-bottom: 20px;
-                        margin-top: 10px;
-
-                        .category-item {
-                            width: 20%;
-                            display: inline-block;
-                        }
-                    }
-                }
+                color: var(--font-active-color);
             }
         }
 
@@ -647,12 +696,12 @@
                         -webkit-box-orient: vertical;
 
                         .text {
-                            color: @font-base-color;
+                            color: var(--font-base-color);
                         }
 
                         .text:hover {
                             cursor: pointer;
-                            color: @font-active-color;
+                            color: var(--font-active-color);
                         }
                     }
                 }

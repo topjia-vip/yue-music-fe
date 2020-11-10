@@ -50,8 +50,6 @@
 </script>
 
 <style lang="less">
-    @import "../../common/css/theme/theme";
-
     .m-album-list-box {
         position: relative;
         width: 100%;
@@ -149,7 +147,7 @@
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
-                color: @font-base-color;
+                color: var(--font-base-color);
                 padding-top: 5px;
                 font-size: 12px;
 
@@ -159,11 +157,11 @@
 
                 .name:hover {
                     cursor: pointer;
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                 }
 
                 .time {
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                 }
             }
         }

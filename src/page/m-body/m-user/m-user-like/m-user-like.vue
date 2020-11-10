@@ -191,8 +191,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../common/css/theme/theme";
-
     .user-like-box {
         position: relative;
         z-index: 0;
@@ -214,14 +212,14 @@
                 position: relative;
 
                 .user-like-header {
-                    color: @font-base-color;
+                    color: var(--font-base-color);
                     font-size: 20px;
                     margin-top: 20px;
                 }
 
                 .tags {
                     margin-top: 20px;
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                     height: 30px;
                     line-height: 30px;
 
@@ -236,12 +234,12 @@
 
                     .btn:hover {
                         cursor: pointer;
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                     }
 
                     .active {
-                        color: @font-active-color;
-                        border-bottom: 1px solid @font-active-color;
+                        color: var(--font-active-color);
+                        border-bottom: 1px solid var(--font-active-color);
                     }
                 }
             }
@@ -276,17 +274,17 @@
         .m-user-like-box-content::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: @scrollbar-thumb-background-color;
+            background-color: var(--scrollbar-thumb-background-color);
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-user-like-box-content::-webkit-scrollbar-thumb:hover {
-            background-color: @scrollbar-thumb-hover-color;
+            background-color: var(--scrollbar-thumb-hover-color);
         }
 
         .m-user-like-box-content::-webkit-scrollbar-thumb:active {
-            background-color: @scrollbar-thumb-active-color;
+            background-color: var(--scrollbar-thumb-active-color);
         }
     }
 </style>

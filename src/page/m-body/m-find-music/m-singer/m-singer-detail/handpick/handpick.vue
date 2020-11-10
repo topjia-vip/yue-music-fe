@@ -113,8 +113,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../../../common/css/theme/theme";
-
     .handpick-box {
         margin-top: 30px;
 
@@ -128,7 +126,7 @@
                 line-height: 30px;
 
                 .title {
-                    color: @font-base-color;
+                    color: var(--font-base-color);
                     display: inline-block;
                 }
 
@@ -141,7 +139,7 @@
                     background-image: linear-gradient(141deg, rgb(17, 224, 246) 0%, rgb(203, 52, 218) 51%, rgb(230, 57, 162) 75%);
                     border-radius: 20px;
                     text-align: center;
-                    color: @font-base-color;
+                    color: #FFFFFF;
                     margin-left: 10px;
 
                     .play-icon {
@@ -158,15 +156,15 @@
                     display: inline-block;
                     float: right;
                     font-size: 12px;
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                 }
 
                 .more:hover {
                     cursor: pointer;
-                    color: @font-active-color;
+                    color: var(--font-active-color);
 
                     span {
-                        border-bottom: 1px solid @font-active-color;
+                        border-bottom: 1px solid var(--font-active-color);
                     }
                 }
             }
@@ -182,7 +180,7 @@
                 line-height: 30px;
 
                 .title {
-                    color: @font-base-color;
+                    color: var(--font-base-color);
                     display: inline-block;
                 }
 
@@ -190,15 +188,15 @@
                     display: inline-block;
                     float: right;
                     font-size: 12px;
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                 }
 
                 .more:hover {
                     cursor: pointer;
-                    color: @font-active-color;
+                    color: var(--font-active-color);
 
                     span {
-                        border-bottom: 1px solid @font-active-color;
+                        border-bottom: 1px solid var(--font-active-color);
                     }
                 }
             }

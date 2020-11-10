@@ -340,8 +340,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../common/css/theme/theme";
-
     .m-singer-box {
         position: relative;
         padding-top: 20px;
@@ -371,18 +369,19 @@
                     border-radius: 20px;
                     border: 1px solid #2b2b2c7a;
                     background: none;
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                     margin-right: 10px;
                 }
 
                 .tag-title:hover {
-                    background: #2b2b2c7a;
+                    color: var(--font-active-color);
+                    background: var(--singer-tag-hover-background-color);
                 }
 
                 .tag-item-active {
-                    border: 1px solid @font-active-color !important;
-                    color: @font-base-color !important;
-                    background: @font-active-color !important;
+                    border: 1px solid var(--font-active-color) !important;
+                    color: #FFFFFF !important;
+                    background: var(--font-active-color) !important;
                 }
             }
 
@@ -393,13 +392,13 @@
 
                 .select-tag-box {
                     cursor: pointer;
-                    background: #25272B;
+                    background: var(--select-dropdown-background-color);
                     font-size: 12px;
                     min-width: 55px;
                     height: 22px;
                     text-align: center;
                     line-height: 22px;
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                     display: inline-block;
                     border-radius: 4px;
 
@@ -415,8 +414,8 @@
 
                 .tag-name:hover {
                     border-radius: 4px;
-                    color: @font-base-color;
-                    background: #2C2E32;
+                    color: var(--font-base-color);
+                    background: var(--select-active-background-color);
                 }
             }
 
@@ -427,7 +426,7 @@
                     position: relative;
                     top: -11px;
                     right: -35px;
-                    color: #29292B;
+                    color: var(--select-dropdown-background-color);
                 }
 
                 .genre-item {
@@ -435,12 +434,12 @@
                     max-height: 200px;
                     top: 8px;
                     width: 60px;
-                    background: #29292B;
+                    background: var(--select-dropdown-background-color);
                     border-radius: 4px;
                     cursor: pointer;
                     font-size: 12px;
                     text-align: center;
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                     overflow-y: scroll;
 
                     ul {
@@ -450,12 +449,12 @@
                             list-style: none;
                             height: 30px;
                             line-height: 30px;
-                            border-bottom: 1px solid #383839;
+                            border-bottom: 1px solid var(--select-active-background-color);
                         }
 
                         .tag:hover {
-                            color: @font-base-color;
-                            background: #49484880;
+                            color: var(--font-base-color);
+                            background: var(--select-active-background-color);
                         }
                     }
                 }
@@ -484,17 +483,17 @@
                 .genre-item::-webkit-scrollbar-thumb {
                     /*滚动条里面小方块*/
                     border-radius: 10px;
-                    background-color: @scrollbar-thumb-background-color;
+                    background-color: var(--scrollbar-thumb-background-color);
                 }
 
                 /*---鼠标点击滚动条显示样式--*/
 
                 .genre-item::-webkit-scrollbar-thumb:hover {
-                    background-color: @scrollbar-thumb-hover-color;
+                    background-color: var(--scrollbar-thumb-hover-color);
                 }
 
                 .genre-item::-webkit-scrollbar-thumb:active {
-                    background-color: @scrollbar-thumb-active-color;
+                    background-color: var(--scrollbar-thumb-active-color);
                 }
             }
 
@@ -505,7 +504,7 @@
                     position: relative;
                     top: -11px;
                     right: -127px;
-                    color: #29292B;
+                    color: var(--select-dropdown-background-color);
                 }
 
                 .index-item {
@@ -514,12 +513,12 @@
                     top: 8px;
                     right: -136px;
                     width: 60px;
-                    background: #29292B;
+                    background: var(--select-dropdown-background-color);
                     border-radius: 4px;
                     cursor: pointer;
                     font-size: 12px;
                     text-align: center;
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                     overflow: hidden;
 
                     ul {
@@ -529,12 +528,12 @@
                             list-style: none;
                             height: 30px;
                             line-height: 30px;
-                            border-bottom: 1px solid #383839;
+                            border-bottom: 1px solid var(--select-active-background-color);
                         }
 
                         .tag:hover {
-                            color: @font-base-color;
-                            background: #49484880;
+                            color: var(--font-base-color);
+                            background: var(--select-active-background-color);
                         }
                     }
                 }
@@ -554,15 +553,15 @@
                     cursor: pointer;
                     height: 30px;
                     line-height: 30px;
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                 }
 
                 .index-tag-title:hover {
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                 }
 
                 .index-tag-active {
-                    color: @font-active-color !important;
+                    color: var(--font-active-color) !important;
                 }
             }
         }
@@ -610,14 +609,14 @@
                     text-align: center;
                     line-height: 30px;
                     font-size: 17px;
-                    color: @font-tow-color;
+                    color: var(--font-base-color);
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
 
                     span:hover {
                         cursor: pointer;
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                     }
                 }
             }
@@ -634,14 +633,14 @@
                     text-align: center;
                     line-height: 30px;
                     font-size: 17px;
-                    color: @font-tow-color;
+                    color: var(--font-base-color);
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
 
                     span:hover {
                         cursor: pointer;
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                     }
                 }
             }

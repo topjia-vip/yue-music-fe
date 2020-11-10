@@ -336,8 +336,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../common/css/theme/theme";
-
     .m-search-box {
         position: relative;
         z-index: 0;
@@ -348,7 +346,7 @@
         overflow: hidden;
 
         .highlight {
-            color: @font-active-color;
+            color: var(--font-active-color);
         }
 
         .search-title {
@@ -357,7 +355,7 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            background-color: #242425;
+            background-color: var(--search-tip-background-color);
             color: #919192;
             font-size: 16px;
         }
@@ -385,29 +383,29 @@
                     flex-flow: column;
 
                     .text {
-                        color: @font-base-color;
+                        color: var(--font-base-color);
                     }
 
                     .text:hover {
                         cursor: pointer;
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                     }
 
                     .active {
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                     }
 
                     .active-line {
                         height: 4px;
                         width: 32px;
-                        background: @font-active-color;
+                        background: var(--font-active-color);
                         border-radius: 4px;
                     }
                 }
             }
 
             .search-result-num {
-                color: @font-tow-color;
+                color: var(--font-tow-color);
                 font-size: 12px;
             }
         }
@@ -431,7 +429,7 @@
                             height: 30px;
                             line-height: 30px;
                             color: #828385;
-                            background: #242425;
+                            background: var(--search-tip-background-color);
                             padding: 0 30px 20px 30px;
                         }
 
@@ -441,13 +439,13 @@
                             align-items: center;
                             height: 80px;
                             padding: 10px 30px;
-                            border-bottom: 1px solid #333333;
+                            border-bottom: 1px solid var(--search-tip-background-color);
 
                             .content {
                                 width: 200px;
                                 height: 60px;
                                 padding: 5px 5px;
-                                background: #242425;
+                                background: var(--search-tip-background-color);
 
                                 .img-box {
                                     width: 50px;
@@ -468,7 +466,7 @@
                                     flex-flow: column;
                                     height: 50px;
                                     font-size: 14px;
-                                    color: #dcdde4;
+                                    color: var(--font-base-color);
                                     padding-left: 10px;
 
                                     .info {
@@ -487,7 +485,7 @@
 
                             .content:hover {
                                 cursor: pointer;
-                                background: #323232;
+                                background: var(--search-baseRes-hover-background-color);
                             }
                         }
                     }
@@ -523,17 +521,17 @@
             .search-content-box::-webkit-scrollbar-thumb {
                 /*滚动条里面小方块*/
                 border-radius: 10px;
-                background-color: @scrollbar-thumb-background-color;
+                background-color: var(--scrollbar-thumb-background-color);
             }
 
             /*---鼠标点击滚动条显示样式--*/
 
             .search-content-box::-webkit-scrollbar-thumb:hover {
-                background-color: @scrollbar-thumb-hover-color;
+                background-color: var(--scrollbar-thumb-hover-color);
             }
 
             .search-content-box::-webkit-scrollbar-thumb:active {
-                background-color: @scrollbar-thumb-active-color;
+                background-color: var(--scrollbar-thumb-active-color);
             }
         }
     }

@@ -159,9 +159,8 @@
 </script>
 
 <style lang="less">
-    @import "../../../../../../common/css/theme/theme";
-
     .singer-song-list {
+        width: 100%;
         position: relative;
         margin-top: 30px;
         height: 30px;
@@ -175,7 +174,7 @@
             background-image: linear-gradient(141deg, rgb(17, 224, 246) 0%, rgb(203, 52, 218) 51%, rgb(230, 57, 162) 75%);
             border-radius: 20px;
             text-align: center;
-            color: @font-base-color;
+            color: #FFFFFF;
 
             .play-icon {
                 position: relative;
@@ -195,16 +194,16 @@
 
             .hot-new-btn {
                 margin-left: 10px;
-                color: @font-tow-color;
+                color: var(--font-tow-color);
             }
 
             .hot-new-btn:hover {
                 cursor: pointer;
-                color: @font-active-color;
+                color: var(--font-active-color);
             }
 
             .active {
-                color: @font-active-color;
+                color: var(--font-active-color);
             }
         }
 

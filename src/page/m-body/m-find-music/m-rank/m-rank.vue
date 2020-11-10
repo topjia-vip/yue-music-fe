@@ -195,8 +195,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../common/css/theme/theme";
-
     .m-rank-box {
         position: relative;
         padding-top: 20px;
@@ -206,7 +204,7 @@
         height: 100%;
 
         .title {
-            color: @font-base-color;
+            color: var(--font-base-color);
         }
 
         .top-img {
@@ -289,7 +287,7 @@
                         width: 100%;
                         height: 100%;
                         z-index: 6;
-                        background: #242425;
+                        background: var(--rank-background-color);
                         border-radius: 10px;
                         position: relative;
                         transform: translateY(0px);
@@ -307,14 +305,14 @@
 
                             .top-title {
                                 font-size: 17px;
-                                color: @font-base-color;
+                                color: var(--font-base-color);
                                 font-weight: normal;
                             }
 
                             .rank-song-item {
                                 margin-top: 10px;
                                 list-style: none;
-                                color: @font-tow-color;
+                                color: var(--font-tow-color);
                                 font-size: 12px;
 
                                 .rank-num {

@@ -10,7 +10,7 @@
                 @click="selectItem(index)"
                 @dblclick="playSong(song)"
                 @contextmenu.prevent="openMenu($event,index)"
-                :style="song === selectSong?'background: #4342402e;':''"
+                :style="song === selectSong?'background: var(--song-list-hover-background-color);':''"
                 :class="handleIsPlay(song)"
             >
                 <div class="play-status-icon" v-if="currentPlaySong.mid === song.mid">
@@ -159,8 +159,6 @@
 </script>
 
 <style lang="less">
-    @import '../../common/css/theme/theme';
-
     .m-singer-song-list {
         .song-info-title {
             height: 30px;
@@ -168,7 +166,7 @@
             line-height: 30px;
             padding: 0 60px 0 55px;
             font-size: 12px;
-            color: @font-tow-color;
+            color: var(--font-tow-color);
 
             .song-info-name {
                 width: 55%;
@@ -191,7 +189,7 @@
             list-style: none;
             height: 60px;
             line-height: 60px;
-            color: @font-base-color;
+            color: var(--font-base-color);
             padding: 0 60px 0 55px;
             display: flex;
             justify-content: flex-start;
@@ -200,7 +198,7 @@
                 position: absolute;
                 left: 0;
                 width: 55px;
-                color: @font-active-color;
+                color: var(--font-active-color);
                 padding-left: 10px;
             }
 
@@ -221,24 +219,24 @@
                 padding-right: 10px;
 
                 .love-btn {
-                    color: @no-favorite-color;
+                    color: var(--no-favorite-color);
                     margin-right: 5px;
                 }
 
                 .love-btn:hover {
-                    color: @favorite-color;
+                    color: var(--favorite-color);
                     cursor: pointer;
                     margin-right: 5px;
                 }
 
                 .unlove-btn {
-                    color: @favorite-color;
+                    color: var(--favorite-color);
                     cursor: pointer;
                     margin-right: 5px;
                 }
 
                 .subTitle {
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                 }
             }
 
@@ -249,11 +247,11 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 padding-right: 10px;
-                color: @font-tow-color;
+                color: var(--font-tow-color);
 
                 span:hover {
                     cursor: pointer;
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                 }
             }
 
@@ -261,30 +259,30 @@
                 position: absolute;
                 right: 0;
                 width: 60px;
-                color: @font-tow-color;
+                color: var(--font-tow-color);
             }
         }
 
         .item:hover {
-            background: #4342402e;
+            background: var(--song-list-hover-background-color);
         }
 
         .song-playing {
-            color: @font-active-color;
-            background: #4342402e;
+            color: var(--font-active-color);
+            background: var(--song-list-hover-background-color) !important;
 
             .song-name-box {
                 .subTitle {
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                 }
             }
 
             .album {
-                color: @font-active-color;
+                color: var(--font-active-color);
             }
 
             .song-time {
-                color: @font-active-color;
+                color: var(--font-active-color);
             }
         }
     }

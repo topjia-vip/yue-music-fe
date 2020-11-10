@@ -154,8 +154,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../common/css/theme/theme";
-
     .m-video {
         position: relative;
         z-index: 0;
@@ -178,7 +176,7 @@
                 align-items: center;
 
                 .tag {
-                    color: @font-tow-color;
+                    color: var(--font-base-color);
 
                     .title {
                         display: flex;
@@ -189,12 +187,12 @@
                     }
 
                     .active {
-                        color: @font-active-color !important;
+                        color: var(--font-active-color) !important;
                     }
 
                     .title:hover {
                         cursor: pointer;
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                     }
                 }
 
@@ -214,7 +212,7 @@
                         width: 60px;
                         height: 100%;
                         border-radius: 5px;
-                        background-color: @font-active-color;
+                        background-color: var(--font-active-color);
                     }
                 }
             }
@@ -272,17 +270,17 @@
         .m-video-box::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: @scrollbar-thumb-background-color;
+            background-color: var(--scrollbar-thumb-background-color);
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-video-box::-webkit-scrollbar-thumb:hover {
-            background-color: @scrollbar-thumb-hover-color;
+            background-color: var(--scrollbar-thumb-hover-color);
         }
 
         .m-video-box::-webkit-scrollbar-thumb:active {
-            background-color: @scrollbar-thumb-active-color;
+            background-color: var(--scrollbar-thumb-active-color);
         }
     }
 </style>

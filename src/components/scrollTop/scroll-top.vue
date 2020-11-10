@@ -23,28 +23,26 @@
 </script>
 
 <style lang="less">
-    @import "../../common/css/theme/theme";
-
     .top_box {
         bottom: 80px;
         right: 15px;
         z-index: 8;
         position: fixed;
         cursor: pointer;
-        background: @to-top-background-color;
+        background: var(--to-top-background-color);
 
         .top {
             width: 30px;
             height: 30px;
             text-align: center;
             line-height: 30px;
-            border: 1px solid @to-top-color;
-            color: @to-top-color;
+            border: 1px solid var(--to-top-color);
+            color: var(--to-top-color);
         }
 
         .top:hover {
-            border: 1px solid @to-top-hover-color;
-            color: @to-top-hover-color;
+            border: 1px solid var(--to-top-hover-color);
+            color: var(--to-top-hover-color);
         }
     }
 </style>

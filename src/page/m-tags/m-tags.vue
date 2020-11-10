@@ -186,14 +186,13 @@
 </script>
 
 <style lang="less">
-    @import "../../common/css/theme/theme";
 
     .m-tags {
         width: 200.1px;
         max-width: 200.1px;
         min-width: 200.1px;
         user-select: none;
-        background: @tags-background-color;
+        background: var(--tags-background-color);
 
         .m-tags-box {
             overflow-x: hidden;
@@ -212,7 +211,7 @@
                         position: relative;
                         padding-left: 20px;
                         font-size: 12px;
-                        color: @tags-title-text-color;
+                        color: var(--tags-title-text-color);
 
                         .tool-btn {
                             height: 30px;
@@ -223,7 +222,7 @@
 
                         .tool-btn:hover {
                             cursor: pointer;
-                            color: @tags-text-hover-color;
+                            color: var(--font-active-color);
                         }
                     }
 
@@ -233,7 +232,7 @@
                         list-style: none;
 
                         .tag-item {
-                            color: @tags-text-color;
+                            color: var(--tags-text-color);
                             padding-left: 20px;
                             position: relative;
                             padding-right: 30px;
@@ -254,7 +253,7 @@
                                 width: 6px;
                                 height: 6px;
                                 border-radius: 50%;
-                                background: @favorite-color;
+                                background: var(--favorite-color);
                                 position: absolute;
                                 top: 12px;
                                 margin-left: 5px;
@@ -271,13 +270,13 @@
                         }
 
                         .tag-item-active {
-                            background: @player-bar-color !important;
-                            color: @tags-text-hover-color !important;
+                            background: var(--player-bar-color) !important;
+                            color: var(--tags-text-hover-color) !important;
                         }
 
                         .tag-item:hover {
                             cursor: pointer;
-                            background: @tag-hover-background-color;
+                            background: var(--tag-hover-background-color);
                         }
                     }
                 }
@@ -317,17 +316,17 @@
         .m-tags-box::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: @scrollbar-thumb-background-color;
+            background-color: var(--scrollbar-thumb-background-color);
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-tags-box::-webkit-scrollbar-thumb:hover {
-            background-color: @scrollbar-thumb-hover-color;
+            background-color: var(--scrollbar-thumb-hover-color);
         }
 
         .m-tags-box::-webkit-scrollbar-thumb:active {
-            background-color: @scrollbar-thumb-active-color;
+            background-color: var(--scrollbar-thumb-active-color);
         }
     }
 </style>

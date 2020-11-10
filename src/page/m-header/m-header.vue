@@ -52,6 +52,16 @@
                 <div class="setting-network" title="改变网络连接" @click="openChangeNetwork">
                     <Icon type="ios-globe-outline" size="20"/>
                 </div>
+                <div class="setting-theme">
+                    <Icon class="theme-icon" type="ios-shirt-outline" title="主题切换" size="18"
+                          @click="canTheme=!canTheme"/>
+                    <div class="themes-box" v-if="canTheme">
+                        <div class="theme-item" v-for="(theme,index) in themeInfo" :key="index"
+                             @click="changeTheme(theme.themeType)">
+                            <span>{{theme.themeName}}</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="user-login-info" v-if="loginUser === null">
                     <div class="user-name-box" @click="_needLogin">
                         <div class="user-name">{{loginStatus}}</div>
@@ -104,6 +114,7 @@
   import MTips from '../../components/m-tips/m-tips'
   import UserDefLazyImg from '../../resources/images/person_300.png'
   import MChangeNetwork from '../../components/m-change-network/m-change-network'
+  import { themeInfo } from '../../common/js/theme-config'
 
   export default {
     name: 'm-header',
@@ -127,7 +138,9 @@
         canBack: false,
         canNext: false,
         canShowSmallSearchBox: false,
-        loginStatus: '点击登录'
+        canTheme: false,
+        loginStatus: '点击登录',
+        themeInfo: themeInfo
       }
     },
     computed: {
@@ -146,6 +159,18 @@
         }
       }
     },
+    created () {
+      this.$nextTick(() => {
+        document.addEventListener('click', e => {
+          const v = document.getElementsByClassName('setting-theme')[0]
+          if (v) {
+            if (!v.contains(event.target)) {
+              this.canTheme = false
+            }
+          }
+        })
+      })
+    },
     mounted () {
       if (window.ipcRenderer) {
         window.ipcRenderer.on('max', (event, arg) => {
@@ -158,6 +183,10 @@
       }
     },
     methods: {
+      changeTheme (themeType) {
+        this.canTheme = false
+        this.$emit('changeTheme', themeType)
+      },
       quickSearch (key) {
         this.key = key.trim()
         this._smartSearch()
@@ -329,18 +358,16 @@
 </script>
 
 <style scoped lang="less">
-    @import "../../common/css/theme/theme";
-
     .m-header {
         user-select: none;
         width: 100%;
-        background-color: @header-background-color;
+        background-color: var(--header-background-color);
         height: 50px;
         min-width: 1020px;
         padding: 12px 16px;
         position: relative;
         -webkit-app-region: drag;
-        color: @font-base-color;
+        color: var(--font-base-color);
 
         .m-header-wrapper {
             height: 26px;
@@ -371,7 +398,7 @@
                     height: 26px;
                     width: 60px;
                     float: left;
-                    color: @header-button-icon-color;
+                    color: var(--header-button-icon-color);
                     margin-right: 10px;
                     position: relative;
                     -webkit-app-region: no-drag;
@@ -386,7 +413,7 @@
 
                         .icon:hover {
                             cursor: pointer;
-                            color: @font-active-color;
+                            color: var(--font-active-color);
                         }
                     }
 
@@ -400,13 +427,13 @@
 
                         .icon:hover {
                             cursor: pointer;
-                            color: @font-active-color;
+                            color: var(--font-active-color);
                         }
                     }
 
                     .disabled {
                         cursor: default !important;
-                        color: @header-button-icon-disable-color !important;
+                        color: var(--header-button-icon-disable-color) !important;
                     }
                 }
 
@@ -418,7 +445,7 @@
                     width: 220px;
                     padding: 0 0 0 15px;
                     border-radius: 26px;
-                    background: @search-background-color;
+                    background: var(--search-background-color);
                     text-align: center;
 
                     .search {
@@ -427,19 +454,19 @@
                         width: 175px;
                         border: none;
                         outline: none;
-                        color: @font-base-color;
-                        background: @search-background-color;
+                        color: var(--font-base-color);
+                        background: var(--search-background-color);
                     }
 
                     .search-icon-box {
-                        color: @header-button-icon-color;
+                        color: var(--header-button-icon-color);
                         float: right;
                         height: 26px;
                         width: 26px;
                     }
 
                     .search-icon-box:hover {
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                         cursor: pointer;
                     }
                 }
@@ -457,14 +484,14 @@
                     -webkit-app-region: no-drag;
 
                     .close-box {
-                        color: @header-button-icon-color;
+                        color: var(--header-button-icon-color);
                         float: right;
                         height: 26px;
                         width: 26px;
                     }
 
                     .maximize-box {
-                        color: @header-button-icon-color;
+                        color: var(--header-button-icon-color);
                         float: right;
                         height: 26px;
                         width: 26px;
@@ -472,24 +499,24 @@
                     }
 
                     .minimize-box {
-                        color: @header-button-icon-color;
+                        color: var(--header-button-icon-color);
                         float: right;
                         height: 26px;
                         width: 26px;
                     }
 
                     .close-box:hover {
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                         cursor: pointer;
                     }
 
                     .maximize-box:hover {
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                         cursor: pointer;
                     }
 
                     .minimize-box:hover {
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                         cursor: pointer;
                     }
                 }
@@ -500,12 +527,12 @@
                     width: 30px;
                     text-align: center;
                     border-right: 1px solid #000000;
-                    color: @header-button-icon-color;
+                    color: var(--header-button-icon-color);
                     -webkit-app-region: no-drag;
                 }
 
                 .setting-box:hover {
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                     cursor: pointer;
                 }
 
@@ -514,13 +541,41 @@
                     display: inline-block;
                     width: 30px;
                     text-align: center;
-                    color: @header-button-icon-color;
+                    color: var(--header-button-icon-color);
                     -webkit-app-region: no-drag;
                 }
 
                 .setting-network:hover {
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                     cursor: pointer;
+                }
+
+                .setting-theme {
+                    position: relative;
+                    float: right;
+                    display: inline-block;
+                    width: 30px;
+                    text-align: center;
+                    color: var(--header-button-icon-color);
+                    -webkit-app-region: no-drag;
+
+                    .themes-box {
+                        position: absolute;
+                        width: 80px;
+                        z-index: 10;
+                        background-color: var(--select-active-background-color);
+                        left: -23px;
+
+                        .theme-item:hover {
+                            cursor: pointer;
+                            color: var(--font-active-color);
+                        }
+                    }
+
+                    .theme-icon:hover {
+                        color: var(--font-active-color);
+                        cursor: pointer;
+                    }
                 }
 
                 .user-login-info {
@@ -551,7 +606,7 @@
                         position: relative;
 
                         .user-name {
-                            color: @header-button-icon-color;
+                            color: var(--font-base-color);
                             height: 26px;
                             line-height: 26px;
                             font-size: 12px;
@@ -561,7 +616,7 @@
                         }
 
                         .down-select-icon {
-                            color: @header-button-icon-color;
+                            color: var(--header-button-icon-color);
                             position: absolute;
                             right: 0;
                             top: 0;
@@ -572,11 +627,11 @@
                         cursor: pointer;
 
                         .user-name {
-                            color: @font-active-color;
+                            color: var(--font-active-color);
                         }
 
                         .down-select-icon {
-                            color: @font-active-color;
+                            color: var(--font-active-color);
                         }
                     }
 

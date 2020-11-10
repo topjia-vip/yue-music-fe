@@ -345,8 +345,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../../common/css/theme/theme";
-
     .m-rank-info-box {
         position: relative;
         z-index: 0;
@@ -356,8 +354,8 @@
         overflow: hidden;
 
         ::selection {
-            background: @font-tow-color;
-            color: @font-base-color;
+            background: var(--font-tow-color);
+            color: var(--font-base-color);
         }
 
         .m-rank-info-box-content {
@@ -410,7 +408,7 @@
                         float: left;
 
                         .rank-name {
-                            color: @font-base-color;
+                            color: var(--font-base-color);
                             font-size: 20px;
                             user-select: text;
 
@@ -426,12 +424,12 @@
                             width: 70px;
                             height: 65px;
                             line-height: 65px;
-                            color: @font-tow-color;
+                            color: var(--font-tow-color);
                             margin-top: 5px;
 
                             .select-text:hover {
                                 cursor: pointer;
-                                color: @font-base-color;
+                                color: var(--font-base-color);
                             }
 
                             .select-box {
@@ -456,26 +454,26 @@
 
                                 .item:hover {
                                     cursor: pointer;
-                                    color: @font-base-color;
+                                    color: var(--font-base-color);
                                 }
 
                                 .selected {
-                                    color: @font-base-color;
-                                    background: #2b2d32;
+                                    color: var(--font-base-color);
+                                    background: var(--select-active-background-color);
                                 }
 
                                 .select-year-box {
                                     width: 80px;
                                     height: 100%;
                                     float: left;
-                                    background: #1e1f23;
+                                    background: var(--select-dropdown-background-color);
                                 }
 
                                 .select-week-box {
                                     width: 120px;
                                     height: 100%;
                                     float: left;
-                                    background: #2b2d32;
+                                    background: var(--select-active-background-color);
                                     padding: 0 10px;
                                     overflow-x: hidden;
                                     overflow-y: scroll;
@@ -505,17 +503,17 @@
                                 .select::-webkit-scrollbar-thumb {
                                     /*滚动条里面小方块*/
                                     border-radius: 10px;
-                                    background-color: @scrollbar-thumb-background-color;
+                                    background-color: var(--scrollbar-thumb-background-color);
                                 }
 
                                 /*---鼠标点击滚动条显示样式--*/
 
                                 .select::-webkit-scrollbar-thumb:hover {
-                                    background-color: @scrollbar-thumb-hover-color;
+                                    background-color: var(--scrollbar-thumb-hover-color);
                                 }
 
                                 .select::-webkit-scrollbar-thumb:active {
-                                    background-color: @scrollbar-thumb-active-color;
+                                    background-color: var(--scrollbar-thumb-active-color);
                                 }
                             }
 
@@ -524,7 +522,7 @@
                         .update-time {
                             height: 65px;
                             line-height: 65px;
-                            color: @font-tow-color;
+                            color: var(--font-tow-color);
                             margin-top: 5px;
                         }
 
@@ -550,7 +548,7 @@
 
                             .play-btn {
                                 background-image: linear-gradient(141deg, rgb(17, 224, 246) 0%, rgb(203, 52, 218) 51%, rgb(230, 57, 162) 75%);
-                                color: @font-base-color;
+                                color: #FFFFFF;
                             }
 
                             .play-btn:hover {
@@ -595,17 +593,17 @@
         .m-rank-info-box-content::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: @scrollbar-thumb-background-color;
+            background-color: var(--scrollbar-thumb-background-color);
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-rank-info-box-content::-webkit-scrollbar-thumb:hover {
-            background-color: @scrollbar-thumb-hover-color;
+            background-color: var(--scrollbar-thumb-hover-color);
         }
 
         .m-rank-info-box-content::-webkit-scrollbar-thumb:active {
-            background-color: @scrollbar-thumb-active-color;
+            background-color: var(--scrollbar-thumb-active-color);
         }
     }
 </style>

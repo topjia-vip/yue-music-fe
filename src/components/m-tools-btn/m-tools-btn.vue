@@ -16,25 +16,25 @@
 </template>
 
 <script>
-export default {
-  name: 'm-tools-btn',
-  props: {
-    isLikeDisst: {
-      type: Boolean
-    }
-  },
-  methods: {
-    playAll () {
-      this.$emit('playAll')
+  export default {
+    name: 'm-tools-btn',
+    props: {
+      isLikeDisst: {
+        type: Boolean
+      }
     },
-    save () {
-      this.$emit('save')
-    },
-    unSave () {
-      this.$emit('unSave')
+    methods: {
+      playAll () {
+        this.$emit('playAll')
+      },
+      save () {
+        this.$emit('save')
+      },
+      unSave () {
+        this.$emit('unSave')
+      }
     }
   }
-}
 </script>
 
 <style lang="less">
@@ -61,16 +61,16 @@ export default {
         }
 
         .save-btn {
-            background: #303031;
-            color: #E7E7E7;
+            background: var(--save-btn-background-color);
+            color: var(--font-base-color);
         }
 
         .unSave-btn {
-            background: #303031;
-            color: #E7E7E7;
+            background: var(--save-btn-background-color);
+            color: var(--font-base-color);
 
             .icon {
-                color: #d65958;
+                color: var(--favorite-color);
             }
         }
 
@@ -79,7 +79,7 @@ export default {
         }
 
         .save-btn:hover, .unSave-btn:hover {
-            background: #3b3b3c;
+            background: var(--save-btn-hover-background-color);
         }
     }
 </style>

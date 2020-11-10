@@ -8,6 +8,7 @@ import VueLazyload from 'vue-lazyload'
 import defLazyImg from './resources/images/playlist_300.png'
 import Router from 'vue-router'
 import routerStack from './RouterStack'
+import './common/css/theme/theme.css'
 
 Vue.prototype.routerStack = routerStack.routerStack
 

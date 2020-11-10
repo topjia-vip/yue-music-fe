@@ -23,7 +23,7 @@
 </script>
 
 <style lang="less">
-    @import "../../common/css/theme/theme";
+    @import "../../common/css/theme/theme-active";
 
     .m-play-btn-box {
         position: absolute;

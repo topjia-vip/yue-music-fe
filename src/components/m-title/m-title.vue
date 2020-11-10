@@ -24,10 +24,8 @@
 </script>
 
 <style lang="less">
-    @import "../../common/css/theme/theme";
-
     .title-box {
-        color: @font-base-color;
+        color: var(--font-base-color);
         font-size: 20px;
         height: 30px;
         display: flex;
@@ -35,6 +33,7 @@
         align-items: center;
 
         .title {
+            font-weight: bold;
             display: inline-block;
         }
 
@@ -42,15 +41,15 @@
             display: inline-block;
             float: right;
             font-size: 12px;
-            color: @font-tow-color;
+            color: var(--font-tow-color);
         }
 
         .more:hover {
             cursor: pointer;
-            color: @font-active-color;
+            color: var(--font-active-color);
 
             span {
-                border-bottom: 1px solid @font-active-color;
+                border-bottom: 1px solid var(--font-active-color);
             }
         }
     }

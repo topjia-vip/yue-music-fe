@@ -69,8 +69,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../common/css/theme/theme";
-
     .m-video-recommend-box {
         padding-bottom: 40px;
 
@@ -79,7 +77,7 @@
 
             .title {
                 font-size: 17px;
-                color: @font-base-color;
+                color: var(--font-base-color);
             }
         }
     }

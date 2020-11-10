@@ -277,7 +277,7 @@
 
         .dot {
             display: inline-block;
-            background-color: #2e3033;
+            background-color: var(--dot-background-color);
             margin-right: 5px;
             width: 10px;
             height: 3px;
@@ -287,7 +287,7 @@
 
         .active {
             width: 20px;
-            background-color: #7f8082;
+            background-color: var(--dot-active-background-color);
         }
     }
 

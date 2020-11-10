@@ -224,8 +224,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../common/css/theme/theme";
-
     .m-video-play-page-box {
         position: relative;
         z-index: 0;
@@ -235,8 +233,8 @@
         overflow: hidden;
 
         ::selection {
-            background: @font-tow-color;
-            color: @font-base-color;
+            background: var(--font-active-color);
+            color: var(--font-base-color);
         }
 
         .m-video-play-page-content {
@@ -284,7 +282,7 @@
 
                             .singer-name:hover {
                                 cursor: pointer;
-                                color: @player-bar-color;
+                                color: var(--player-bar-color);
                             }
                         }
                     }
@@ -329,17 +327,17 @@
         .m-video-play-page-content::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: #2F3134;
+            background-color: var(--scrollbar-thumb-background-color);
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-video-play-page-content::-webkit-scrollbar-thumb:hover {
-            background-color: #3B3C40;
+            background-color: var(--scrollbar-thumb-hover-color);
         }
 
         .m-video-play-page-content::-webkit-scrollbar-thumb:active {
-            background-color: #3B3C40;
+            background-color: var(--scrollbar-thumb-active-color);
         }
     }
 </style>

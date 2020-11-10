@@ -11,7 +11,7 @@
                 @click="selectItem(index)"
                 @dblclick="playSong(song)"
                 @contextmenu.prevent="openMenu($event,index)"
-                :style="song === selectSong?'background: #4342402e;':''"
+                :style="song === selectSong?'background: var(--song-list-hover-background-color);':''"
                 :class="handleIsPlay(song)"
             >
                 <div class="play-status-icon" v-if="currentPlaySong.mid === song.mid">
@@ -177,8 +177,6 @@
 </script>
 
 <style lang="less">
-    @import '../../common/css/theme/theme';
-
     .m-song-list {
         .song-info-title {
             height: 30px;
@@ -186,7 +184,7 @@
             line-height: 30px;
             padding: 0 60px 0 55px;
             font-size: 12px;
-            color: @font-tow-color;
+            color: var(--font-tow-color);
 
             .song-info-name {
                 width: 45%;
@@ -214,7 +212,7 @@
             list-style: none;
             height: 60px;
             line-height: 60px;
-            color: @font-base-color;
+            color: var(--font-base-color);
             padding: 0 60px 0 55px;
             display: flex;
             justify-content: flex-start;
@@ -223,7 +221,7 @@
                 position: absolute;
                 left: 0;
                 width: 55px;
-                color: @font-active-color;
+                color: var(--font-active-color);
                 padding-left: 10px;
             }
 
@@ -244,18 +242,18 @@
                 padding-right: 10px;
 
                 .love-btn {
-                    color: @no-favorite-color;
+                    color: var(--no-favorite-color);
                     margin-right: 5px;
                 }
 
                 .love-btn:hover {
-                    color: @favorite-color;
+                    color: var(--favorite-color);
                     cursor: pointer;
                     margin-right: 5px;
                 }
 
                 .unlove-btn {
-                    color: @favorite-color;
+                    color: var(--favorite-color);
                     cursor: pointer;
                     margin-right: 5px;
                 }
@@ -265,7 +263,7 @@
                 }
 
                 .subTitle {
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                 }
             }
 
@@ -287,12 +285,12 @@
                     }
 
                     .singer-name {
-                        color: @font-tow-color;
+                        color: var(--font-tow-color);
                     }
 
                     .singer-name:hover {
                         cursor: pointer;
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                     }
                 }
             }
@@ -304,11 +302,11 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 padding-right: 10px;
-                color: @font-tow-color;
+                color: var(--font-tow-color);
 
                 span:hover {
                     cursor: pointer;
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                 }
             }
 
@@ -316,20 +314,20 @@
                 position: absolute;
                 right: 0;
                 width: 60px;
-                color: @font-tow-color;
+                color: var(--font-tow-color);
             }
         }
 
         .item:hover {
-            background: #4342401f;
+            background: var(--song-list-hover-background-color);
         }
 
         .song-playing {
-            color: @font-active-color;
-            background: rgba(97, 96, 94, 0.25) !important;
+            color: var(--font-active-color);
+            background: var(--song-list-hover-background-color) !important;
 
             .song-time {
-                color: @font-active-color;
+                color: var(--font-active-color);
             }
 
             .singer {
@@ -337,19 +335,19 @@
                 .singer-name-box {
 
                     .singer-name {
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                     }
                 }
             }
 
             .album {
-                color: @font-active-color;
+                color: var(--font-active-color);
             }
 
             .song-name-box {
 
                 .subTitle {
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                 }
             }
         }

@@ -12,18 +12,20 @@
 </template>
 
 <script>
-export default {
-  name: 'm-rank-skeleton',
-  data () {
-    return {
-      list: new Array(10),
-      width: ''
+  export default {
+    name: 'm-rank-skeleton',
+    data () {
+      return {
+        list: new Array(10),
+        width: ''
+      }
     }
   }
-}
 </script>
 
 <style lang="less">
+    @import "../../common/css/skeleton/skeleton";
+
     .rank-skeleton {
         margin-right: -2%;
 
@@ -56,21 +58,6 @@ export default {
             .item-box {
                 width: 31%;
             }
-        }
-    }
-
-    .skeleton {
-        background: linear-gradient(90deg, #303031 25%, #373737 37%, #303031 63%);
-        background-size: 400% 100%;
-        animation: skeleton-loading 2s ease infinite;
-    }
-
-    @keyframes skeleton-loading {
-        0% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0 50%;
         }
     }
 </style>

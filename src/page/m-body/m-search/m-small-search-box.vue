@@ -227,15 +227,13 @@
 </script>
 
 <style lang="less">
-    @import "../../../common/css/theme/theme";
-
     .m-small-search-box {
         position: absolute;
         top: 36px;
         left: 0;
         height: 0;
         width: 408px;
-        background: #2d2f33;
+        background: var(--select-dropdown-background-color);
         z-index: 15;
         transition-property: width, height;
         transition-duration: 0.5s;
@@ -244,7 +242,7 @@
         overflow-x: hidden;
 
         .highlight {
-            color: @font-active-color;
+            color: var(--font-active-color);
         }
 
         .hot-search-title {
@@ -254,7 +252,7 @@
 
             .search-history {
                 .search-history-title {
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                     height: 60px;
                     line-height: 60px;
                     padding: 0 20px;
@@ -271,7 +269,7 @@
 
                     .delete-all-icon:hover {
                         cursor: pointer;
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                     }
                 }
 
@@ -287,13 +285,13 @@
                         position: relative;
                         font-size: 12px;
                         padding: 5px 16px;
-                        background-color: #1a1c20;
+                        background-color: var(--select-active-background-color);
                         margin: 5px;
                         border-radius: 5px;
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        color: @font-tow-color;
+                        color: var(--font-tow-color);
 
                         .key-text {
                             display: flex;
@@ -316,11 +314,11 @@
                         }
 
                         .key-text:hover {
-                            color: @font-active-color;
+                            color: var(--font-active-color);
                         }
 
                         .delete-icon:hover {
-                            color: @font-active-color;
+                            color: var(--font-active-color);
                         }
                     }
 
@@ -336,7 +334,7 @@
             }
 
             .hot-title-box {
-                color: @font-tow-color;
+                color: var(--font-tow-color);
                 height: 60px;
                 line-height: 60px;
                 padding-left: 20px;
@@ -370,14 +368,14 @@
 
                 .search-num {
                     display: inline-block;
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                     font-size: 12px;
                 }
             }
 
             .hot-key-item:hover {
                 cursor: pointer;
-                background: #2a2c30;
+                background: var(--select-active-background-color);
             }
         }
 
@@ -391,23 +389,23 @@
                 height: 30px;
                 line-height: 30px;
                 padding-left: 20px;
-                color: @font-tow-color;
+                color: var(--font-tow-color);
             }
 
             .search-key:hover {
                 cursor: pointer;
-                color: @font-active-color;
+                color: var(--font-active-color);
             }
 
             .title {
                 height: 20px;
                 line-height: 20px;
                 padding-left: 20px;
-                background: #303236;
+                background: var(--select-active-background-color);
             }
 
             .item {
-                color: #a5a7a8;
+                color: var(--font-tow-color);
                 height: 30px;
                 line-height: 30px;
                 padding-left: 20px;
@@ -429,7 +427,7 @@
 
             .item:hover {
                 cursor: pointer;
-                background: #2a2c30;
+                background: var(--select-active-background-color);
 
                 .play-icon {
                     font-size: 12px;
@@ -467,16 +465,16 @@
     .m-small-search-box::-webkit-scrollbar-thumb {
         /*滚动条里面小方块*/
         border-radius: 10px;
-        background-color: @scrollbar-thumb-background-color;
+        background-color: var(--scrollbar-thumb-background-color);
     }
 
     /*---鼠标点击滚动条显示样式--*/
 
     .m-small-search-box::-webkit-scrollbar-thumb:hover {
-        background-color: @scrollbar-thumb-hover-color;
+        background-color: var(--scrollbar-thumb-background-color);
     }
 
     .m-small-search-box::-webkit-scrollbar-thumb:active {
-        background-color: @scrollbar-thumb-active-color;
+        background-color: var(--scrollbar-thumb-active-color);
     }
 </style>

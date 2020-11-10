@@ -44,19 +44,17 @@
 </script>
 
 <style lang="less">
-    @import "../../../../../../common/css/theme/theme";
-
     .singer-info-box {
         margin-top: 30px;
         user-select: text;
 
         .singer-desc {
             margin-top: 20px;
-            color: @font-tow-color
+            color: var(--font-tow-color)
         }
 
         .title {
-            color: @font-base-color;
+            color: var(--font-base-color);
         }
 
         .singer-base-info {
@@ -64,7 +62,7 @@
 
             .base-info-box {
                 margin-top: 20px;
-                color: @font-tow-color;
+                color: var(--font-tow-color);
 
                 .base-info {
                     margin-bottom: 15px;
@@ -78,7 +76,7 @@
                 margin-top: 20px;
 
                 .info {
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                     margin-top: 20px;
                 }
             }

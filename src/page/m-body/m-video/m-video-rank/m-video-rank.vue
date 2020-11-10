@@ -150,8 +150,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../common/css/theme/theme";
-
     .m-video-rank-box {
         margin: 20px auto 0 auto;
         padding-bottom: 40px;
@@ -202,7 +200,7 @@
                     .rank-title {
                         font-weight: bold;
                         font-size: 30px;
-                        color: @font-base-color;
+                        color: var(--font-base-color);
                     }
                 }
             }
@@ -225,16 +223,16 @@
                         width: 80px;
 
                         .text {
-                            color: @font-base-color;
+                            color: var(--font-base-color);
                         }
 
                         .text:hover {
                             cursor: pointer;
-                            color: @font-active-color;
+                            color: var(--font-active-color);
                         }
 
                         .active {
-                            color: @font-active-color !important;
+                            color: var(--font-active-color) !important;
                         }
                     }
 
@@ -254,7 +252,7 @@
                             width: 28px;
                             height: 100%;
                             border-radius: 5px;
-                            background-color: @font-active-color;
+                            background-color: var(--font-active-color);
                         }
                     }
                 }

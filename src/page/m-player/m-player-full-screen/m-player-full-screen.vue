@@ -273,8 +273,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../common/css/theme/theme";
-
     .m-play-full-screen {
         user-select: none;
         position: absolute;
@@ -334,13 +332,13 @@
                     -webkit-app-region: no-drag;
 
                     .btn {
-                        color: @font-base-color;
+                        color: #FFFFFF;
                         font-size: 24px;
                     }
 
                     .btn:hover {
                         cursor: pointer;
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                     }
                 }
 
@@ -351,13 +349,13 @@
                     -webkit-app-region: no-drag;
 
                     .btn {
-                        color: @font-base-color;
+                        color: #FFFFFF;
                         font-size: 24px;
                     }
 
                     .btn:hover {
                         cursor: pointer;
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                     }
                 }
 
@@ -421,7 +419,7 @@
 
                                 .song-name {
                                     user-select: text;
-                                    color: @font-base-color;
+                                    color: #FFFFFF;
                                     overflow: hidden;
                                     text-overflow: ellipsis;
                                     white-space: nowrap;
@@ -490,7 +488,7 @@
                                 position: relative;
                                 width: 0;
                                 height: 3px;
-                                background: @player-bar-color;
+                                background: var(--player-bar-color);
                             }
 
                             .btn {
@@ -498,7 +496,7 @@
                                 width: 12px;
                                 height: 12px;
                                 border-radius: 50%;
-                                background: @font-active-color;
+                                background: var(--font-active-color);
                                 top: -4px;
                                 left: -6px;
                                 opacity: 0;
@@ -532,18 +530,18 @@
                                 display: inline-block;
 
                                 .love-btn {
-                                    color: @no-favorite-color;
+                                    color: var(--no-favorite-color);
                                     margin-right: 5px;
                                 }
 
                                 .love-btn:hover {
-                                    color: @favorite-color;
+                                    color: var(--favorite-color);
                                     cursor: pointer;
                                     margin-right: 5px;
                                 }
 
                                 .unlove-btn {
-                                    color: @favorite-color;
+                                    color: var(--favorite-color);
                                     cursor: pointer;
                                     margin-right: 5px;
                                 }
@@ -551,7 +549,7 @@
 
                             .playTime {
                                 font-size: 12px;
-                                color: @font-tow-color;
+                                color: #999999;
                                 display: inline-block;
 
                                 .time {
@@ -570,11 +568,11 @@
 
                             .btn {
                                 cursor: pointer;
-                                color: @font-base-color;
+                                color: #FFFFFF;
                             }
 
                             .btn:hover {
-                                color: @font-active-color;
+                                color: var(--font-active-color);
                             }
 
                             .prev {
@@ -584,7 +582,7 @@
                             }
 
                             .play, .pause {
-                                color: @font-active-color;
+                                color: var(--font-active-color);
                                 font-size: 40px;
                                 margin: 0 20px;
                             }

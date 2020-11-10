@@ -128,8 +128,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../../common/css/theme/theme";
-
     .m-recomdisstlist-box {
         position: relative;
         width: 100%;
@@ -220,14 +218,14 @@
                     display: -webkit-box;
                     -webkit-line-clamp: 2;
                     -webkit-box-orient: vertical;
-                    color: @font-base-color;
+                    color: var(--font-base-color);
                     font-size: 12px;
                     padding-top: 5px;
                 }
 
                 .item-name:hover {
                     cursor: pointer;
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                 }
             }
         }

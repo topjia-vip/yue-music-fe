@@ -382,8 +382,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../common/css/theme/theme";
-
     .m-user-create-disst-box {
         position: relative;
         z-index: 0;
@@ -430,7 +428,7 @@
                         float: left;
 
                         .disst-title {
-                            color: @font-base-color;
+                            color: var(--font-base-color);
                             font-size: 20px;
 
                             h2 {
@@ -465,7 +463,7 @@
                                 max-width: 50%;
                                 float: left;
                                 margin-left: 5px;
-                                color: @font-base-color;
+                                color: var(--font-base-color);
 
                                 span {
                                     overflow: hidden;
@@ -477,7 +475,7 @@
                             .disst-tag {
                                 float: left;
                                 line-height: 30px;
-                                color: @font-tow-color;
+                                color: var(--font-tow-color);
 
                                 span {
                                     margin-left: 10px;
@@ -499,7 +497,7 @@
                             .disst-desc {
                                 position: relative;
                                 width: 100%;
-                                color: @font-tow-color;
+                                color: var(--font-tow-color);
                                 font-size: 12px;
                                 padding: 0 40px 0 0;
 
@@ -520,7 +518,7 @@
 
                                 .open-desc-btn:hover {
                                     cursor: pointer;
-                                    color: @font-active-color;
+                                    color: var(--font-active-color);
                                 }
 
                                 .desc {
@@ -530,7 +528,7 @@
 
                             .desc-box {
                                 position: absolute;
-                                color: @font-tow-color;
+                                color: var(--font-tow-color);
                                 background: #29292B;
                                 padding: 10px 10px;
                                 left: -10px;
@@ -552,9 +550,9 @@
                 margin-top: 30px;
                 height: 30px;
                 line-height: 30px;
-                color: @font-base-color;
+                color: var(--font-base-color);
                 display: inline-block;
-                border-bottom: 2px solid @font-base-color;
+                border-bottom: 2px solid var(--font-base-color);
             }
 
             .song-list {
@@ -595,17 +593,17 @@
         .m-user-create-disst-box-content::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: @scrollbar-thumb-background-color;
+            background-color: var(--scrollbar-thumb-background-color);
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-user-create-disst-box-content::-webkit-scrollbar-thumb:hover {
-            background-color: @scrollbar-thumb-hover-color;
+            background-color: var(--scrollbar-thumb-hover-color);
         }
 
         .m-user-create-disst-box-content::-webkit-scrollbar-thumb:active {
-            background-color: @scrollbar-thumb-active-color;
+            background-color: var(--scrollbar-thumb-active-color);
         }
     }
 </style>

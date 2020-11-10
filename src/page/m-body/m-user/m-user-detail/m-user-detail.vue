@@ -67,8 +67,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../../common/css/theme/theme";
-
     .m-user-detail-box {
         position: relative;
         z-index: 0;
@@ -78,8 +76,8 @@
         overflow: hidden;
 
         ::selection {
-            background: @font-tow-color;
-            color: @font-base-color;
+            background: var(--font-tow-color);
+            color: var(--font-base-color);
         }
 
         .m-user-detail-box-content {
@@ -121,7 +119,7 @@
 
                         .user-nick {
                             p {
-                                color: @font-base-color;
+                                color: var(--font-base-color);
                                 font-size: 24px;
                                 display: inline-block
                             }
@@ -129,7 +127,7 @@
                             .modify-user-info-btn {
                                 font-size: 12px;
                                 float: right;
-                                color: @font-base-color;
+                                color: var(--font-base-color);
                                 width: 90px;
                                 height: 20px;
                                 line-height: 20px;
@@ -214,17 +212,17 @@
         .m-user-detail-box-content::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: @scrollbar-thumb-background-color;
+            background-color: var(--scrollbar-thumb-background-color);
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-user-detail-box-content::-webkit-scrollbar-thumb:hover {
-            background-color: @scrollbar-thumb-hover-color;
+            background-color: var(--scrollbar-thumb-hover-color);
         }
 
         .m-user-detail-box-content::-webkit-scrollbar-thumb:active {
-            background-color: @scrollbar-thumb-active-color;
+            background-color: var(--scrollbar-thumb-active-color);
         }
     }
 </style>

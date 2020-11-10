@@ -123,8 +123,6 @@
 </script>
 
 <style lang="less">
-    @import "../../common/css/theme/theme";
-
     .video-box {
         display: flex;
         justify-content: flex-start;
@@ -255,12 +253,12 @@
                 -webkit-box-orient: vertical;
 
                 .title-text {
-                    color: @font-base-color;
+                    color: var(--font-base-color);
                 }
 
                 .title-text:hover {
                     cursor: pointer;
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                 }
             }
 
@@ -274,13 +272,13 @@
                 white-space: nowrap;
 
                 .tip {
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                     margin-right: 5px;
                 }
 
                 .singer-name-box {
                     .singer-name {
-                        color: @font-tow-color;
+                        color: var(--font-tow-color);
                     }
 
                     .division {
@@ -289,7 +287,7 @@
 
                     .singer-name:hover {
                         cursor: pointer;
-                        color: @font-active-color;
+                        color: var(--font-active-color);
                     }
                 }
             }
@@ -304,24 +302,24 @@
                 white-space: nowrap;
 
                 .tip {
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                     margin-right: 5px;
                 }
 
                 .uploader-name {
-                    color: @font-tow-color;
+                    color: var(--font-tow-color);
                 }
 
                 .uploader-name:hover {
                     cursor: pointer;
-                    color: @font-active-color;
+                    color: var(--font-active-color);
                 }
             }
 
             .mv-create-time {
                 margin-top: 5px;
                 font-size: 12px;
-                color: @font-tow-color;
+                color: var(--font-tow-color);
             }
         }
 

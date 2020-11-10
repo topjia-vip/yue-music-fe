@@ -612,8 +612,6 @@
 </script>
 
 <style lang="less">
-    @import "../../common/css/theme/theme";
-
     .m-video-player-box {
         position: relative;
         width: 100%;
@@ -677,7 +675,7 @@
 
                 .btn:hover {
                     cursor: pointer;
-                    color: @player-bar-color;
+                    color: var(--player-bar-color);
                 }
             }
         }
@@ -721,7 +719,7 @@
                         position: relative;
                         width: 0;
                         height: 3px;
-                        background: @player-bar-color;
+                        background: var(--player-bar-color);
                     }
 
                     .btn {
@@ -729,7 +727,7 @@
                         width: 12px;
                         height: 12px;
                         border-radius: 50%;
-                        background: @player-bar-color;
+                        background: var(--player-bar-color);
                         top: -4px;
                         left: -6px;
                         opacity: 0;
@@ -770,7 +768,7 @@
 
                         .video-btn:hover {
                             cursor: pointer;
-                            color: @player-bar-color;
+                            color: var(--player-bar-color);
                         }
                     }
 
@@ -793,8 +791,8 @@
 
                         .play-url-btn:hover {
                             cursor: pointer;
-                            color: @player-bar-color;
-                            border: 1px solid @player-bar-color;
+                            color: var(--player-bar-color);
+                            border: 1px solid var(--player-bar-color);
                         }
 
                         .other-url-box {
@@ -820,11 +818,11 @@
 
                                 .text:hover {
                                     cursor: pointer;
-                                    color: @player-bar-color;
+                                    color: var(--player-bar-color);
                                 }
 
                                 .active {
-                                    color: @player-bar-color !important;
+                                    color: var(--player-bar-color) !important;
                                 }
                             }
                         }
@@ -889,7 +887,7 @@
                                     position: relative;
                                     width: 0;
                                     height: 4px;
-                                    background: @player-bar-color;
+                                    background: var(--player-bar-color);
                                     border-radius: 2px;
                                 }
 
@@ -898,7 +896,7 @@
                                     width: 12px;
                                     height: 12px;
                                     border-radius: 50%;
-                                    background: @player-bar-color;
+                                    background: var(--player-bar-color);
                                     top: -4px;
                                     left: -6px;
                                     opacity: 1;
