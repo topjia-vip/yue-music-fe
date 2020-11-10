@@ -1,6 +1,6 @@
 <template>
     <div class="search-loading">
-        <img ondragstart="return false" class="loading-img" src="./search-loading-black.gif" alt="">
+        <img ondragstart="return false" class="loading-img" src="./search-loading.gif" alt="">
     </div>
 </template>
 
