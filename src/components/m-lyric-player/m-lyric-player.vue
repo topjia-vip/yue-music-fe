@@ -131,7 +131,7 @@
         }
 
         .current {
-            color: @player-bar-color;
+            color: var(--font-active-color);
         }
 
         .no-lyric, .cyy {
