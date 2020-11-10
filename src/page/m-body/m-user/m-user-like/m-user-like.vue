@@ -195,11 +195,9 @@
         position: relative;
         z-index: 0;
         user-select: none;
-        background: #16181C;
         min-width: 820px;
         width: 100%;
         overflow: hidden;
-        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
 
         .m-user-like-box-content {
             position: relative;
@@ -214,14 +212,14 @@
                 position: relative;
 
                 .user-like-header {
-                    color: #ffffff;
+                    color: var(--font-base-color);
                     font-size: 20px;
                     margin-top: 20px;
                 }
 
                 .tags {
                     margin-top: 20px;
-                    color: #999999;
+                    color: var(--font-tow-color);
                     height: 30px;
                     line-height: 30px;
 
@@ -236,12 +234,12 @@
 
                     .btn:hover {
                         cursor: pointer;
-                        color: #ffffff;
+                        color: var(--font-active-color);
                     }
 
                     .active {
-                        color: #ffffff;
-                        border-bottom: 1px solid #ffffff;
+                        color: var(--font-active-color);
+                        border-bottom: 1px solid var(--font-active-color);
                     }
                 }
             }
@@ -251,6 +249,11 @@
             /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
             -ms-overflow-style: none;
         }
+
+        // 火狐
+        scrollbar-color: transparent transparent;
+        scrollbar-track-color: transparent;
+        -ms-scrollbar-track-color: transparent;
 
         .m-user-like-box-content::-webkit-scrollbar {
             /*滚动条整体样式*/
@@ -271,17 +274,17 @@
         .m-user-like-box-content::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: #2F3134;
+            background-color: var(--scrollbar-thumb-background-color);
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-user-like-box-content::-webkit-scrollbar-thumb:hover {
-            background-color: #3B3C40;
+            background-color: var(--scrollbar-thumb-hover-color);
         }
 
         .m-user-like-box-content::-webkit-scrollbar-thumb:active {
-            background-color: #3B3C40;
+            background-color: var(--scrollbar-thumb-active-color);
         }
     }
 </style>

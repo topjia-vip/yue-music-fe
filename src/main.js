@@ -8,8 +8,10 @@ import VueLazyload from 'vue-lazyload'
 import defLazyImg from './resources/images/playlist_300.png'
 import Router from 'vue-router'
 import routerStack from './RouterStack'
+import './common/css/theme/theme.css'
 
 Vue.prototype.routerStack = routerStack.routerStack
+
 // 解决连续点击相同路由报错
 const originalPush = Router.prototype.push
 Router.prototype.push = function push (location) {

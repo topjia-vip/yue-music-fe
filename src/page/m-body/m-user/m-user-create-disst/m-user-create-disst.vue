@@ -16,6 +16,7 @@
                                 <div class="user-img-box">
                                     <img class="user-img" ondragstart="return false"
                                          v-lazy="handleLazyImage(disst.headUrl)"
+                                         :key="disst.headUrl"
                                          :alt="disst.nickname">
                                 </div>
                                 <div class="user-name">
@@ -69,7 +70,7 @@
                 <m-tips class="tips" ref="tips" :width="180"/>
             </div>
         </m-slider>
-        <loading class="loading" v-if="!isShow"/>
+        <m-disstdetail-skeleton v-if="!isShow"/>
         <scroll-top v-if="showToTop" @toTop="toTop"/>
     </Content>
 </template>
@@ -91,10 +92,12 @@
   import MTips from '../../../../components/m-tips/m-tips'
   import MSlider from '../../../../components/m-slider/m-slider'
   import UserDefLazyImg from '../../../../resources/images/person_300.png'
+  import MDisstdetailSkeleton from '../../../../components/m-skeleton/m-disstdetail-skeleton'
 
   export default {
     name: 'm-user-create-disst',
     components: {
+      MDisstdetailSkeleton,
       MSlider,
       MTips,
       MToolsBtn,
@@ -183,7 +186,9 @@
       })
     },
     updated () {
-      this.showDetailBtn = this.$refs.descBox.clientWidth - 40 <= this.$refs.descText.offsetWidth
+      if (this.$refs.descBox) {
+        this.showDetailBtn = this.$refs.descBox.clientWidth - 40 <= this.$refs.descText.offsetWidth
+      }
     },
     methods: {
       _initDisstDetail (disstId) {
@@ -381,7 +386,6 @@
         position: relative;
         z-index: 0;
         user-select: none;
-        background: #16181C;
         min-width: 820px;
         width: 100%;
         overflow: hidden;
@@ -399,14 +403,14 @@
                 position: relative;
 
                 .disst-detail-header {
-                    height: 170px;
-                    padding-left: 170px;
+                    height: 200px;
+                    padding-left: 200px;
 
                     .img-box {
                         position: absolute;
                         left: 0;
-                        width: 170px;
-                        height: 170px;
+                        width: 200px;
+                        height: 200px;
                         float: left;
 
                         .disst-detail-img {
@@ -420,11 +424,11 @@
                     .disst-detail-info-box {
                         padding-left: 30px;
                         width: 100%;
-                        height: 170px;
+                        height: 200px;
                         float: left;
 
                         .disst-title {
-                            color: #E7E7E7;
+                            color: var(--font-base-color);
                             font-size: 20px;
 
                             h2 {
@@ -436,7 +440,7 @@
 
                         .create-user-box {
                             height: 30px;
-                            margin-top: 10px;
+                            margin-top: 20px;
                             font-size: 12px;
 
                             .user-img-box {
@@ -459,7 +463,7 @@
                                 max-width: 50%;
                                 float: left;
                                 margin-left: 5px;
-                                color: #E7E7E7;
+                                color: var(--font-base-color);
 
                                 span {
                                     overflow: hidden;
@@ -471,7 +475,7 @@
                             .disst-tag {
                                 float: left;
                                 line-height: 30px;
-                                color: #8E8E8F;
+                                color: var(--font-tow-color);
 
                                 span {
                                     margin-left: 10px;
@@ -487,12 +491,13 @@
                         .disst-desc-box {
                             position: relative;
                             height: 40px;
-                            margin-top: 10px;
+                            margin-top: 20px;
+                            user-select: text;
 
                             .disst-desc {
                                 position: relative;
                                 width: 100%;
-                                color: #8E8E8F;
+                                color: var(--font-tow-color);
                                 font-size: 12px;
                                 padding: 0 40px 0 0;
 
@@ -513,7 +518,7 @@
 
                                 .open-desc-btn:hover {
                                     cursor: pointer;
-                                    color: #ffffff;
+                                    color: var(--font-active-color);
                                 }
 
                                 .desc {
@@ -523,7 +528,7 @@
 
                             .desc-box {
                                 position: absolute;
-                                color: #8E8E8F;
+                                color: var(--font-tow-color);
                                 background: #29292B;
                                 padding: 10px 10px;
                                 left: -10px;
@@ -545,9 +550,9 @@
                 margin-top: 30px;
                 height: 30px;
                 line-height: 30px;
-                color: #ffffff;
+                color: var(--font-base-color);
                 display: inline-block;
-                border-bottom: 2px solid #ffffff;
+                border-bottom: 2px solid var(--font-base-color);
             }
 
             .song-list {
@@ -563,6 +568,11 @@
             /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
             -ms-overflow-style: none;
         }
+
+        // 火狐
+        scrollbar-color: transparent transparent;
+        scrollbar-track-color: transparent;
+        -ms-scrollbar-track-color: transparent;
 
         .m-user-create-disst-box-content::-webkit-scrollbar {
             /*滚动条整体样式*/
@@ -583,17 +593,17 @@
         .m-user-create-disst-box-content::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: #2F3134;
+            background-color: var(--scrollbar-thumb-background-color);
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-user-create-disst-box-content::-webkit-scrollbar-thumb:hover {
-            background-color: #3B3C40;
+            background-color: var(--scrollbar-thumb-hover-color);
         }
 
         .m-user-create-disst-box-content::-webkit-scrollbar-thumb:active {
-            background-color: #3B3C40;
+            background-color: var(--scrollbar-thumb-active-color);
         }
     }
 </style>

@@ -90,11 +90,12 @@
         width: 360px;
         height: 460px;
         padding: 40px;
-        background-color: #2a2a2a;
+        background-color: var(--select-dropdown-background-color);
         z-index: -10;
         opacity: 0;
         transform: translate3d(0, 0, 0) scale(.7);
         transition: transform 200ms, opacity 200ms;
+        box-shadow: 0 0 20px 0px #171717;
 
         .close-box {
             position: absolute;
@@ -107,12 +108,12 @@
             align-items: center;
 
             .close-btn {
-                color: #b3b3b3;
+                color: var(--font-tow-color);
             }
 
             .close-btn:hover {
                 cursor: pointer;
-                color: #ffffff;
+                color: var(--font-active-color);
             }
         }
 
@@ -120,7 +121,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #FFFFFF;
+            color: var(--font-base-color);
             height: 20px;
         }
 
@@ -129,7 +130,7 @@
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
-                color: #a5a5a5;
+                color: var(--font-tow-color);
 
                 .select-box {
                     display: flex;
@@ -143,7 +144,7 @@
                     .inner {
                         width: 10px;
                         height: 10px;
-                        background-color: #4ea4dc;
+                        background-color: var(--font-active-color);
                         border-radius: 50%;
                     }
                 }
@@ -155,11 +156,11 @@
 
             .connection:hover {
                 cursor: pointer;
-                color: #cccccc;
+                color: var(--font-tow-color);
             }
 
             .selected {
-                color: #FFFFFF !important;
+                color: var(--font-base-color) !important;
             }
         }
 
@@ -175,23 +176,23 @@
                 align-items: center;
                 width: 45%;
                 height: 30px;
-                color: #FFFFFF;
+                color: var(--font-base-color);
             }
 
             .confirm-btn {
-                background-color: #4ea4dc;
+                background-color: var(--font-active-color);
             }
 
             .confirm-btn:hover {
-                background-color: #0aabfa;
+                background-color: var(--font-active-color);
             }
 
             .cancel-btn {
-                background-color: #4d4d4d;
+                background-color: var(--select-active-background-color);
             }
 
             .cancel-btn:hover {
-                background-color: #676767;
+                background-color: var(--select-dropdown-hover-background-color);
             }
         }
     }

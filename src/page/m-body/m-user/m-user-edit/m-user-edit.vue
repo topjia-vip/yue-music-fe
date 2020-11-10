@@ -407,11 +407,11 @@
 </script>
 
 <style lang="less">
+    /*TODO 重构样式 */
     .m-user-edit-box {
         position: relative;
         z-index: 0;
         user-select: none;
-        background: #16181C;
         min-width: 820px;
         width: 100%;
         overflow: hidden;
@@ -620,6 +620,10 @@
         textarea {
             /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
             -ms-overflow-style: none;
+            // 火狐
+            scrollbar-color: transparent transparent;
+            scrollbar-track-color: transparent;
+            -ms-scrollbar-track-color: transparent;
         }
 
         textarea {

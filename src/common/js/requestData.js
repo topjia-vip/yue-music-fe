@@ -203,3 +203,125 @@ export function getTopListData (topId, period) {
     }, 'comm': { 'ct': 24, 'cv': 0 }
   }
 }
+
+/****************************MV******************************/
+export function getMVRankListData (areaType) {
+  return {
+    'comm': { 'ct': 24, 'cv': 0 },
+    'request': {
+      'method': 'get_video_rank_list',
+      'param': {
+        'rank_type': 0,
+        'area_type': areaType,
+        'required': ['vid', 'name', 'singers', 'cover_pic', 'pubdate']
+      },
+      'module': 'video.VideoRankServer'
+    }
+  }
+}
+
+export function getVideosTags () {
+  return {
+    'comm': { 'ct': 24 },
+    'mv_tag': { 'module': 'MvService.MvInfoProServer', 'method': 'GetAllocTag', 'param': {} }
+  }
+}
+
+export function getVideosData (start, size, areaId, versionId, order) {
+  return {
+    'comm': { 'ct': 24 },
+    'mv_list': {
+      'module': 'MvService.MvInfoProServer',
+      'method': 'GetAllocMvInfo',
+      'param': { 'start': start, 'size': size, 'version_id': versionId, 'area_id': areaId, 'order': order }
+    }
+  }
+}
+
+export function getVideoPlayUrlData (vid) {
+  return {
+    'getMvUrl': {
+      'module': 'gosrf.Stream.MvUrlProxy',
+      'method': 'GetMvUrls',
+      'param': {
+        'vids': [
+          vid
+        ],
+        'request_typet': 10001,
+        'addrtype': 3
+      }
+    },
+    'comm': {
+      'ct': 24,
+      'cv': 4747474,
+      'g_tk': 34936803,
+      'uin': 1256957450,
+      'format': 'json',
+      'platform': 'yqq'
+    }
+  }
+}
+
+export function getVideoInfoAndOtherVideoData (vid) {
+  return {
+    'comm': {
+      'ct': 24,
+      'cv': 4747474
+    },
+    'mvinfo': {
+      'module': 'video.VideoDataServer',
+      'method': 'get_video_info_batch',
+      'param': {
+        'vidlist': [
+          vid
+        ],
+        'required': [
+          'vid',
+          'type',
+          'sid',
+          'cover_pic',
+          'duration',
+          'singers',
+          'video_switch',
+          'msg',
+          'name',
+          'desc',
+          'playcnt',
+          'pubdate',
+          'isfav',
+          'gmid'
+        ]
+      }
+    },
+    'other': {
+      'module': 'video.VideoLogicServer',
+      'method': 'rec_video_byvid',
+      'param': {
+        'vid': vid,
+        'required': [
+          'vid',
+          'type',
+          'sid',
+          'cover_pic',
+          'duration',
+          'singers',
+          'video_switch',
+          'msg',
+          'name',
+          'desc',
+          'playcnt',
+          'pubdate',
+          'isfav',
+          'gmid',
+          'uploader_headurl',
+          'uploader_nick',
+          'uploader_encuin',
+          'uploader_uin',
+          'uploader_hasfollow',
+          'uploader_follower_num'
+        ],
+        'support': 1
+      }
+    }
+  }
+}

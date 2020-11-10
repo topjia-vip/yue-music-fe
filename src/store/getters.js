@@ -47,3 +47,7 @@ export const currentTop = state => state.currentTop
 export const routerStackPointer = state => state.routerStackPointer
 
 export const needLogin = state => state.needLogin
+
+export const playHistory = state => state.playHistory
+
+export const searchHistory = state => state.searchHistory

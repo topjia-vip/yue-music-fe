@@ -24,48 +24,43 @@
 </template>
 
 <script>
-import MTitle from '../m-title/m-title'
+  import MTitle from '../m-title/m-title'
 
-export default {
-  name: 'm-recommend-skeleton',
-  components: { MTitle },
-  mounted () {
-    window.addEventListener(('resize'), () => {
-      this.width = window.innerWidth
-    })
-    this.setHeight()
-  },
-  data () {
-    return {
-      list: new Array(10),
-      width: ''
-    }
-  },
-  methods: {
-    setHeight () {
-      let items = this.$refs.item
-      for (let i = 0; i < items.length; i++) {
-        items[i].style.height = this.$refs.item[0].clientWidth + 'px'
+  export default {
+    name: 'm-recommend-skeleton',
+    components: { MTitle },
+    mounted () {
+      window.addEventListener(('resize'), () => {
+        this.width = window.innerWidth
+      })
+      this.setHeight()
+    },
+    data () {
+      return {
+        list: new Array(10),
+        width: ''
+      }
+    },
+    methods: {
+      setHeight () {
+        let items = this.$refs.item
+        for (let i = 0; i < items.length; i++) {
+          items[i].style.height = this.$refs.item[0].clientWidth + 'px'
+        }
+      }
+    },
+    watch: {
+      width () {
+        this.setHeight()
       }
     }
-  },
-  watch: {
-    width () {
-      this.setHeight()
-    }
   }
-}
 </script>
 
 <style lang="less">
+    @import "../../common/css/skeleton/skeleton";
+
     .recommend-skeleton-box {
-
-        .skeleton {
-            background: linear-gradient(90deg, #303031 25%, #373737 37%, #303031 63%);
-            background-size: 400% 100%;
-            animation: skeleton-loading 2s ease infinite;
-        }
-
         .focus-skeleton {
             width: 100%;
             height: 240px;
@@ -102,15 +97,6 @@ export default {
                     display: inline-block;
                     list-style: none;
                 }
-            }
-        }
-
-        @keyframes skeleton-loading {
-            0% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0 50%;
             }
         }
     }

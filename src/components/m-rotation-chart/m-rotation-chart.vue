@@ -149,12 +149,16 @@
         element.setAttribute('class', oldClazz.replace(regexp, ''))
       },
       setTransform () {
+        // 中间图片
         let front = document.getElementsByClassName('img-item-front')[0]
-        front.style.transform = `translate3d(${(this.sliderWrapperWidth - imgWidth) / 2}px, 0px, 0px) scale(1.05)`
+        front.style.transform = `translate3d(${(this.sliderWrapperWidth - imgWidth) / 2}px, 0px, 0px) scale(1.1)`
+        // 右边图片
         let right = document.getElementsByClassName('img-item-right')[0]
         right.style.transform = `translate3d(${this.sliderWrapperWidth - imgWidth}px, 0px, 0px) scale(1)`
+        // 左边图片
         let left = document.getElementsByClassName('img-item-left')[0]
-        left.style.transform = `translate3d(0px, 0px, 0px) scale(1)`
+        left.style.transform = `translate3d(0, 0, 0) scale(1)`
+        // 其他图片
         let backs = document.getElementsByClassName('img-item-back')
         for (let i = 0; i < backs.length; i++) {
           backs[i].style.transform = `translate3d(${(this.sliderWrapperWidth - imgWidth) / 2}px, 0px, 0px) scale(1)`
@@ -226,13 +230,14 @@
             margin-top: 10px;
             width: 490px;
             height: 200px;
+            border-radius: 10px;
             background-repeat: no-repeat;
             background-size: cover;
             transition: transform 500ms, filter 500ms, opacity 500ms, z-index 500ms;
         }
 
         .img-item-front {
-            transform: translate3d(200px, 0px, 0px) scale(1.05);
+            transform: translate3d(200px, 0px, 0px) scale(1.1);
             filter: brightness(100%);
             z-index: 10;
             opacity: 1;
@@ -272,7 +277,7 @@
 
         .dot {
             display: inline-block;
-            background-color: #2e3033;
+            background-color: var(--dot-background-color);
             margin-right: 5px;
             width: 10px;
             height: 3px;
@@ -282,7 +287,7 @@
 
         .active {
             width: 20px;
-            background-color: #7f8082;
+            background-color: var(--dot-active-background-color);
         }
     }
 

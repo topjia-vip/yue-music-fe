@@ -11,7 +11,7 @@
                 @click="selectItem(index)"
                 @dblclick="playSong(song)"
                 @contextmenu.prevent="openMenu($event,index)"
-                :style="song === selectSong?'background: #4342402e;':''"
+                :style="song === selectSong?'background: var(--song-list-hover-background-color);':''"
                 :class="handleIsPlay(song)"
             >
                 <div class="play-status-icon" v-if="currentPlaySong.mid === song.mid">
@@ -33,9 +33,11 @@
                           v-if="song.subTitle" v-html="'('+song.subTitle+')'"></span>
                 </div>
                 <div class="singer">
-                                <span v-for="(singer) in song.singers" :key="singer.singerMid"
-                                      v-html="singer.singerName" :title="singer.singerName"
-                                      @click.stop="toSingerDetail(singer)" @dblclick.stop=""></span>
+                    <div class="singer-name-box" v-for="(singer,singerIndex) in song.singers" :key="singerIndex">
+                        <span class="singer-name" v-html="singer.singerName" @click="toSingerDetail(singer)"
+                              @dblclick.stop=""/>
+                        <span class="division" v-if="singerIndex !== song.singers.length - 1">/</span>
+                    </div>
                 </div>
                 <div class="album">
                     <span class="album-title" v-html="song.album"></span>
@@ -175,16 +177,16 @@
 </script>
 
 <style lang="less">
-    @import '../../common/css/theme/theme';
-
     .m-song-list {
+        width: 100%;
+
         .song-info-title {
             height: 30px;
             list-style: none;
             line-height: 30px;
             padding: 0 60px 0 55px;
             font-size: 12px;
-            color: #8E8E8F;
+            color: var(--font-tow-color);
 
             .song-info-name {
                 width: 45%;
@@ -212,14 +214,16 @@
             list-style: none;
             height: 60px;
             line-height: 60px;
-            color: #ADAFB2;
+            color: var(--font-base-color);
             padding: 0 60px 0 55px;
+            display: flex;
+            justify-content: flex-start;
 
             .play-status-icon {
                 position: absolute;
                 left: 0;
                 width: 55px;
-                color: @player-bar-color;
+                color: var(--font-active-color);
                 padding-left: 10px;
             }
 
@@ -227,7 +231,6 @@
                 position: absolute;
                 left: 0;
                 width: 55px;
-                color: #ffffff;
                 padding-left: 10px;
             }
 
@@ -241,17 +244,18 @@
                 padding-right: 10px;
 
                 .love-btn {
+                    color: var(--no-favorite-color);
                     margin-right: 5px;
                 }
 
                 .love-btn:hover {
-                    color: @favorite-color;
+                    color: var(--favorite-color);
                     cursor: pointer;
                     margin-right: 5px;
                 }
 
                 .unlove-btn {
-                    color: @favorite-color;
+                    color: var(--favorite-color);
                     cursor: pointer;
                     margin-right: 5px;
                 }
@@ -261,25 +265,35 @@
                 }
 
                 .subTitle {
-                    color: #999999 !important;
+                    color: var(--font-tow-color);
                 }
             }
 
             .singer {
                 width: 25%;
                 float: left;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
                 padding-right: 10px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
 
-                span {
-                    margin-right: 5px;
-                }
+                .singer-name-box {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
 
-                span:hover {
-                    cursor: pointer;
-                    color: #FFFFFF;
+                    .division {
+                        margin: 0 2px;
+                    }
+
+                    .singer-name {
+                        color: var(--font-tow-color);
+                    }
+
+                    .singer-name:hover {
+                        cursor: pointer;
+                        color: var(--font-active-color);
+                    }
                 }
             }
 
@@ -290,10 +304,11 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 padding-right: 10px;
+                color: var(--font-tow-color);
 
                 span:hover {
                     cursor: pointer;
-                    color: #FFFFFF;
+                    color: var(--font-active-color);
                 }
             }
 
@@ -301,16 +316,42 @@
                 position: absolute;
                 right: 0;
                 width: 60px;
+                color: var(--font-tow-color);
             }
         }
 
         .item:hover {
-            background: #4342402e;
+            background: var(--song-list-hover-background-color);
         }
 
         .song-playing {
-            color: #FFFFFF;
-            background: #4342402e;
+            color: var(--font-active-color);
+            background: var(--song-list-hover-background-color) !important;
+
+            .song-time {
+                color: var(--font-active-color);
+            }
+
+            .singer {
+
+                .singer-name-box {
+
+                    .singer-name {
+                        color: var(--font-active-color);
+                    }
+                }
+            }
+
+            .album {
+                color: var(--font-active-color);
+            }
+
+            .song-name-box {
+
+                .subTitle {
+                    color: var(--font-active-color);
+                }
+            }
         }
     }
 </style>

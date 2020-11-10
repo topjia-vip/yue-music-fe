@@ -2,7 +2,7 @@
     <Layout class="body-bg">
         <div ref="main">
             <!--导航栏-->
-            <m-header ref="header"/>
+            <m-header ref="header" @changeTheme="changeTheme"/>
             <div class="line"></div>
             <Layout class="ivu-layout ivu-layout-has-sider">
                 <!--侧边-->
@@ -34,6 +34,7 @@
   import MLoginBox from './components/m-login-box/m-login-box'
   import 'vue2-animate/dist/vue2-animate.min.css'
   import MPlayerFullScreen from './page/m-player/m-player-full-screen/m-player-full-screen'
+  import { THEME_TYPE, themes } from './common/js/theme-config'
 
   export default {
     components: {
@@ -48,7 +49,7 @@
     data () {
       return {
         showPlayList: false,
-        transitionName: 'slide-left'
+        transitionName: 'my-slide-left'
       }
     },
     mounted () {
@@ -61,6 +62,7 @@
           }
         }
       })
+      this.loadTheme()
     },
     computed: {
       ...mapGetters([
@@ -73,6 +75,34 @@
       ])
     },
     methods: {
+      loadTheme () {
+        // LocalStorage获取上次保存的主题颜色
+        let themeType = localStorage.getItem('theme')
+        if (themeType) {
+          this.changeTheme(themeType)
+        } else {
+          this.changeTheme('light')
+        }
+      },
+      // 改变主题颜色
+      changeTheme (themeType) {
+        let theme
+        switch (themeType) {
+          case THEME_TYPE.light: {
+            theme = themes.light
+            break
+          }
+          case THEME_TYPE.dark: {
+            theme = themes.dark
+            break
+          }
+        }
+        for (let i = 0; i < theme.length; i++) {
+          document.documentElement.style.setProperty(theme[i].cssName, theme[i].cssValue)
+        }
+        // 保存主题
+        localStorage.setItem('theme', themeType)
+      },
       changeShowPlayListStatus () {
         if (this.showPlayList) {
           // 关闭播放列表
@@ -112,7 +142,6 @@
 </script>
 
 <style lang="less">
-
     .body-bg {
         position: absolute;
         width: 100%;
@@ -121,20 +150,25 @@
         left: 0;
         font: 14px/1.5 Tahoma, Helvetica, Arial, '宋体', sans-serif;
         overflow: hidden;
+        background-color: var(--background-color-base);
 
         .line {
             width: 100%;
             height: 2px;
-            background-image: linear-gradient(141deg, #4f4f4f 0%, #893e12 50%, #565656 100%);
+            background-color: var(--header-background-color);
         }
 
         .play-list {
             position: absolute;
-            bottom: 50px;
             right: 0;
-            z-index: 10;
-            transform: translateX(100%);
+            top: 0;
+            z-index: 10000;
+            transform: translateX(110%);
             transition: transform 200ms;
+        }
+
+        .ivu-layout {
+            background-color: var(--background-color-base);
         }
     }
 </style>

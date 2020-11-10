@@ -2,35 +2,38 @@
     <Content ref="content" class="m-find-music">
         <!--导航栏-->
         <div class="m-find-music-nav">
-            <ul>
-                <li class="item" @click.stop="pushRouter('/findMusic/recommend')">
+            <div class="tag-box">
+                <div class="tag" @click.stop="selectRouter('recommend')">
                     <div class="title" :class="this.$route.path==='/findMusic/recommend'?'active':''">个性推荐</div>
-                </li>
+                </div>
 
-                <li class="item" @click.stop="pushRouter('/findMusic/dissts')">
+                <div class="tag" @click.stop="selectRouter('dissts')">
                     <div class="title" :class="this.$route.path==='/findMusic/dissts'?'active':''">歌单</div>
-                </li>
+                </div>
 
-                <li class="item" @click.stop="pushRouter('/findMusic/rank')">
+                <div class="tag" @click.stop="selectRouter('rank')">
                     <div class="title" :class="this.$route.path==='/findMusic/rank'?'active':''">排行榜</div>
-                </li>
+                </div>
 
-                <li class="item" @click.stop="pushRouter('/findMusic/singer')">
+                <div class="tag" @click.stop="selectRouter('singer')">
                     <div class="title" :class="this.$route.path==='/findMusic/singer'?'active':''">歌手</div>
-                </li>
+                </div>
 
-                <li class="item" @click.stop="pushRouter('/findMusic/new_song')">
+                <div class="tag" @click.stop="selectRouter('new_song')">
                     <div class="title" :class="this.$route.path==='/findMusic/new_song'?'active':''">最新音乐</div>
-                </li>
-            </ul>
+                </div>
+                <div class="active-line-box" ref="activeLine">
+                    <div class="active-line"></div>
+                </div>
+            </div>
         </div>
-        <div class="nav-line"></div>
         <m-slider ref="wrapper">
             <div ref="musicBox" class="m-find-music-box" @scroll="scrollValue">
                 <!--分类内容区-->
                 <transition :name="transitionName">
                     <keep-alive>
-                        <router-view :scrollTop="scrollTop" :clientHeight="clientHeight" :scrollHeight="scrollHeight"/>
+                        <router-view :scrollTop="scrollTop" :clientHeight="clientHeight" :scrollHeight="scrollHeight"
+                                     @location="location"/>
                     </keep-alive>
                 </transition>
             </div>
@@ -61,7 +64,7 @@
         clientHeight: 0,
         showToTop: false,
         screenHeight: document.body.clientHeight,
-        transitionName: ''
+        transitionName: 'my-slide-left'
       }
     },
     mounted () {
@@ -71,6 +74,37 @@
       this.$refs.content.$el.style.height = `${window.innerHeight - 102.1}px`
     },
     methods: {
+      selectRouter (router) {
+        let allRouter = '/findMusic/' + router
+        this.changeActiveLineStyle(router)
+        this.pushRouter(allRouter)
+      },
+      changeActiveLineStyle (router) {
+        let translate = 1
+        switch (router) {
+          case 'recommend': {
+            translate = 0
+            break
+          }
+          case 'dissts': {
+            translate = 1
+            break
+          }
+          case 'rank': {
+            translate = 2
+            break
+          }
+          case 'singer': {
+            translate = 3
+            break
+          }
+          case 'new_song': {
+            translate = 4
+            break
+          }
+        }
+        this.$refs.activeLine.style.transform = `translate3d(${translate * 100}%, 0, 0)`
+      },
       scrollValue () {
         this.scrollTop = this.$refs.musicBox.scrollTop
         this.scrollHeight = this.$refs.musicBox.scrollHeight
@@ -95,7 +129,10 @@
       },
       ...mapMutations({
         setRouterStackPointer: 'SET_ROUTER_STACK_POINTER'
-      })
+      }),
+      location (location) {
+        this.$refs.wrapper.scrollTo(this.$refs.musicBox, location, timeOut)
+      }
     },
     watch: {
       screenHeight () {
@@ -109,6 +146,7 @@
           return
         }
         this.transitionName = toIndex < fromIndex ? 'my-slide-right' : 'my-slide-left'
+        this.changeActiveLineStyle(to.path.replace('/findMusic/', ''))
       }
     }
   }
@@ -119,49 +157,64 @@
         position: relative;
         z-index: 0;
         user-select: none;
-        background: #16181C;
         min-width: 820px;
         overflow: hidden;
 
         .m-find-music-nav {
             width: 100%;
             height: 50px;
-            line-height: 50px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-            ul {
+            .tag-box {
+                position: relative;
                 height: 50px;
-                list-style: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
 
-                .item {
-                    color: #828385;
-                    font-size: 14px;
-                    display: inline;
+                .tag {
+                    color: var(--font-base-color);
 
                     .title {
-                        display: inline-block;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                         height: 50px;
-                        width: 60px;
-                        margin: 0 10px;
+                        width: 80px;
                     }
 
                     .active {
-                        color: #FFFFFF;
-                        border-bottom: 1.5px solid #5C5E61;
+                        color: var(--font-active-color) !important;
                     }
 
                     .title:hover {
                         cursor: pointer;
-                        color: #FFFFFF;
+                        color: var(--font-active-color);
+                    }
+                }
+
+                .active-line-box {
+                    position: absolute;
+                    left: 0;
+                    bottom: 2px;
+                    width: 80px;
+                    height: 4px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    transform: translate3d(0, 0, 0);
+                    transition: transform 300ms ease;
+
+                    .active-line {
+                        width: 60px;
+                        height: 100%;
+                        border-radius: 5px;
+                        background-color: var(--font-active-color);
                     }
                 }
             }
-        }
-
-        .nav-line {
-            width: 100%;
-            height: 1px;
-            background: #303030;
         }
 
         .my-slide-right-enter-active,
@@ -184,13 +237,18 @@
             overflow-x: hidden;
             overflow-y: scroll;
             height: 94%;
-            padding: 0 30px 0 30px;
+            padding: 0 22px 0 30px;
         }
 
         .m-find-music-box {
             /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
             -ms-overflow-style: none;
         }
+
+        // 火狐
+        scrollbar-color: transparent transparent;
+        scrollbar-track-color: transparent;
+        -ms-scrollbar-track-color: transparent;
 
         .m-find-music-box::-webkit-scrollbar {
             /*滚动条整体样式*/
@@ -211,17 +269,17 @@
         .m-find-music-box::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: #2F3134;
+            background-color: var(--scrollbar-thumb-background-color);
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-find-music-box::-webkit-scrollbar-thumb:hover {
-            background-color: #3B3C40;
+            background-color: var(--scrollbar-thumb-hover-color);
         }
 
         .m-find-music-box::-webkit-scrollbar-thumb:active {
-            background-color: #3B3C40;
+            background-color: var(--scrollbar-thumb-active-color);
         }
     }
 </style>

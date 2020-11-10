@@ -34,6 +34,8 @@
 </script>
 
 <style lang="less">
+    @import "../../common/css/skeleton/skeleton";
+
     .m-singer-detail-skeleton {
         position: relative;
         height: 100%;
@@ -100,21 +102,6 @@
                     }
                 }
             }
-        }
-    }
-
-    .skeleton {
-        background: linear-gradient(90deg, #303031 25%, #373737 37%, #303031 63%);
-        background-size: 400% 100%;
-        animation: skeleton-loading 2s ease infinite;
-    }
-
-    @keyframes skeleton-loading {
-        0% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0 50%;
         }
     }
 </style>

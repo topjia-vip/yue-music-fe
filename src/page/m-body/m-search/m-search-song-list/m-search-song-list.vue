@@ -7,11 +7,11 @@
                 <div class="song-info-album">专辑</div>
                 <div class="song-info-time">时长</div>
             </li>
-            <li class="item song-info" v-for="(song,index) in hiLights" :key="songlist[index].mid"
+            <li class="item song-info" v-for="(song,index) in hiLights" :key="index"
                 @click="selectItem(index)"
                 @dblclick="playSong(songlist[index])"
                 @contextmenu.prevent="openMenu($event,index)"
-                :style="songlist[index] === selectSong?'background: #4342402e;':''"
+                :style="songlist[index] === selectSong?'background: var(--song-list-hover-background-color);':''"
                 :class="handleIsPlay(songlist[index])"
             >
                 <div class="play-status-icon" v-if="currentPlaySong.mid === songlist[index].mid">
@@ -28,7 +28,8 @@
                        @click.stop="deleteFavoriteSong(songlist[index])"
                        v-else></i>
                     <!--歌曲名称-->
-                    <span :title="`${song.song_name}${song.song_subtitle === ''?'':`-(${song.song_subtitle })`}`"
+                    <span class="song-name"
+                          :title="`${song.song_name}${song.song_subtitle === ''?'':`-(${song.song_subtitle })`}`"
                           v-html="song.songname_hilight"></span>
                     <span :title="`${song.song_name}${song.song_subtitle === ''?'':`-(${song.song_subtitle })`}`"
                           class="subTitle"
@@ -182,7 +183,7 @@
             line-height: 30px;
             padding: 0 60px 0 55px;
             font-size: 12px;
-            color: #8E8E8F;
+            color: var(--font-base-color);
 
             .song-info-name {
                 width: 45%;
@@ -208,7 +209,7 @@
 
         em {
             font-style: normal;
-            color: #2e6bb0 !important;
+            color: var(--player-bar-color) !important;
         }
 
         .item {
@@ -222,7 +223,7 @@
                 position: absolute;
                 left: 30px;
                 width: 55px;
-                color: #A62626;
+                color: var(--font-active-color);
                 padding-left: 10px;
             }
 
@@ -230,7 +231,6 @@
                 position: absolute;
                 left: 30px;
                 width: 55px;
-                color: #ffffff;
                 padding-left: 10px;
             }
 
@@ -244,17 +244,18 @@
                 padding-right: 10px;
 
                 .love-btn {
+                    color: var(--no-favorite-color);
                     margin-right: 5px;
                 }
 
                 .love-btn:hover {
-                    color: #d65958;
+                    color: var(--favorite-color);
                     cursor: pointer;
                     margin-right: 5px;
                 }
 
                 .unlove-btn {
-                    color: #d65958;
+                    color: var(--favorite-color);
                     cursor: pointer;
                     margin-right: 5px;
                 }
@@ -263,8 +264,12 @@
                     display: inline-block;
                 }
 
+                .song-name {
+                    color: var(--font-base-color);
+                }
+
                 .subTitle {
-                    color: #999999 !important;
+                    color: var(--font-tow-color);
                 }
             }
 
@@ -278,11 +283,12 @@
 
                 span {
                     margin-right: 5px;
+                    color: var(--font-base-color);
                 }
 
                 span:hover {
                     cursor: pointer;
-                    color: #FFFFFF;
+                    color: var(--font-active-color);
                 }
             }
 
@@ -294,9 +300,13 @@
                 white-space: nowrap;
                 padding-right: 10px;
 
+                .album-title {
+                    color: var(--font-base-color);
+                }
+
                 span:hover {
                     cursor: pointer;
-                    color: #FFFFFF;
+                    color: var(--font-active-color);
                 }
             }
 
@@ -308,12 +318,34 @@
         }
 
         .item:hover {
-            background: #4342402e;
+            background: var(--song-list-hover-background-color);
         }
 
         .song-playing {
-            color: #FFFFFF;
-            background: #4342402e;
+            color: var(--font-active-color);
+            background: var(--song-list-hover-background-color) !important;
+
+            .song-name-box {
+                .song-name {
+                    color: var(--font-active-color);
+                }
+
+                .subTitle {
+                    color: var(--font-active-color);
+                }
+            }
+
+            .singer {
+                span {
+                    color: var(--font-active-color);
+                }
+            }
+
+            .album {
+                .album-title {
+                    color: var(--font-active-color);
+                }
+            }
         }
     }
 </style>

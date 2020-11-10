@@ -71,14 +71,13 @@
         position: relative;
         z-index: 0;
         user-select: none;
-        background: #16181C;
         min-width: 820px;
         width: 100%;
         overflow: hidden;
 
         ::selection {
-            background: #d3d3d3;
-            color: #ffffff;
+            background: var(--font-tow-color);
+            color: var(--font-base-color);
         }
 
         .m-user-detail-box-content {
@@ -120,7 +119,7 @@
 
                         .user-nick {
                             p {
-                                color: #f2f2f2;
+                                color: var(--font-base-color);
                                 font-size: 24px;
                                 display: inline-block
                             }
@@ -128,7 +127,7 @@
                             .modify-user-info-btn {
                                 font-size: 12px;
                                 float: right;
-                                color: #ffffff;
+                                color: var(--font-base-color);
                                 width: 90px;
                                 height: 20px;
                                 line-height: 20px;
@@ -152,6 +151,11 @@
             -ms-overflow-style: none;
         }
 
+        // 火狐
+        scrollbar-color: transparent transparent;
+        scrollbar-track-color: transparent;
+        -ms-scrollbar-track-color: transparent;
+
         .m-user-detail-box-content {
             /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
             -ms-overflow-style: none;
@@ -208,17 +212,17 @@
         .m-user-detail-box-content::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: #2F3134;
+            background-color: var(--scrollbar-thumb-background-color);
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .m-user-detail-box-content::-webkit-scrollbar-thumb:hover {
-            background-color: #3B3C40;
+            background-color: var(--scrollbar-thumb-hover-color);
         }
 
         .m-user-detail-box-content::-webkit-scrollbar-thumb:active {
-            background-color: #3B3C40;
+            background-color: var(--scrollbar-thumb-active-color);
         }
     }
 </style>

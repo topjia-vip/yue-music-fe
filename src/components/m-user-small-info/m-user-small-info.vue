@@ -14,52 +14,52 @@
 </template>
 
 <script>
-export default {
-  name: 'm-user-small-info',
-  mounted () {
-    document.addEventListener('click', e => {
-      const v = document.getElementsByClassName('m-user-small-info')[0]
-      const b = document.getElementsByClassName('user-name-box-login')[0]
-      if (v && b) {
-        if (!v.contains(event.target) && !b.contains(event.target)) {
-          this.isShow = false
+  export default {
+    name: 'm-user-small-info',
+    mounted () {
+      document.addEventListener('click', e => {
+        const v = document.getElementsByClassName('m-user-small-info')[0]
+        const b = document.getElementsByClassName('user-name-box-login')[0]
+        if (v && b) {
+          if (!v.contains(event.target) && !b.contains(event.target)) {
+            this.isShow = false
+          }
         }
+      })
+    },
+    data () {
+      return {
+        isShow: false
       }
-    })
-  },
-  data () {
-    return {
-      isShow: false
-    }
-  },
-  methods: {
-    openSmallInfo () {
-      this.isShow = true
     },
-    closeSmallInfo () {
-      this.isShow = false
-    },
-    changeUser () {
-      this.isShow = false
-      this.$emit('changeUser')
-    },
-    toUserPage () {
-      this.$emit('toUserPage')
+    methods: {
+      openSmallInfo () {
+        this.isShow = true
+      },
+      closeSmallInfo () {
+        this.isShow = false
+      },
+      changeUser () {
+        this.isShow = false
+        this.$emit('changeUser')
+      },
+      toUserPage () {
+        this.$emit('toUserPage')
+      }
     }
   }
-}
 </script>
 
 <style lang="less">
     .m-user-small-info {
         width: 240px;
         height: 140px;
-        background: #29292b;
+        background: var(--select-dropdown-background-color);
         border-radius: 10px;
         z-index: 10;
         top: 40px;
         right: -60px;
-        color: #999999;
+        color: var(--font-base-color);
 
         .header {
             padding: 0 20px;
@@ -76,7 +76,7 @@ export default {
         .division-line {
             width: 100%;
             height: 1px;
-            background: #424242;
+            background: var(--select-active-background-color);
         }
 
         .tools {
@@ -93,7 +93,7 @@ export default {
 
         div :hover {
             cursor: pointer;
-            color: #ffffff;
+            color: var(--font-active-color);
         }
     }
 </style>

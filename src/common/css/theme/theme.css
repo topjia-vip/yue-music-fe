@@ -1,0 +1,77 @@
+:root {
+    /*                                                  Base组件颜色                                                 */
+    --font-base-color: #ffffff; /*文字基本颜色*/
+    --font-tow-color: #999999;
+    --font-active-color: #dc890d;
+    --background-color-base: #1e1e1f;
+    --no-favorite-color: #ADAFB2;
+    --favorite-color: #d65958;
+    /*滚动条*/
+    --scrollbar-thumb-background-color: #414346;
+    --scrollbar-thumb-hover-color: #4D4E52;
+    --scrollbar-thumb-active-color: #4D4E52;
+
+    /*                                                  头部颜色主题                                                 */
+    --header-background-color: #232326;
+    --search-background-color: #181818;
+    --header-button-icon-color: #ADAFB2;
+    --header-button-icon-disable-color: #3c3c3c;
+
+
+    /*                                                  左侧标签主题                                                 */
+    --tags-background-color: #171718;
+    --tag-hover-background-color: #2e2e2f;
+    --tags-title-text-color: #7c7c7c;
+    --tags-text-color: #ADAFB2;
+    --tags-text-hover-color: #FFFFFF;
+
+    /*                                                 mini播放器主题                                                */
+    --mini-player-background-color: #222225;
+    --play-progress-bar-color: #18181A;
+    --load-bar-color: #454546;
+    --player-bar-color: #dc890d;
+    /*播放器进度条颜色*/
+    --current-play-song-background-color: #191B1F;
+    --current-play-song-name-color: #f2f2f2;
+    /*播放列表*/
+    --play-list-background-color: #2D2F33;
+
+
+    /*                                                     body主题                                                 */
+    /*排行榜背景颜色 */
+    --rank-background-color: #242425;
+
+
+    /*                                                     ToTop按钮                                                 */
+    --to-top-background-color: #171717;
+    --to-top-color: #6d6d6d;
+    --to-top-hover-color: #dc890d;
+
+    /*                                                     下拉框                                                */
+    --select-dropdown-background-color: #232428;
+    --select-dropdown-hover-background-color: #2C2E32;
+    --select-active-background-color: #2a2c30;
+
+    /*                                                     轮播图dot                                                */
+    --dot-background-color: #2e3033;
+    --dot-active-background-color: #7f8082;
+
+    /*                                                     歌手标签hover                                                */
+    --singer-tag-hover-background-color: #2b2b2c7a;
+
+    /*                                                     收藏按钮                                                */
+    --save-btn-background-color: #303031;
+    --save-btn-hover-background-color: #3b3b3c;
+
+    /*                                                     骨架屏                                                */
+    --skeleton-background-start-color: #303031;
+    --skeleton-background-to-color: #373737;
+    --skeleton-background-end-color: #303031;
+
+    /*                                                     搜索                                                */
+    --search-tip-background-color: #242425;
+    --search-baseRes-hover-background-color: #323232;
+
+    /*                                                     歌曲列表                                                */
+    --song-list-hover-background-color: #4342401f;
+}

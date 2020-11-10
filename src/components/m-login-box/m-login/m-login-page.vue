@@ -311,7 +311,7 @@
 </script>
 
 <style lang="less">
-    @import "../../../common/css/theme/theme";
+    @import "../../../common/css/theme/theme-active";
 
     .login-page {
         user-select: none;
@@ -332,6 +332,7 @@
         opacity: 0;
         transform: translate3d(0, 0, 0) scale(.7);
         transition: transform 200ms, opacity 200ms;
+        box-shadow: 0 0 20px 0px #171717;
 
         .close-box {
             position: absolute;

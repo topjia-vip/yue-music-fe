@@ -1,10 +1,11 @@
 <template>
     <div class="left-tools">
         <div class="play-mode-box">
-            <span class="icon-btn loop iconfont icon-loop-play" v-if="mode === 0" @click="changePlayMode"></span>
-            <span class="icon-btn single iconfont icon-single_play" v-if="mode === 1"
+            <span class="icon-btn mode loop iconfont icon-loop-play" v-if="mode === 0" @click="changePlayMode"></span>
+            <span class="icon-btn mode single iconfont icon-single_play" v-if="mode === 1"
                   @click="changePlayMode"></span>
-            <span class="icon-btn random iconfont icon-random-play" v-if="mode === 2" @click="changePlayMode"></span>
+            <span class="icon-btn mode random iconfont icon-random-play" v-if="mode === 2"
+                  @click="changePlayMode"></span>
             <div class="tips" ref="tips">{{handleTips}}</div>
         </div>
         <div class="lyric-box">
@@ -78,110 +79,100 @@
   }
 </script>
 
-<style scoped>
+<style lang="less">
 
     .left-tools {
-        color: #5c5c5c;
-    }
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
 
-    .play-mode-box {
-        display: inline-block;
-        position: absolute;
-        right: 95px;
-        height: 40px;
-        width: 40px;
-        line-height: 40px;
-        text-align: center;
-    }
+        .icon-btn {
+            color: var(--font-tow-color);
+        }
 
-    .icon-btn:hover {
-        cursor: pointer;
-        color: #d6d4d4;
-    }
+        .icon-btn:hover {
+            cursor: pointer;
+            color: var(--font-active-color);
+        }
 
-    .play-mode-box .single {
-        font-size: 25px;
-    }
+        .play-mode-box {
+            position: relative;
+            height: 40px;
+            width: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-    .play-mode-box .loop {
-        font-size: 25px;
-    }
+            .mode {
+                font-size: 25px;
+            }
 
-    .play-mode-box .random {
-        font-size: 25px;
-    }
+            .tips {
+                position: absolute;
+                height: 30px;
+                width: 100px;
+                line-height: 30px;
+                transition: 0.5s;
+                font-size: 12px;
+                background: var(--select-active-background-color);
+                top: -35px;
+                left: -30px;
+                color: var(--font-base-color);
+                opacity: 0;
+                z-index: -1;
+                text-align: center;
+            }
+        }
 
-    .play-mode-box .tips {
-        position: absolute;
-        height: 30px;
-        width: 100px;
-        line-height: 30px;
-        transition: 0.5s;
-        display: inline-block;
-        font-size: 12px;
-        background: #000000;
-        top: -35px;
-        left: -30px;
-        color: #d6d4d4;
-        opacity: 0;
-        z-index: -1;
-    }
+        .lyric-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-    .lyric-box {
-        display: inline-block;
-        position: absolute;
-        right: 55px;
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
-    }
+            .lyric {
+                font-size: 25px;
+            }
+        }
 
-    .lyric-box .lyric {
-        font-size: 25px;
-    }
+        .play-list-box {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-    .play-list-box {
-        display: inline-block;
-        position: absolute;
-        right: 15px;
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
-    }
+            .play-list-icon {
+                font-size: 24px;
+            }
 
-    .play-list-box .play-list-icon {
-        font-size: 24px;
-    }
+            .playing-tips {
+                width: 80px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                background: var(--select-active-background-color);
+                color: var(--font-base-color);
+                font-size: 12px;
+                position: absolute;
+                top: -30px;
+                left: -38px;
+                border-radius: 3px;
+            }
 
-    .play-list-box .play-list-open {
-        color: #d6d4d4 !important;
-    }
+            .playing-tips-icon {
+                position: absolute;
+                color: var(--select-active-background-color);
+                top: -12px;
+                font-size: 20px;
+            }
 
-    .play-list-box .playing-tips {
-        width: 80px;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-        background: #2A2C30;
-        color: #56565A;
-        font-size: 12px;
-        position: absolute;
-        top: -30px;
-        left: -38px;
-        border-radius: 3px;
-    }
-
-    .play-list-box .playing-tips-icon {
-        position: absolute;
-        color: #2A2C30;
-        top: -12px;
-        font-size: 20px;
-    }
-
-    .play-list-box .tips-box {
-        opacity: 0;
-        transition: 0.5s;
+            .tips-box {
+                opacity: 0;
+                transition: opacity 0.5s;
+            }
+        }
     }
 </style>

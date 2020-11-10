@@ -35,7 +35,11 @@ const state = {
   // 记录路由栈的指针
   routerStackPointer: routerStack.routerStack.pointer,
   // 是否需要登录
-  needLogin: false
+  needLogin: false,
+  // 播放历史
+  playHistory: [],
+  // 搜索历史记录
+  searchHistory: []
 }
 
 export default state

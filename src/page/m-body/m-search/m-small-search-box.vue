@@ -3,9 +3,28 @@
         <div class="m-small-search-box" ref="smallSearchBox">
             <div class="hot-search-title" ref="hotSearch" v-if="smartSearch === null">
                 <!--历史搜索记录-->
+                <div class="search-history" v-if="searchHistory.length > 0">
+                    <div class="search-history-title">
+                        <div class="text">搜索历史</div>
+                        <div class="delete-all-icon" title="清空搜索记录" @click="deleteSearch()">
+                            <Icon type="md-trash" size="16"/>
+                            清空
+                        </div>
+                    </div>
+                    <div class="history-search-box">
+                        <div class="history-search-key"
+                             v-for="(key,index) in searchHistory" :key="index"
+                        >
+                            <div class="key-text" @click="quickSearch(key)">{{key}}</div>
+                            <div class="delete-icon" title="删除搜索记录" @click="deleteSearchItem(key)">
+                                <Icon type="md-trash" size="16"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!--热搜榜-->
                 <div class="hot-title-box">
-                    <div class="hot-title">热搜榜</div>
+                    <div class="hot-title">热搜</div>
                     <clip-loader style="display: inline-block;" v-if="hotKey === null"
                                  :color="'rgba(255, 255, 255, 0.5)'"
                                  :size="'10px'"></clip-loader>
@@ -55,7 +74,7 @@
   import { createHotKeyData } from '../../../common/js/createReqData'
   import { ERR_OK } from '../../../api/config'
   import { Icon } from 'view-design'
-  import { mapMutations } from 'vuex'
+  import { mapMutations, mapGetters, mapActions } from 'vuex'
   import ClipLoader from 'vue-spinner/src/ClipLoader'
   import MTips from '../../../components/m-tips/m-tips'
 
@@ -80,6 +99,11 @@
       Icon,
       ClipLoader
     },
+    computed: {
+      ...mapGetters([
+        'searchHistory'
+      ])
+    },
     created () {
       document.addEventListener('mousedown', e => {
         const x = document.getElementsByClassName('m-small-search-box')[0]
@@ -90,8 +114,15 @@
           }
         }
       })
+      this.readSearchHistory()
     },
     methods: {
+      deleteSearch () {
+        this.deleteSearchHistory()
+      },
+      deleteSearchItem (key) {
+        this.deleteSearchHistoryByKey(key)
+      },
       quickSearch (key) {
         this.$emit('quickSearch', key)
       },
@@ -150,7 +181,12 @@
       },
       ...mapMutations({
         setRouterStackPointer: 'SET_ROUTER_STACK_POINTER'
-      })
+      }),
+      ...mapActions([
+        'readSearchHistory',
+        'deleteSearchHistoryByKey',
+        'deleteSearchHistory'
+      ])
     },
     watch: {
       smartSearch (newValue) {
@@ -197,7 +233,7 @@
         left: 0;
         height: 0;
         width: 408px;
-        background: #2d2f33;
+        background: var(--select-dropdown-background-color);
         z-index: 15;
         transition-property: width, height;
         transition-duration: 0.5s;
@@ -206,7 +242,7 @@
         overflow-x: hidden;
 
         .highlight {
-            color: #2e6bb0;
+            color: var(--font-active-color);
         }
 
         .hot-search-title {
@@ -214,8 +250,91 @@
             max-height: 500px;
             text-align: left;
 
+            .search-history {
+                .search-history-title {
+                    color: var(--font-tow-color);
+                    height: 60px;
+                    line-height: 60px;
+                    padding: 0 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .delete-all-icon {
+                        font-size: 14px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    .delete-all-icon:hover {
+                        cursor: pointer;
+                        color: var(--font-active-color);
+                    }
+                }
+
+                .history-search-box {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    flex-flow: row;
+                    flex-wrap: wrap;
+                    padding: 0 10px;
+
+                    .history-search-key {
+                        position: relative;
+                        font-size: 12px;
+                        padding: 5px 16px;
+                        background-color: var(--select-active-background-color);
+                        margin: 5px;
+                        border-radius: 5px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: var(--font-tow-color);
+
+                        .key-text {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 20px;
+                        }
+
+                        .delete-icon {
+                            position: absolute;
+                            right: 2px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 20px;
+                            font-size: 14px;
+                            z-index: -10;
+                            opacity: 0;
+                            transition: opacity 200ms;
+                        }
+
+                        .key-text:hover {
+                            color: var(--font-active-color);
+                        }
+
+                        .delete-icon:hover {
+                            color: var(--font-active-color);
+                        }
+                    }
+
+                    .history-search-key:hover {
+                        cursor: pointer;
+
+                        .delete-icon {
+                            z-index: 10;
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+
             .hot-title-box {
-                color: #828385;
+                color: var(--font-tow-color);
                 height: 60px;
                 line-height: 60px;
                 padding-left: 20px;
@@ -249,14 +368,14 @@
 
                 .search-num {
                     display: inline-block;
-                    color: #5b5b5b;
+                    color: var(--font-tow-color);
                     font-size: 12px;
                 }
             }
 
             .hot-key-item:hover {
                 cursor: pointer;
-                background: #2a2c30;
+                background: var(--select-active-background-color);
             }
         }
 
@@ -270,23 +389,23 @@
                 height: 30px;
                 line-height: 30px;
                 padding-left: 20px;
-                color: #828385;
+                color: var(--font-tow-color);
             }
 
             .search-key:hover {
                 cursor: pointer;
-                color: #ffffff;
+                color: var(--font-active-color);
             }
 
             .title {
                 height: 20px;
                 line-height: 20px;
                 padding-left: 20px;
-                background: #303236;
+                background: var(--select-active-background-color);
             }
 
             .item {
-                color: #a5a7a8;
+                color: var(--font-tow-color);
                 height: 30px;
                 line-height: 30px;
                 padding-left: 20px;
@@ -308,13 +427,18 @@
 
             .item:hover {
                 cursor: pointer;
-                background: #2a2c30;
+                background: var(--select-active-background-color);
 
                 .play-icon {
                     font-size: 12px;
                 }
             }
         }
+
+        // 火狐
+        scrollbar-color: transparent transparent;
+        scrollbar-track-color: transparent;
+        -ms-scrollbar-track-color: transparent;
     }
 
     .m-small-search-box {
@@ -341,16 +465,16 @@
     .m-small-search-box::-webkit-scrollbar-thumb {
         /*滚动条里面小方块*/
         border-radius: 10px;
-        background-color: #414346;
+        background-color: var(--scrollbar-thumb-background-color);
     }
 
     /*---鼠标点击滚动条显示样式--*/
 
     .m-small-search-box::-webkit-scrollbar-thumb:hover {
-        background-color: #4c4d51;
+        background-color: var(--scrollbar-thumb-background-color);
     }
 
     .m-small-search-box::-webkit-scrollbar-thumb:active {
-        background-color: #4c4d51;
+        background-color: var(--scrollbar-thumb-active-color);
     }
 </style>

@@ -147,7 +147,7 @@
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
-                color: #ADAFB2;
+                color: var(--font-base-color);
                 padding-top: 5px;
                 font-size: 12px;
 
@@ -157,11 +157,11 @@
 
                 .name:hover {
                     cursor: pointer;
-                    color: #ffffff;
+                    color: var(--font-active-color);
                 }
 
                 .time {
-                    color: #999999;
+                    color: var(--font-tow-color);
                 }
             }
         }

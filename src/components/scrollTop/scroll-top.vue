@@ -23,27 +23,26 @@
 </script>
 
 <style lang="less">
-
     .top_box {
         bottom: 80px;
         right: 15px;
         z-index: 8;
         position: fixed;
         cursor: pointer;
-        background: #171717;
-    }
+        background: var(--to-top-background-color);
 
-    .top {
-        width: 30px;
-        height: 30px;
-        text-align: center;
-        line-height: 30px;
-        border: 1px solid #6d6d6d;
-        color: #6d6d6d;
-    }
+        .top {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid var(--to-top-color);
+            color: var(--to-top-color);
+        }
 
-    .top:hover {
-        border: 1px solid #888888;
-        color: #888888;
+        .top:hover {
+            border: 1px solid var(--to-top-hover-color);
+            color: var(--to-top-hover-color);
+        }
     }
 </style>

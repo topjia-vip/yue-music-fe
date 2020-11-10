@@ -23,20 +23,22 @@
 </template>
 
 <script>
-import MSongListSkeleton from './m-song-list-skeleton'
+  import MSongListSkeleton from './m-song-list-skeleton'
 
-export default {
-  name: 'm-disstdetail-skeleton',
-  components: { MSongListSkeleton },
-  data () {
-    return {
-      list: new Array(20)
+  export default {
+    name: 'm-disstdetail-skeleton',
+    components: { MSongListSkeleton },
+    data () {
+      return {
+        list: new Array(20)
+      }
     }
   }
-}
 </script>
 
 <style lang="less">
+    @import "../../common/css/skeleton/skeleton";
+
     .disstdetail-skeleton-box {
         padding: 0 30px 20px 30px;
 
@@ -221,21 +223,6 @@ export default {
                         }
                     }
                 }
-            }
-        }
-
-        .skeleton {
-            background: linear-gradient(90deg, #303031 25%, #373737 37%, #303031 63%);
-            background-size: 400% 100%;
-            animation: skeleton-loading 2s ease infinite;
-        }
-
-        @keyframes skeleton-loading {
-            0% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0 50%;
             }
         }
     }

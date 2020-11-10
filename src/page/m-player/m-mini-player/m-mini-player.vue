@@ -25,7 +25,6 @@
                     <div class="load-bar" :style="`width:${currentSongLoad}%`"></div>
                     <div ref="progress" class="play-progressed-bar"></div>
                     <div ref="progressBtn" class="btn" @mousedown.prevent="progressTouchStart($event,'song')">
-                        <div class="dot"></div>
                         <clip-loader style="position: absolute;top: -13px; left: 0;" size="12px"
                                      color="rgb(135, 133, 133)"
                                      :loading="sequenceList.length !== 0 && !playReady"></clip-loader>
@@ -47,7 +46,6 @@
                         <div ref="volumeProgress" class="volume-progressed-bar"></div>
                         <div ref="volumeProgressBtn" class="btn"
                              @mousedown.prevent="progressTouchStart($event,'volume')">
-                            <div class="dot"></div>
                         </div>
                     </div>
                 </div>
@@ -221,8 +219,6 @@
 </script>
 
 <style lang="less">
-    @import '../../../common/css/theme/theme';
-
     .player {
         user-select: none;
         height: 51px;
@@ -232,15 +228,14 @@
         bottom: 0;
         z-index: 999;
         padding: 5px 310px 5px 240px;
-        border-top: 0.1px solid #363636;
-        box-shadow: -3px 4px 5px #7d7d7d;
-        background: @mini-player-background-color;
+        border-top: 0.1px solid var(--mini-player-background-color);
+        background: var(--mini-player-background-color);
 
         .player-tools {
             position: absolute;
             width: 200px;
             height: 40px;
-            color: @tools-color;
+            color: var(--font-base-color);
             left: 0;
             padding: 0 10px;
             text-align: center;
@@ -261,7 +256,7 @@
 
                 .tool-icon:hover {
                     cursor: pointer;
-                    color: @player-bar-color;
+                    color: var(--font-active-color);
                 }
             }
 
@@ -279,7 +274,7 @@
                 padding: 2.5px;
 
                 .play-icon {
-                    color: @player-bar-color;
+                    color: var(--font-active-color);
                     font-size: 38px;
                     position: relative;
                 }
@@ -290,7 +285,7 @@
                 padding: 2.5px;
 
                 .pause-icon {
-                    color: @player-bar-color;
+                    color: var(--font-active-color);
                     font-size: 38px;
                     position: relative;
                 }
@@ -314,7 +309,7 @@
             padding: 0 3px;
             font-size: 12px;
             text-align: center;
-            color: @time-color;
+            color: var(--font-tow-color);
             display: inline-block;
         }
 
@@ -336,13 +331,13 @@
                 .play-progress-bar {
                     position: relative;
                     height: 4px;
-                    background: @play-progress-bar-color;
+                    background: var(--play-progress-bar-color);
                     border-radius: 2px;
 
                     .load-bar {
                         position: absolute;
                         height: 4px;
-                        background: @load-bar-color;
+                        background: var(--load-bar-color);
                         border-radius: 2px;
                     }
 
@@ -350,7 +345,7 @@
                         position: relative;
                         width: 0;
                         height: 4px;
-                        background: @player-bar-color;
+                        background: var(--font-active-color);
                         border-radius: 2px;
                     }
 
@@ -359,24 +354,9 @@
                         width: 12px;
                         height: 12px;
                         border-radius: 50%;
-                        background: @player-bar-btn-background-color;
-                        -webkit-box-shadow: 0 0 2px @player-bar-btn-box-shadow-color;
-                        box-shadow: 0 0 2px @player-bar-btn-box-shadow-color;
+                        background: var(--font-active-color);
                         top: -4px;
                         left: -6px;
-
-                        .dot {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            right: 0;
-                            bottom: 0;
-                            margin: auto;
-                            width: 4px;
-                            height: 4px;
-                            background: @player-bar-color;
-                            border-radius: 50%;
-                        }
 
                         .song-loading {
                             position: absolute;
@@ -392,7 +372,6 @@
 
                     .btn:hover {
                         cursor: pointer;
-                        box-shadow: 0 0 6px @player-bar-btn-box-shadow-color;
                     }
                 }
             }
@@ -405,33 +384,39 @@
         .volume-box {
             height: 40px;
             width: 140px;
-            display: inline-block;
             position: absolute;
             right: 130px;
             padding: 0 5px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            top: 6px;
 
             .icon-box {
                 height: 40px;
                 width: 24px;
-                line-height: 40px;
                 font-size: 24px;
-                float: left;
-                color: @icon-color;
+                color: var(--font-tow-color);
                 margin-right: 6px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .icon-box:hover {
                 cursor: pointer;
-                color: @tools-color;
+                color: var(--font-active-color);
             }
 
             .volume-bar-box {
                 height: 40px;
-                padding: 12px 2px;
                 width: 100px;
-                float: left;
+                display: flex;
+                justify-content: center;
+                align-items: center;
 
                 .ex-bar {
+                    width: 100%;
                     height: 16px;
                     padding: 6px 0;
 
@@ -439,7 +424,7 @@
                         position: relative;
                         width: 100%;
                         height: 4px;
-                        background: @play-progress-bar-color;
+                        background: var(--play-progress-bar-color);
                         border-radius: 2px;
                     }
 
@@ -447,7 +432,7 @@
                         position: relative;
                         width: 0;
                         height: 4px;
-                        background: @player-bar-color;
+                        background: var(--font-active-color);
                         border-radius: 2px;
                     }
 
@@ -456,31 +441,11 @@
                         width: 12px;
                         height: 12px;
                         border-radius: 50%;
-                        background: @player-bar-btn-background-color;
-                        -webkit-box-shadow: 0 0 2px @player-bar-btn-box-shadow-color;
-                        box-shadow: 0 0 2px @player-bar-btn-box-shadow-color;
+                        background: var(--font-active-color);
                         top: -4px;
                         left: -6px;
                         opacity: 0;
                         z-index: -1;
-
-                        .dot {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            right: 0;
-                            bottom: 0;
-                            margin: auto;
-                            width: 4px;
-                            height: 4px;
-                            background: @player-bar-color;
-                            border-radius: 50%;
-                        }
-                    }
-
-                    .btn:hover {
-                        cursor: pointer;
-                        box-shadow: 0 0 6px @player-bar-btn-box-shadow-color;
                     }
                 }
 
@@ -502,17 +467,16 @@
             right: 0;
             padding: 0 5px;
             display: inline-block;
+            top: 5px;
         }
 
         .current-play-song {
             width: 200px;
             height: 60px;
             position: absolute;
-            background: @current-play-song-background-color;
+            background: var(--current-play-song-background-color);
             top: -61px;
             left: 0;
-            border-top: 0.1px solid @current-play-song-border-color;
-            border-right: 0.1px solid @current-play-song-border-color;
             padding: 8px 30px 8px 5px;
             transform: translate3d(-100%, 0, 0);
             transition: transform 300ms;
@@ -521,12 +485,12 @@
                 position: absolute;
                 right: 8px;
                 top: 12px;
-                color: @no-favorite-color;
+                color: var(--no-favorite-color);
                 margin-right: 5px;
             }
 
             .love-btn:hover {
-                color: @favorite-color;
+                color: var(--favorite-color);
                 cursor: pointer;
                 margin-right: 5px;
             }
@@ -535,7 +499,7 @@
                 position: absolute;
                 right: 8px;
                 top: 12px;
-                color: @favorite-color;
+                color: var(--favorite-color);
                 cursor: pointer;
                 margin-right: 5px;
             }
@@ -590,7 +554,7 @@
                     width: 100%;
                     height: 22px;
                     line-height: 22px;
-                    color: @current-play-song-name-color;
+                    color: var(--current-play-song-name-color);
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -604,7 +568,7 @@
                     width: 100%;
                     height: 22px;
                     line-height: 22px;
-                    color: @current-play-song-singer-color;
+                    color: var(--font-tow-color);
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -614,7 +578,7 @@
                     }
 
                     span:hover {
-                        color: @current-play-song-name-color;
+                        color: var(--font-active-color);
                         cursor: pointer;
                     }
                 }

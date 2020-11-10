@@ -35,17 +35,19 @@
 </template>
 
 <script>
-export default {
-  name: 'm-song-list-skeleton',
-  data () {
-    return {
-      list: new Array(20)
+  export default {
+    name: 'm-song-list-skeleton',
+    data () {
+      return {
+        list: new Array(20)
+      }
     }
   }
-}
 </script>
 
 <style lang="less">
+    @import "../../common/css/skeleton/skeleton";
+
     .song-list-skeleton {
         margin-top: 20px;
 
@@ -151,21 +153,6 @@ export default {
                     width: 60px;
                 }
             }
-        }
-    }
-
-    .skeleton {
-        background: linear-gradient(90deg, #303031 25%, #373737 37%, #303031 63%);
-        background-size: 400% 100%;
-        animation: skeleton-loading 2s ease infinite;
-    }
-
-    @keyframes skeleton-loading {
-        0% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0 50%;
         }
     }
 </style>

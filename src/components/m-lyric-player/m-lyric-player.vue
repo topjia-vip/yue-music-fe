@@ -107,7 +107,7 @@
 </script>
 
 <style lang="less">
-    @import "../../common/css/theme/theme";
+    @import "../../common/css/theme/theme-active";
 
     .lyric-wrapper {
         width: 100%;
@@ -131,7 +131,7 @@
         }
 
         .current {
-            color: @player-bar-color;
+            color: var(--font-active-color);
         }
 
         .no-lyric, .cyy {
@@ -143,6 +143,13 @@
     }
 
     .lyric-wrapper::-webkit-scrollbar {
+        // 火狐
         display: none;
+    }
+
+    .lyric-wrapper {
+        scrollbar-color: transparent transparent;
+        scrollbar-track-color: transparent;
+        -ms-scrollbar-track-color: transparent;
     }
 </style>

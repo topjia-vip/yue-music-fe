@@ -1,61 +1,70 @@
 <template>
     <div ref="playListBox" class="m-play-list">
-        <div class="heard">
-            <div class="btn-box">
-                <div class="btn now-play-list btn-active">
-                    <span>播放列表</span>
+        <div class="play-list-heard">
+            <div class="list-mode-title">
+                <h2 v-if="listMode === 0">播放队列</h2>
+                <h2 v-else>历史记录</h2>
+                <Icon class="change-list" type="md-arrow-dropright" size="20" @click="changeList"/>
+            </div>
+            <div class="list-other-info">
+                <div class="song-num-box">
+                    <span class="num">{{listMode === 0 ? sequenceList.length : playHistory.length}}</span>首歌曲
                 </div>
-                <div class="btn history-play-list">
-                    <span>历史记录</span>
-                </div>
-                <div class="close" @click="closeList">
-                    <Icon type="ios-close" size="24"/>
+                <div class="play-list-tools">
+                    <div class="clear-all" @click="clearAll" v-if="listMode === 0" title="清空播放队列">
+                        <Icon class="clear-icon" type="md-trash" size="20"/>
+                    </div>
+                    <div class="clear-all" @click="clearAllPlayHistory" v-else title="清空历史记录">
+                        <Icon class="clear-icon" type="md-trash" size="20"/>
+                    </div>
                 </div>
             </div>
         </div>
-        <!--工具栏-->
-        <div class="play-list-tool">
-            <div class="song-sum">
-                <span>总<span class="num">{{sequenceList.length}}</span>首</span>
-            </div>
-            <div class="clear-all" @click="clearAll">
-                <Icon class="clear-icon" type="ios-trash-outline" size="18"/>
-                <span class="name">清空</span>
-            </div>
-        </div>
-        <div class="play-list-info">
-            <!--列表展示-->
-            <div class="song-list">
-                <ul>
-                    <li class="song-item" v-for="(song,index) in sequenceList" :key="index"
-                        :class="[index%2===0?'':'odd',index === curSelectSong?'song-select':'',song === currentPlaySong?'song-playing':'']"
-                        @click="selectSong(index)"
-                        @dblclick="selectItem(song,index)"
-                    >
-                        <div class="play-status-icon" v-if="song.mid === currentPlaySong.mid">
-                            <Icon type="ios-play" size="17" v-if="playStatus"/>
-                            <Icon type="ios-pause" size="17" v-else/>
-                        </div>
-                        <div class="song-name">
-                            <span class="title" v-html="song.title"></span>
-                            <span class="subTitle" v-if="song.subTitle" v-html="'('+song.subTitle+')'"></span>
-                        </div>
-                        <div class="singer">
-                             <span v-for="(singer) in song.singers" :key="singer.singerMid"
-                                   v-html="singer.singerName" :title="singer.singerName"
-                                   @click="toSingerDetail(singer)" @dblclick.stop=""></span>
-                        </div>
-                        <div class="song-time">
-                            {{_handleTime(song.duration)}}
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <!--没有列表时显示-->
+        <div class="play-list-info" v-if="listMode === 0">
             <div class="no-song-list" v-if="sequenceList.length === 0">
                 <div class="tips">
                     <p>您还没有添加任何歌曲!</p>
                     <p>前往首页<span class="toFindMusic" @click="toFindMusicPage">发现音乐</span></p>
+                </div>
+            </div>
+            <m-play-list-song-list
+                    class="play-list-song-list"
+                    :curSelectSong="curSelectSong"
+                    :current-play-song="currentPlaySong"
+                    :play-status="playStatus"
+                    :song-list="sequenceList"
+                    @selectSong="selectSong"
+                    @selectItem="selectItem"
+                    @toSingerDetail="toSingerDetail"
+                    v-else
+            />
+        </div>
+        <div class="play-list-info history" v-else>
+            <!--没有列表时显示-->
+            <div class="no-song-list" v-if="playHistory.length === 0">
+                <div class="tips">
+                    <p>您还没有播放任何歌曲!</p>
+                    <p>前往首页<span class="toFindMusic" @click="toFindMusicPage">发现音乐</span></p>
+                </div>
+            </div>
+            <m-play-list-song-list
+                    class="play-list-song-list"
+                    :curSelectSong="curSelectHistorySong"
+                    :current-play-song="currentPlaySong"
+                    :play-status="playStatus"
+                    :song-list="playHistory"
+                    @selectSong="selectSong"
+                    @selectItem="selectItem"
+                    @toSingerDetail="toSingerDetail"
+                    v-else
+            />
+        </div>
+        <div class="play-list-footer">
+            <div class="line"></div>
+            <div class="close-play-list">
+                <div class="icon-box" @click="closeList">
+                    <span class="icon-btn play-list-icon iconfont icon-play-list"></span>
+                    <span class="tip">收起</span>
                 </div>
             </div>
         </div>
@@ -63,19 +72,24 @@
 </template>
 
 <script>
+  import '../icon/font_icon/iconfont.css'
   import { Icon } from 'view-design'
-  import { mapGetters, mapMutations } from 'vuex'
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
   import { handleTime, scrollToTop } from '../../../common/js/util'
   import { playMode } from '../../../common/js/config'
+  import MPlayListSongList from './m-play-list-song-list/m-play-list-song-list'
 
   export default {
     name: 'm-play-list',
     components: {
+      MPlayListSongList,
       Icon
     },
     data () {
       return {
-        curSelectSong: -1
+        curSelectSong: -1,
+        curSelectHistorySong: -1,
+        listMode: 0
       }
     },
     computed: {
@@ -86,16 +100,21 @@
         'currentPlaySong',
         'currentPlaySongIndex',
         'playStatus',
-        'mode'
+        'mode',
+        'playHistory'
       ])
     },
     mounted () {
-      window.addEventListener('resize', () => {
-        this.$refs.playListBox.style.height = `${window.innerHeight * 0.7}px`
-      })
-      this.$refs.playListBox.style.height = `${window.innerHeight * 0.7}px`
+      this.readPlayHistory()
     },
     methods: {
+      changeList () {
+        if (this.listMode === 0) {
+          this.listMode = 1
+        } else {
+          this.listMode = 0
+        }
+      },
       closeList () {
         this.$emit('closeList')
       },
@@ -126,240 +145,181 @@
         return handleTime(duration)
       },
       selectSong (songIndex) {
-        this.curSelectSong = songIndex
+        switch (this.listMode) {
+          case 0: {
+            this.curSelectSong = songIndex
+            break
+          }
+          case 1: {
+            this.curSelectHistorySong = songIndex
+            break
+          }
+        }
       },
       clearAll () {
         this.$emit('clearAll')
       },
+      clearAllPlayHistory () {
+        this.cleanAllPlayHistorySong()
+      },
       // 从播放列表中切换歌曲
       selectItem (item, index) {
-        if (this.mode === playMode.random) {
-          index = this.playList.findIndex((song) => {
-            return song.id === item.id
-          })
+        console.log(index)
+        if (this.listMode === 1) {
+          // 从历史记录里选取歌曲播放
+          this.insertSong(item)
+        } else {
+          if (this.mode === playMode.random) {
+            index = this.playList.findIndex((song) => {
+              return song.id + '' === item.id + ''
+            })
+          }
+          this.setCurrentPlaySongIndex(index)
         }
-        this.setCurrentPlaySongIndex(index)
       },
       ...mapMutations({
         setCurrentPlaySongIndex: 'SET_CURRENT_PLAY_SONG_INDEX',
         setRouterStackPointer: 'SET_ROUTER_STACK_POINTER'
-      })
+      }),
+      ...mapActions([
+        'readPlayHistory',
+        'insertSong',
+        'cleanAllPlayHistorySong'
+      ])
     }
   }
 </script>
 
 <style lang="less">
-    @import '../../../common/css/theme/theme';
-
     .m-play-list {
         user-select: none;
-        width: 600px;
-        height: 300px;
-        background: #2D2F33;
-        box-shadow: 0 0 2px #000000;
+        width: 300px;
+        height: 100%;
+        background: var(--play-list-background-color);
+        box-shadow: 6px 2px 20px 0 #000000;
 
-        .heard {
-            height: 40px;
+        .play-list-heard {
+            height: 100px;
             width: 100%;
-            padding: 5px 200px;
-            background: #282A2E;
-
-            .btn-box {
-                float: left;
-                border: 0.5px solid #303030;
-                border-radius: 6px;
-
-                .btn {
-                    cursor: pointer;
-                    width: 95px;
-                    height: 30px;
-                    line-height: 30px;
-                    font-size: 12px;
-                    text-align: center;
-                    color: #828385;
-                }
-
-                .now-play-list {
-                    float: left;
-                    border-radius: 6px 0 0 6px;
-                }
-
-                .history-play-list {
-                    float: right;
-                    border-radius: 0 6px 6px 0;
-                }
-
-                .btn:hover {
-                    background: #313337;
-                }
-
-                .btn-active {
-                    background: #3A3A3F !important;
-                    color: #DCDDE4 !important;
-                }
-            }
-
-            .close {
-                position: absolute;
-                right: 0;
-                margin-right: 15px;
-                color: #828385;
-            }
-
-            .close:hover {
-                cursor: pointer;
-                color: #DCDDE4;
-            }
-        }
-
-        .play-list-tool {
-            width: 100%;
-            height: 30px;
-            background: #2D2F33;
             padding: 0 30px;
-            border-bottom: 0.5px solid #454545;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-flow: column;
 
-            .song-sum {
-                color: #828385;
-                line-height: 30px;
-                font-size: 12px;
-                display: inline-block;
-            }
+            .list-mode-title {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                color: var(--font-base-color);
 
-            .clear-all {
-                float: right;
-                height: 30px;
-                line-height: 30px;
-                cursor: pointer;
-                color: #828385;
-
-                .clear-icon {
-                    position: relative;
-                    top: 1px;
+                .change-list {
+                    color: var(--font-tow-color);
                 }
 
-                .name {
-                    font-size: 12px;
+                .change-list:hover {
+                    cursor: pointer;
+                    color: var(--font-active-color);
                 }
             }
 
-            .clear-all:hover {
-                color: #DCDDE4;
+            .list-other-info {
+                width: 100%;
+                margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .song-num-box {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: var(--font-tow-color);
+
+                    .num {
+                        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+                    }
+                }
+
+                .play-list-tools {
+                    .clear-all {
+                        color: var(--font-tow-color);
+                    }
+
+                    .clear-all:hover {
+                        cursor: pointer;
+                        color: var(--font-active-color);
+                    }
+                }
             }
         }
 
         .play-list-info {
-            height: 86%;
+            height: calc(100% - 200px);
             overflow-y: scroll;
             overflow-x: hidden;
 
-            .song-list {
-                .song-item {
-                    position: relative;
-                    list-style: none;
-                    height: 30px;
-                    line-height: 30px;
-                    font-size: 12px;
-                    background: #2D2F33;
-
-                    .play-status-icon {
-                        position: absolute;
-                        left: 0;
-                        width: 30px;
-                        text-align: center;
-                        color: @player-bar-color;
-                    }
-
-                    .song-name {
-                        width: 360px;
-                        display: inline-block;
-                        padding-left: 30px;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        color: #DCDDE4;
-
-                        .subTitle {
-                            color: #5F5F63 !important;
-                        }
-                    }
-
-                    .singer {
-                        width: 160px;
-                        padding-left: 10px;
-                        display: inline-block;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        color: #5F5F63;
-
-                        span {
-                            margin-right: 5px;
-                            cursor: pointer;
-                        }
-                    }
-
-                    .song-time {
-                        float: right;
-                        right: 0;
-                        width: 60px;
-                        color: #828385;
-                        text-align: center;
-                        display: inline-block;
-                    }
-
-                }
-
-                .odd {
-                    background: #303236
-                }
-
-                .song-item:hover {
-                    background: #323438;
-
-                    .singer {
-                        color: #DCDDE4;
-                    }
-
-                    .song-time {
-                        color: #DCDDE4;
-                    }
-                }
-
-                .song-playing {
-                    background: #3A3C40 !important;
-
-                    .singer {
-                        color: #DCDDE4;
-                    }
-
-                    .song-time {
-                        color: #DCDDE4;
-                    }
-                }
-
-                .song-select {
-                    background: #3A3C40 !important;
-
-                    .singer {
-                        color: #DCDDE4;
-                    }
-
-                    .song-time {
-                        color: #DCDDE4;
-                    }
-                }
+            .play-list-song-list {
+                padding-left: 8px;
             }
 
             .no-song-list {
-                margin-top: 150px;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 text-align: center;
-                color: #828385;
+                color: var(--font-tow-color);
 
                 .toFindMusic {
                     cursor: pointer;
-                    color: #DCDDE4;
-                    text-decoration: underline;
+                    color: var(--font-active-color);
+                }
+            }
+        }
+
+        .play-list-footer {
+            width: 100%;
+            height: 100px;
+            padding: 0 30px 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-flow: column;
+
+            .line {
+                width: 100%;
+                height: 2px;
+                background-color: var(--select-active-background-color);
+            }
+
+            .close-play-list {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+
+                .icon-box {
+                    height: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: var(--font-tow-color);
+
+                    .icon-btn {
+                        font-size: 24px;
+                    }
+
+                    .tip {
+                        margin-left: 3px;
+                        font-size: 12px;
+                    }
+                }
+
+                .icon-box:hover {
+                    cursor: pointer;
+                    color: var(--font-active-color);
                 }
             }
         }
@@ -368,6 +328,11 @@
             /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
             -ms-overflow-style: none;
         }
+
+        // 火狐
+        scrollbar-color: transparent transparent;
+        scrollbar-track-color: transparent;
+        -ms-scrollbar-track-color: transparent;
 
         .play-list-info::-webkit-scrollbar {
             /*滚动条整体样式*/
@@ -388,17 +353,17 @@
         .play-list-info::-webkit-scrollbar-thumb {
             /*滚动条里面小方块*/
             border-radius: 10px;
-            background-color: #414347;
+            background-color: var(--scrollbar-thumb-background-color);
         }
 
         /*---鼠标点击滚动条显示样式--*/
 
         .play-list-info::-webkit-scrollbar-thumb:hover {
-            background-color: #4C4D51;
+            background-color: var(--scrollbar-thumb-hover-color);
         }
 
         .play-list-info::-webkit-scrollbar-thumb:active {
-            background-color: #4C4D51;
+            background-color: var(--scrollbar-thumb-active-color);
         }
     }
 </style>

@@ -273,8 +273,6 @@
 </script>
 
 <style lang="less">
-    @import "../../../common/css/theme/theme";
-
     .m-play-full-screen {
         user-select: none;
         position: absolute;
@@ -334,13 +332,13 @@
                     -webkit-app-region: no-drag;
 
                     .btn {
-                        color: #918f90;
+                        color: #FFFFFF;
                         font-size: 24px;
                     }
 
                     .btn:hover {
                         cursor: pointer;
-                        color: #ffffff;
+                        color: var(--font-active-color);
                     }
                 }
 
@@ -351,13 +349,13 @@
                     -webkit-app-region: no-drag;
 
                     .btn {
-                        color: #918f90;
+                        color: #FFFFFF;
                         font-size: 24px;
                     }
 
                     .btn:hover {
                         cursor: pointer;
-                        color: #ffffff;
+                        color: var(--font-active-color);
                     }
                 }
 
@@ -421,7 +419,7 @@
 
                                 .song-name {
                                     user-select: text;
-                                    color: #ffffff;
+                                    color: #FFFFFF;
                                     overflow: hidden;
                                     text-overflow: ellipsis;
                                     white-space: nowrap;
@@ -490,7 +488,7 @@
                                 position: relative;
                                 width: 0;
                                 height: 3px;
-                                background: @player-bar-color;
+                                background: var(--player-bar-color);
                             }
 
                             .btn {
@@ -498,7 +496,7 @@
                                 width: 12px;
                                 height: 12px;
                                 border-radius: 50%;
-                                background: @player-bar-color;
+                                background: var(--font-active-color);
                                 top: -4px;
                                 left: -6px;
                                 opacity: 0;
@@ -524,23 +522,26 @@
                             height: 40px;
                             line-height: 40px;
                             left: 0;
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
 
                             .love-btn-box {
                                 display: inline-block;
 
                                 .love-btn {
-                                    color: #ADAFB2;
+                                    color: var(--no-favorite-color);
                                     margin-right: 5px;
                                 }
 
                                 .love-btn:hover {
-                                    color: #d65958;
+                                    color: var(--favorite-color);
                                     cursor: pointer;
                                     margin-right: 5px;
                                 }
 
                                 .unlove-btn {
-                                    color: #d65958;
+                                    color: var(--favorite-color);
                                     cursor: pointer;
                                     margin-right: 5px;
                                 }
@@ -548,7 +549,7 @@
 
                             .playTime {
                                 font-size: 12px;
-                                color: #a9a9a9;
+                                color: #999999;
                                 display: inline-block;
 
                                 .time {
@@ -567,11 +568,11 @@
 
                             .btn {
                                 cursor: pointer;
-                                color: #ffffff;
+                                color: #FFFFFF;
                             }
 
                             .btn:hover {
-                                color: @player-bar-color;
+                                color: var(--font-active-color);
                             }
 
                             .prev {
@@ -581,7 +582,7 @@
                             }
 
                             .play, .pause {
-                                color: @player-bar-color;
+                                color: var(--font-active-color);
                                 font-size: 40px;
                                 margin: 0 20px;
                             }
@@ -599,6 +600,9 @@
                             height: 40px;
                             line-height: 40px;
                             right: 0;
+                            display: flex;
+                            justify-content: flex-end;
+                            align-items: center;
                         }
                     }
                 }
