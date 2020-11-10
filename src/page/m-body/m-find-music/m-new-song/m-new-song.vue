@@ -1,66 +1,47 @@
 <template>
     <div class="m-new-song-box">
-        <div class="info-page" v-if="!isError && !showLoading">
-            <div class="title">新歌速递</div>
-            <div class="tag-box">
-                <ul>
-                    <li class="tag-item" v-for="(tag) in tags" :key="tag.type">
-                        <div class="tag-name" :class="type === tag.type?'tag-active':''" v-html="tag.lan"
-                             @click="selectTag(tag.type)"></div>
-                    </li>
-                </ul>
+        <div class="new-song-content">
+            <div class="new-song-header">
+                <div class="title">
+                    <h1>新歌首发</h1>
+                </div>
+                <div class="new-song-tags-box" v-if="showTag">
+                    <div class="new-song-tags">
+                        <div class="new-song-tag" v-for="(tag) in tags" :key="tag.type">
+                            <div class="text"
+                                 :class="type === tag.type?'active':''"
+                                 @click="selectTag(tag.type)"
+                                 v-html="tag.lan"
+                            />
+                            <div class="active-line" v-if="type === tag.type"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tags-skeleton" v-else></div>
             </div>
-            <div class="new-song-list-box">
-                <div class="new-song-list">
-                    <ul>
-                        <!--工具栏-->
-                        <li class="tool-box">
-                            <div class="play-all-btn" @click="playAllNewSong">
-                                <div class="icon-box">
-                                    <i class="play-all fa fa-play-circle-o" aria-hidden="true"></i>
-                                </div>
-                                <div class="btn-title">播放全部</div>
-                            </div>
-                        </li>
-                        <!--歌曲展示-->
-                        <li class="new-song" v-for="(newSong,index) in newSongList" :key="newSong.id"
-                            :style="index % 2 !== 0?'background:#16181C':'background:#1A1C20'"
-                            :class="cur_index === index?'new-song-select':''"
-                            @click="selectItem(index)"
-                            @dblclick="playSong(newSong)"
-                            @contextmenu.prevent="openMenu($event,index)"
-                        >
-                            <div class="num">{{handleNum(index+1)}}</div>
-                            <div class="song-img-box" @click.prevent="playSong(newSong)">
-                                <img class="song-img" v-lazy="handleLazyImage(newSong.image)" :key="newSong.image"
-                                     :alt="newSong.name">
-                                <div class="play-icon">
-                                    <Icon class="icon" type="ios-play" size="14"/>
-                                </div>
-                            </div>
-                            <div class="song-info">
-                                <div class="song-name">
-                                    <span class="title" v-html="newSong.title"></span>
-                                    <span class="subTitle" v-if="newSong.subTitle"
-                                          v-html="'('+newSong.subTitle+')'"></span>
-                                </div>
-                                <div class="singer-name">
-                                <span v-for="(singer) in newSong.singers" :key="singer.singerMid"
-                                      v-html="singer.singerName" :title="singer.singerName"
-                                      @click="toSingerDetail(singer)" @dblclick.stop=""></span>
-                                </div>
-                                <div class="album">
-                                    <span v-html="newSong.album"></span>
-                                </div>
-                            </div>
-                            <div class="song-time">{{_handleTime(newSong.duration)}}</div>
-                        </li>
-                    </ul>
+            <div class="play-btn-box">
+                <div class="play-btn">
+                    <Icon class="play-icon" type="ios-play" size="24"/>
+                    <span>播放全部</span>
                 </div>
             </div>
-            <m-right-click-menu :left="left" :top="top" v-if="isShow" @operation="operation"/>
+            <div class="song-list">
+                <m-song-list
+                        v-if="!showLoading && !isError"
+                        :songlist="newSongList"
+                        :selectSong="selectSong"
+                        :currentPlaySong="currentPlaySong"
+                        :playStatus="playStatus"
+                        :playList="playList"
+                        @selectItem="selectItem"
+                        @playSong="playSong"
+                        @openMenu="openMenu"
+                />
+                <m-song-list-skeleton v-if="showLoading && !isError"/>
+                <m-right-click-menu :left="left" :top="top" v-if="isShow" @operation="operation"/>
+            </div>
         </div>
-        <loading class="loading" v-if="showLoading && !isError"/>
+        <m-location-play-song v-if="_listHasSong" @location="location"/>
         <m-error-page v-if="isError" @refresh="refresh"/>
     </div>
 </template>
@@ -69,9 +50,9 @@
   import { Icon } from 'view-design'
   import { getNewSong } from '../../../../api/recommend'
   import { ERR_OK } from '../../../../api/config'
-  import { _normalizeSongs, handleTime, sleep } from '../../../../common/js/util'
+  import { _normalizeSongs, handleTime, listHasSong, sleep } from '../../../../common/js/util'
   import Loading from '../../../../components/loading/loading'
-  import { mapActions, mapMutations } from 'vuex'
+  import { mapActions, mapGetters, mapMutations } from 'vuex'
   import MRightClickMenu from '../../../../components/m-right-click-menu/m-right-click-menu'
   import { operationType } from '../../../../common/js/config'
   import { getNewSongData } from '../../../../common/js/requestData'
@@ -79,10 +60,13 @@
   import { createReqData } from '../../../../common/js/createReqData'
   import MErrorPage from '../../../../components/m-error-page/m-error-page'
   import SongDefLazyImg from '../../../../resources/images/playlist_300.png'
+  import MSongList from '../../../../components/m-song-list/m-song-list'
+  import MLocationPlaySong from '../../../../components/m-location-play-song/m-location-play-song'
+  import MSongListSkeleton from '../../../../components/m-skeleton/m-song-list-skeleton'
 
   export default {
     name: 'm-new-song',
-    components: { MErrorPage, MRightClickMenu, Loading, Icon },
+    components: { MSongListSkeleton, MLocationPlaySong, MSongList, MErrorPage, MRightClickMenu, Loading, Icon },
     data () {
       return {
         type: 5,
@@ -93,6 +77,7 @@
         top: 0,
         left: 0,
         isShow: false,
+        showTag: false,
         showLoading: true,
         findMusicBox: null,
         isError: false
@@ -108,7 +93,16 @@
             loading: SongDefLazyImg
           }
         }
-      }
+      },
+      _listHasSong () {
+        return listHasSong(this.newSongList, this.currentPlaySong)
+      },
+      ...mapGetters([
+        'currentPlaySong',
+        'playList',
+        'playStatus',
+        'loginUser'
+      ])
     },
     created () {
       this._getNewSong()
@@ -147,10 +141,17 @@
         this.tags = res.data.lanlist
         this.newSongList = _normalizeSongs(res.data.newSongList)
         this.showLoading = false
+        this.showTag = true
       },
       refresh () {
         this.isError = false
         this._getNewSong()
+      },
+      // 定位
+      location () {
+        let index = this.newSongList.findIndex((item) => item.id + '' === this.currentPlaySong.id + '')
+        let location = 60 * (index + 1)
+        this.$emit('location', location)
       },
       // 右键打开菜单栏
       openMenu (e, index) {
@@ -251,228 +252,107 @@
         width: 100%;
         height: 100%;
 
-        .title {
-            text-align: center;
-            margin-top: 20px;
-            color: #fff0f6;
-        }
+        .new-song-content {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
 
-        .tag-box {
-            margin-top: 20px;
-            border-bottom: 0.1px solid #303030;
+            .new-song-header {
+                width: 100%;
+                height: 150px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-flow: column;
 
-            .tag-item {
-                list-style: none;
-                display: inline-block;
-
-                .tag-name {
-                    cursor: pointer;
-                    margin-right: 20px;
-                    font-size: 17px;
-                    color: #999999;
+                .title {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    color: var(--font-base-color);
+                    font-size: 20px;
                 }
 
-                .tag-name:hover {
-                    color: #f2f2f2;
+                .new-song-tags-box {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                    .new-song-tags {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        .new-song-tag {
+                            width: 60px;
+                            height: 30px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: flex-start;
+                            flex-flow: column;
+                            color: var(--font-tow-color);
+
+                            .active-line {
+                                width: 27px;
+                                height: 4px;
+                                border-radius: 4px;
+                                background-color: var(--font-active-color);
+                            }
+
+                            .text:hover {
+                                cursor: pointer;
+                                color: var(--font-active-color);
+                            }
+
+                            .active {
+                                color: var(--font-active-color) !important;
+                            }
+                        }
+                    }
                 }
 
-                .tag-active {
-                    color: #f2f2f2;
-                    border-bottom: 1.5px solid #999999;
+                .tags-skeleton {
+                    width: 100%;
+                    height: 30px;
                 }
             }
-        }
 
-        .new-song-list-box {
-            margin-top: 10px;
-            margin-bottom: 30px;
-            border: 1px solid #303030;
+            .play-btn-box {
+                width: 100%;
+                height: 60px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
 
-            .new-song-list {
-                position: relative;
+                .play-btn {
+                    display: inline-block;
+                    cursor: pointer;
+                    position: relative;
+                    width: 120px;
+                    height: 30px;
+                    background-image: linear-gradient(141deg, rgb(17, 224, 246) 0%, rgb(203, 52, 218) 51%, rgb(230, 57, 162) 75%);
+                    border-radius: 20px;
+                    text-align: center;
+                    color: #FFFFFF;
 
-                ul {
-                    list-style: none;
-                }
-
-                .tool-box {
-                    width: 100%;
-                    height: 40px;
-                    background: #16181C;
-
-                    .play-all-btn {
-                        float: left;
-                        width: 120px;
-                        padding: 0 20px;
-                        line-height: 40px;
-
-                        .icon-box {
-                            display: inline-block;
-                            position: relative;
-                            top: 3px;
-
-                            .play-all {
-                                color: #8c1e1e;
-                                font-size: 18px;
-                            }
-                        }
-
-                        .btn-title {
-                            display: inline-block;
-                            font-size: 12px;
-                            color: #999999;
-                        }
-
-                    }
-
-                    .play-all-btn:hover {
-                        cursor: pointer;
-
-                        .btn-title {
-                            color: #f2f2f2;
-                        }
-                    }
-                }
-
-                .new-song {
-                    width: 100%;
-                    height: 60px;
-                    line-height: 40px;
-                    padding: 10px 60px 10px 80px;
-                    color: #999999;
-                    font-size: 12px;
-                    background: #1A1C20;
-
-                    .num {
-                        position: absolute;
-                        left: 0;
-                        width: 40px;
-                        text-align: center;
-                        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
-                        display: inline-block;
-                    }
-
-                    .song-img-box {
-                        cursor: pointer;
-                        position: absolute;
-                        left: 40px;
-                        height: 40px;
-                        width: 40px;
-
-                        .song-img {
-                            width: 100%;
-                            height: 100%;
-                            display: block;
-                        }
-
-                        .play-icon {
-                            position: absolute;
-                            right: 0;
-                            bottom: 0;
-                            top: 0;
-                            left: 0;
-                            margin: auto;
-                            width: 24px;
-                            height: 24px;
-                            color: #c2bebee3;
-                            background: #00000059;
-                            text-align: center;
-                            border-radius: 50%;
-                            border: 1px solid #FFFFFF;
-                            opacity: 0;
-                            z-index: -1;
-
-                            .icon {
-                                position: relative;
-                                top: -8px;
-                                left: 1.2px
-                            }
-                        }
-
-                        .play-icon:hover {
-                            background: #000000;
-                            color: #FFFFFF;
-                        }
-                    }
-
-                    .song-info {
-                        width: 100%;
-                        height: 40px;
-                        color: #E2E2E2;
-                        line-height: 40px;
+                    .play-icon {
                         position: relative;
-                        display: inline-block;
-
-                        .song-name {
-                            width: 46%;
-                            padding-left: 10px;
-                            display: inline-block;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
-
-                            .subTitle {
-                                color: #999999 !important;
-                            }
-                        }
-
-                        .singer-name {
-                            width: 23%;
-                            padding-left: 10px;
-                            display: inline-block;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
-
-                            span {
-                                margin-right: 5px;
-                                cursor: pointer;
-                            }
-                        }
-
-                        .album {
-                            width: 28%;
-                            padding-left: 10px;
-                            display: inline-block;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
-
-                            span {
-                                cursor: pointer;
-                            }
-                        }
-
-                    }
-
-                    .song-time {
-                        position: absolute;
-                        right: 0;
-                        width: 60px;
-                        text-align: center;
-                        font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
-                        display: inline-block;
+                        top: 3px;
                     }
                 }
 
-                .new-song:hover {
-                    background: #232529 !important;
-
-                    .play-icon {
-                        opacity: 1;
-                        z-index: 10;
-                    }
+                .play-btn:hover {
+                    background-image: linear-gradient(141deg, rgb(4, 195, 246) 0%, rgb(183, 46, 218) 51%, rgb(230, 34, 164) 75%);
                 }
+            }
 
-                .new-song-select {
-                    background: #25272B !important;
-                    color: #E2E2E2;
-
-                    .play-icon {
-                        opacity: 1;
-                        z-index: 10;
-                    }
-                }
+            .song-list {
+                width: 100%;
+                margin-bottom: 20px;
             }
         }
 

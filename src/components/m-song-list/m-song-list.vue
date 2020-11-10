@@ -178,6 +178,8 @@
 
 <style lang="less">
     .m-song-list {
+        width: 100%;
+
         .song-info-title {
             height: 30px;
             list-style: none;

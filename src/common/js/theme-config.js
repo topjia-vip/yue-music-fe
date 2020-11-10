@@ -38,7 +38,7 @@ let lightTheme = [
   },
   {
     cssName: '--header-background-color',
-    cssValue: '#f0f0f0'
+    cssValue: '#504e4e'
   },
   {
     cssName: '--search-background-color',
@@ -50,7 +50,7 @@ let lightTheme = [
   },
   {
     cssName: '--header-button-icon-disable-color',
-    cssValue: '#cccccc'
+    cssValue: '#6f6e6e'
   },
   {
     cssName: '--tags-background-color',

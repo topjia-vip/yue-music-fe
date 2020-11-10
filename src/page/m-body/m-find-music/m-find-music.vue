@@ -32,7 +32,8 @@
                 <!--分类内容区-->
                 <transition :name="transitionName">
                     <keep-alive>
-                        <router-view :scrollTop="scrollTop" :clientHeight="clientHeight" :scrollHeight="scrollHeight"/>
+                        <router-view :scrollTop="scrollTop" :clientHeight="clientHeight" :scrollHeight="scrollHeight"
+                                     @location="location"/>
                     </keep-alive>
                 </transition>
             </div>
@@ -128,7 +129,10 @@
       },
       ...mapMutations({
         setRouterStackPointer: 'SET_ROUTER_STACK_POINTER'
-      })
+      }),
+      location (location) {
+        this.$refs.wrapper.scrollTo(this.$refs.musicBox, location, timeOut)
+      }
     },
     watch: {
       screenHeight () {

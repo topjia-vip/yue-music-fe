@@ -606,7 +606,7 @@
                         position: relative;
 
                         .user-name {
-                            color: var(--font-base-color);
+                            color: var(--font-tow-color);
                             height: 26px;
                             line-height: 26px;
                             font-size: 12px;

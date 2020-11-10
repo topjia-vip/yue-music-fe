@@ -3,11 +3,14 @@
         <div class="info-page" v-if="isShow && !isError">
             <m-focus ref="focus" :focus="focus" v-if="focus !== null"/>
             <m-recommend-focus-skeleton v-else/>
-            <div class="content-box" v-if="playlist !== null && newSongList !== null">
-                <m-recomdisstlist :recom-play-list="playlist"/>
-                <m-newsonglist :new-song-list="newSongList"/>
+            <div class="content-box">
+                <m-title :title="'推荐歌单'" @moreClick="_toDisstPage"/>
+                <m-recomdisstlist v-if="playlist !== null" :recom-play-list="playlist"/>
+                <m-disst-list-skeleton v-else/>
+                <m-title :title="'最新音乐'" @moreClick="_toNewSongPage"/>
+                <m-newsonglist v-if="newSongList !== null" :new-song-list="newSongList"/>
+                <m-song-list-skeleton v-else/>
             </div>
-            <m-recommend-disst-skeleton v-else/>
         </div>
         <m-recommend-skeleton v-if="!isShow && !isError"/>
         <m-error-page v-if="isError" @refresh="refresh"/>
@@ -22,7 +25,7 @@
   import { ERR_OK } from '../../../../api/config'
   import Loading from '../../../../components/loading/loading'
   import MNewsonglist from './m-newsongs/m-newsonglist'
-  import { _normalizeSongs, sleep } from '../../../../common/js/util'
+  import { _normalizeSongs, scrollToTop, sleep } from '../../../../common/js/util'
   import { getFocusData, getPlayListAndNewMusicData } from '../../../../common/js/requestData'
   import { getSign } from '../../../../common/js/sign'
   import { createReqData } from '../../../../common/js/createReqData'
@@ -31,10 +34,17 @@
   import MRecommendSkeleton from '../../../../components/m-skeleton/m-recommend-skeleton'
   import MRecommendDisstSkeleton from '../../../../components/m-skeleton/m-recommend-disst-skeleton'
   import MRecommendFocusSkeleton from '../../../../components/m-skeleton/m-recommend-focus-skeleton'
+  import MDisstListSkeleton from '../../../../components/m-skeleton/m-disst-list-skeleton'
+  import MSongListSkeleton from '../../../../components/m-skeleton/m-song-list-skeleton'
+  import MTitle from '../../../../components/m-title/m-title'
+  import { mapMutations } from 'vuex'
 
   export default {
     name: 'm-recommend',
     components: {
+      MTitle,
+      MSongListSkeleton,
+      MDisstListSkeleton,
       MRecommendFocusSkeleton,
       MRecommendDisstSkeleton,
       MRecommendSkeleton,
@@ -114,7 +124,32 @@
       refresh () {
         this.isError = false
         this._getRecommendPlayListAndNewMusicAndFocus()
-      }
+      },
+      _toDisstPage () {
+        let router = '/findMusic/dissts'
+        if (this.$route.path !== router) {
+          this.routerStack.push(router)
+          this.setRouterStackPointer(this.routerStack.pointer)
+          this.$router.replace({
+            path: router
+          })
+          scrollToTop('m-find-music-box')
+        }
+      },
+      _toNewSongPage () {
+        let router = '/findMusic/new_song'
+        if (this.$route.path !== router) {
+          this.routerStack.push(router)
+          this.setRouterStackPointer(this.routerStack.pointer)
+          this.$router.replace({
+            path: router
+          })
+          scrollToTop('m-find-music-box')
+        }
+      },
+      ...mapMutations({
+        setRouterStackPointer: 'SET_ROUTER_STACK_POINTER'
+      })
     }
   }
 </script>
